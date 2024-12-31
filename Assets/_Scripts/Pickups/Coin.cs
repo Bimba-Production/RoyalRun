@@ -1,10 +1,10 @@
-using UnityEngine;
-
-public class Coin : Pickup
+namespace Assets._Scripts
 {
-    public override void OnPickup()
+    public class Coin : Pickup
     {
-        //Debug.Log("Add coin");
-        Destroy(gameObject);
+        public override void OnPickup()
+        {
+            Destroy(gameObject);
+        }
     }
 }

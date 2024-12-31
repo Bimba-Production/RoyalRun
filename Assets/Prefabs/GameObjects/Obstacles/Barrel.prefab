@@ -119,6 +119,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel
       objectReference: {fileID: 0}
+    - target: {fileID: 5705800893960892436, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7360590621349186536, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}
     m_RemovedGameObjects:
@@ -131,6 +135,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3775027360108091480, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8042924456062557016}
+    - targetCorrespondingSourceObject: {fileID: 3775027360108091480, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1605273807573571410}
   m_SourcePrefab: {fileID: 100100000, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}
 --- !u!1 &2206527073186966725 stripped
 GameObject:
@@ -160,6 +167,19 @@ CapsuleCollider:
   m_Height: 1.336972
   m_Direction: 1
   m_Center: {x: 0.02797085, y: -0.01632607, z: 0}
+--- !u!114 &-1605273807573571410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2206527073186966725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b8af89e3e44ca2927d40997e5a8959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cooldown: 1
 --- !u!4 &5388302777355926017 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6934319804908310172, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}

@@ -1,7 +1,10 @@
-public class Explosion : Pickup
+namespace Assets._Scripts
 {
-    public override void OnPickup()
+    public class Explosion : Pickup
     {
-        Destroy(gameObject);
+        public override void OnPickup()
+        {
+            Destroy(gameObject);
+        }
     }
 }

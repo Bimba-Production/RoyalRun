@@ -1,10 +1,10 @@
-using UnityEngine;
-
-public class Apple : Pickup
+namespace Assets._Scripts
 {
-    public override void OnPickup()
+    public class Apple : Pickup
     {
-        Debug.Log("Power up!");
-        Destroy(gameObject);
+        public override void OnPickup()
+        {
+            Destroy(gameObject);
+        }
     }
 }

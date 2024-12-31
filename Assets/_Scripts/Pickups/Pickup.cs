@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public abstract class Pickup : MonoBehaviour
+namespace Assets._Scripts
 {
-    [SerializeField] private float _rotationSpeed;
-
-    void Update()
+    public abstract class Pickup : MonoBehaviour
     {
-        float rotationAngle = _rotationSpeed * Time.deltaTime;
-        transform.Rotate(0, rotationAngle, 0);     
-    }
+        [SerializeField] private float _rotationSpeed;
 
-    public abstract void OnPickup();
+        private void Update()
+        {
+            float rotationAngle = _rotationSpeed * Time.deltaTime;
+            transform.Rotate(0, rotationAngle, 0);
+        }
+
+        public abstract void OnPickup();
+    }
 }

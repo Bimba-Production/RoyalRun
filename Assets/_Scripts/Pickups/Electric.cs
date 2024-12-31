@@ -1,7 +1,10 @@
-public class Electric : Pickup
+namespace Assets._Scripts
 {
-    public override void OnPickup()
+    public class Electric : Pickup
     {
-        Destroy(gameObject);
+        public override void OnPickup()
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -1,7 +1,10 @@
-public class Shield : Pickup
+namespace Assets._Scripts
 {
-    public override void OnPickup()
+    public class Shield : Pickup
     {
-        Destroy(gameObject);
+        public override void OnPickup()
+        {
+            Destroy(gameObject);
+        }
     }
 }

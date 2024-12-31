@@ -1,7 +1,10 @@
-public class Crown : Pickup
+namespace Assets._Scripts
 {
-    public override void OnPickup()
+    public class Crown : Pickup
     {
-        Destroy(gameObject);
+        public override void OnPickup()
+        {
+            Destroy(gameObject);
+        }
     }
 }
