@@ -68,5 +68,7 @@ namespace Assets._Scripts
 
             _damagEffect.weight = targetWeight;
         }
+
+        public void SetDefaultFov() => _camera.fieldOfView = _minFov;
     }
 }

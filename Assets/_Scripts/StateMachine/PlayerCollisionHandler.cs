@@ -14,7 +14,11 @@ namespace Assets._Scripts
             {
                 case nameof(Tags.Obstacle):
                     if (!_playerController.IsCriticalCondition) _playerController.IsStumble = true;
-                    else _playerController.IsFall = true;
+                    else
+                    {
+                        _playerController.IsFall = true;
+                        _playerController.OnGameOverEvent.Invoke();
+                    }
                     break;
 
                 case nameof(Tags.Coin):

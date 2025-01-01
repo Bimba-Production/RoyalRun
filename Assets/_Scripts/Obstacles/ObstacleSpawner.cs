@@ -10,11 +10,13 @@ namespace Assets._Scripts
         [SerializeField] private Transform _parent;
         [SerializeField] private float _spawnBoundaries = 4f;
 
-        private void Start() => StartCoroutine(SpawnObstacleRoutin());
-
+        public bool IsPaused { get;  set; }
+        public void ResetSpawn() => StartCoroutine(SpawnObstacleRoutin());
+        private void Start() => ResetSpawn();
+        
         private IEnumerator SpawnObstacleRoutin()
         {
-            while (true)
+            while (!IsPaused)
             {
                 yield return new WaitForSeconds(_spawnCooldownTime);
                 GameObject prefab = _prefabs[Random.Range(0, _prefabs.Length)];

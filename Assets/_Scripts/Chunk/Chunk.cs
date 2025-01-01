@@ -41,7 +41,7 @@ namespace Assets._Scripts
             if (Random.value > _pickupSpawnChance) return;
             if (_availableLanesIndexes.Count == 0) return;
 
-            int randIndex = Random.RandomRange(0, _pickups.Length);
+            int randIndex = Random.Range(0, _pickups.Length);
 
             InstantiateObjOnLine(_pickups[randIndex]);
         }

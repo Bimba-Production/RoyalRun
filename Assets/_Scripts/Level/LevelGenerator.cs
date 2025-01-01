@@ -24,6 +24,8 @@ namespace Assets._Scripts
         private float _accelerationCooldownValue;
         private float _currentSpeed;
 
+        public bool IsPaused { get; set; }
+        
         private void Awake()
         {
             _accelerationCooldownValue = _accelerationCooldown;
@@ -33,6 +35,11 @@ namespace Assets._Scripts
         private void Start() => InitChunks();
 
         private void Update()
+        {
+            if (!IsPaused) UpdateSpeedUp();
+        }
+
+        private void UpdateSpeedUp()
         {
             _accelerationCooldownValue -= Time.deltaTime;
 
@@ -47,26 +54,32 @@ namespace Assets._Scripts
 
         public void GameOver()
         {
-            foreach (var chunk in _chunks)
-            {
-                chunk.GetComponent<ChunkMover>().Speed = 0;
-            }
+            foreach (var chunk in _chunks) chunk.GetComponent<ChunkMover>().Speed = 0;
         }
 
         public void SlowDownTheLevel() => ChangeChunkMoveSpeed(-_levelDecceleration);
 
-        public void ChangeChunkMoveSpeed(float acceleration)
+        private void ChangeChunkMoveSpeed(float acceleration)
         {
             _cameraController.ChangeCameraFOV(acceleration);
 
             float speed = _currentSpeed + acceleration;
             float newSpeed = _minMoveSpeed <= speed ? speed : _minMoveSpeed;
-            float realAcceleration = newSpeed - _currentSpeed;
             _currentSpeed = newSpeed;
 
             foreach (var mover in _chunkMovers) mover.Speed = newSpeed;
+        }
+        
+        public void StopChunks()
+        {
+            _cameraController.SetDefaultFov();
 
-            Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - realAcceleration);
+            foreach (var mover in _chunkMovers) mover.Speed = 0f;
+        }
+
+        public void ResetChunksSpeed()
+        {
+            foreach (var mover in _chunkMovers) mover.Speed = _minMoveSpeed;
         }
 
         private void InitChunks()

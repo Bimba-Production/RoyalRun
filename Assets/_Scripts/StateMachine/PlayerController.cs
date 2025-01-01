@@ -24,8 +24,8 @@ namespace Assets._Scripts.StateMachine
         public bool Restart = false;
         public float CurrentCriticalCuldown = 0f;
 
-        // public delegate void OnGameOver();
-        // public OnGameOver onGameOver;
+        public delegate void OnGameOver();
+        public OnGameOver OnGameOverEvent;
 
         private PlayerStateMachine _stateMachine;
 
