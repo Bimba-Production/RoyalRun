@@ -4,9 +4,9 @@ namespace Assets._Scripts.StateMachine
 {
     public class Sliding : State, IEnterState, IUpdateState, IExitState
     {
-        private float _speed = 8f;
-        private float _timer = 0.8f;
-        private float _currntTimer = 0.8f;
+        private readonly float _speed = 8f;
+        private readonly float _timer = 0.8f;
+        private float _currentTimer = 0.8f;
         private bool _timerActive = false;
 
         public Sliding(Animator animator, PlayerMover mover, PlayerController controller) : base(animator, mover, controller)
@@ -15,7 +15,7 @@ namespace Assets._Scripts.StateMachine
 
         public void Enter(IState previous)
         {
-            if (previous is Run) _animator.SetTrigger("RunToSliding");
+            if (previous is Run) _animator.SetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());
 
             _controller.CanLand = false;
             _controller.IsSliding = true;
@@ -28,20 +28,17 @@ namespace Assets._Scripts.StateMachine
 
             if (_timerActive)
             {
-                if (_currntTimer <= 0)
+                if (_currentTimer <= 0)
                 {
                     _timerActive = false;
                     _controller.IsSliding = false;
                     _controller.CanLand = true;
-                    _currntTimer = _timer;
+                    _currentTimer = _timer;
                 }
-                else _currntTimer -= Time.deltaTime;
+                else _currentTimer -= Time.deltaTime;
             }
         }
 
-        public void Exit()
-        {
-            _controller.IsSliding = false;
-        }
+        public void Exit() => _controller.IsSliding = false;
     }
 }

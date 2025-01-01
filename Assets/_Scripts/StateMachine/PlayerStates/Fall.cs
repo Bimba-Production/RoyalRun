@@ -8,9 +8,6 @@ namespace Assets._Scripts.StateMachine
         {
         }
 
-        public void Enter(IState previous)
-        {
-            _animator.SetTrigger("Fall");
-        }
+        public void Enter(IState previous) => _animator.SetTrigger(PlayerAnimationTriggers.Fall.ToString());
     }
 }

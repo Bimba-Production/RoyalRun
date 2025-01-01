@@ -10,10 +10,7 @@ namespace Assets._Scripts
         [SerializeField] private Transform _parent;
         [SerializeField] private float _spawnBoundaries = 4f;
 
-        private void Start()
-        {
-            StartCoroutine(SpawnObstacleRoutin());
-        }
+        private void Start() => StartCoroutine(SpawnObstacleRoutin());
 
         private IEnumerator SpawnObstacleRoutin()
         {

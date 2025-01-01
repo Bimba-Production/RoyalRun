@@ -11,15 +11,11 @@ namespace Assets._Scripts
         [SerializeField] private float _maxFov = 100f;
         [SerializeField] private float _zoomDuration = 1f;
         [SerializeField] private float _damageDuration = 1f;
-
         [SerializeField] private Volume _damagEffect;
 
         private Camera _camera;
 
-        private void Awake()
-        {
-            _camera = GetComponent<Camera>();
-        }
+        private void Awake() => _camera = GetComponent<Camera>();
 
         public void ChangeCameraFOV(float acceleration)
         {

@@ -6,14 +6,11 @@ namespace Assets._Scripts.StateMachine
     public class PlayerController: MonoBehaviour
     {
         [SerializeField] private CameraController _cameraController;
-
         [SerializeField] private float _minX;
         [SerializeField] private float _maxX;
-
         [SerializeField] private float _maxSlidingTime;
         [SerializeField] private float _slidingColdown;
         [SerializeField] private float _jumpingColdown;
-
         [SerializeField] private Animator _animator;
         [SerializeField] private PlayerMover _mover;
 
@@ -25,23 +22,19 @@ namespace Assets._Scripts.StateMachine
         public bool IsStumble = false;
         public bool IsFall = false;
         public bool Restart = false;
-
-        private float _criticalCuldown = 3;
         public float CurrentCriticalCuldown = 0f;
 
-        public delegate void OnGameOver();
-        public OnGameOver onGameOver;
+        // public delegate void OnGameOver();
+        // public OnGameOver onGameOver;
 
         private PlayerStateMachine _stateMachine;
 
-        private void Awake()
-        {
-            InitStateMachine();
-        }
+        private void Awake() => InitStateMachine();
 
         public float MaxX => _maxX;
         public float MinX => _minX;
-        public float CriticalCuldown => _criticalCuldown;
+        public float CriticalCooldown { get; } = 3;
+
         public CameraController CameraController => _cameraController;
 
         private void Update()
@@ -111,39 +104,12 @@ namespace Assets._Scripts.StateMachine
             _stateMachine = new PlayerStateMachine(states, transitions, run);
         }
 
-        private bool CanRun()
-        {
-            return _mover.IsGraunded && !IsSliding && !IsRolling && CanLand;
-        }
-
-        private bool CanSliding()
-        {
-            return _mover.IsGraunded && !IsSliding && !IsRolling && !IsJumping && _mover.SlidingInput;
-        }
-
-        private bool CanJump()
-        {
-            return !IsJumping && !IsRolling && _mover.JumpInput && _mover.IsGraunded;
-        }
-
-        private bool CanRoll()
-        {
-            return IsJumping && _mover.SlidingInput && !IsRolling && !_mover.IsGraunded;
-        }
-
-        private bool CanStumble()
-        {
-            return _mover.IsGraunded && IsStumble;
-        }
-
-        private bool CanFall()
-        {
-            return IsFall;
-        }
-
-        private bool CanRestart()
-        {
-            return Restart && !IsFall;
-        }
+        private bool CanRun() => _mover.IsGraunded && !IsSliding && !IsRolling && CanLand;
+        private bool CanSliding() => _mover.IsGraunded && !IsSliding && !IsRolling && !IsJumping && _mover.SlidingInput;
+        private bool CanJump() => !IsJumping && !IsRolling && _mover.JumpInput && _mover.IsGraunded;
+        private bool CanRoll() => IsJumping && _mover.SlidingInput && !IsRolling && !_mover.IsGraunded;
+        private bool CanStumble() => _mover.IsGraunded && IsStumble;
+        private bool CanFall() => IsFall;
+        private bool CanRestart() => Restart && !IsFall;
     }
 }

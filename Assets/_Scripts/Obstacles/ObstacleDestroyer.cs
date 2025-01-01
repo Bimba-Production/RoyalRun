@@ -8,10 +8,7 @@ namespace Assets._Scripts
 
         private void FixedUpdate()
         {
-            if (transform.position.z <= _minZ)
-            {
-                Destroy(transform.gameObject);
-            }
+            if (transform.position.z <= _minZ) Destroy(transform.gameObject);
         }
     }
 }

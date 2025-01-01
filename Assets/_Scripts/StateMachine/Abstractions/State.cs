@@ -8,7 +8,7 @@ namespace Assets._Scripts.StateMachine
         protected PlayerMover _mover;
         protected PlayerController _controller;
 
-        public State(Animator animator, PlayerMover mover, PlayerController controller)
+        protected State(Animator animator, PlayerMover mover, PlayerController controller)
         {
             _animator = animator;
             _mover = mover;

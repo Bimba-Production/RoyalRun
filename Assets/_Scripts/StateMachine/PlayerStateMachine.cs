@@ -18,14 +18,8 @@ namespace Assets._Scripts.StateMachine
 
             foreach (Transition transition in transitions)
             {
-                if (!_transitionsPerState.ContainsKey(transition.From))
-                {
-                    _transitionsPerState[transition.From] = new List<Transition>() { transition };
-                }
-                else
-                {
-                    _transitionsPerState[transition.From].Add(transition);
-                }
+                if (!_transitionsPerState.ContainsKey(transition.From)) _transitionsPerState[transition.From] = new List<Transition>() { transition };
+                else _transitionsPerState[transition.From].Add(transition);
             }
         }
 

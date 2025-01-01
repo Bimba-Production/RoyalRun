@@ -30,10 +30,7 @@ namespace Assets._Scripts
             _currentSpeed = _minMoveSpeed;
         }
 
-        private void Start()
-        {
-            InitChunks();
-        }
+        private void Start() => InitChunks();
 
         private void Update()
         {
@@ -46,10 +43,7 @@ namespace Assets._Scripts
             }
         }
 
-        private void LateUpdate()
-        {
-            UpdateChunksPos();
-        }
+        private void LateUpdate() => UpdateChunksPos();
 
         public void GameOver()
         {
@@ -59,10 +53,7 @@ namespace Assets._Scripts
             }
         }
 
-        public void SlowDownTheLevel()
-        {
-            ChangeChunkMoveSpeed(-_levelDecceleration);
-        }
+        public void SlowDownTheLevel() => ChangeChunkMoveSpeed(-_levelDecceleration);
 
         public void ChangeChunkMoveSpeed(float acceleration)
         {
@@ -73,10 +64,7 @@ namespace Assets._Scripts
             float realAcceleration = newSpeed - _currentSpeed;
             _currentSpeed = newSpeed;
 
-            foreach (var mover in _chunkMovers)
-            {
-                mover.Speed = newSpeed;
-            }
+            foreach (var mover in _chunkMovers) mover.Speed = newSpeed;
 
             Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - realAcceleration);
         }

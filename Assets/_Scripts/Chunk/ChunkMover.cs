@@ -19,10 +19,7 @@ namespace Assets._Scripts
 
         }
 
-        private void Update()
-        {
-            Move();
-        }
+        private void Update() => Move();
 
         private void Move()
         {

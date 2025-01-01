@@ -4,12 +4,10 @@ namespace Assets._Scripts.StateMachine
 {
     public class Jump : State, IEnterState, IUpdateState, IExitState
     {
-        private float _speed = 8f;
-        private float _gravityForce = 22f;
-        private float _jumpForce = 9f;
-
-        private float _timer = 0.6f;
-        private float _currntTimer = 0.6f;
+        private readonly float _speed = 8f;
+        private readonly float _jumpForce = 10f;
+        private readonly float _timer = 0.6f;
+        private float _currentTimer = 0.6f;
         private bool _timerActive = false;
 
         public Jump(Animator animator, PlayerMover mover, PlayerController controller) : base(animator, mover, controller)
@@ -18,10 +16,10 @@ namespace Assets._Scripts.StateMachine
 
         public void Enter(IState previous)
         {
-            _mover.AppluForce(Vector3.up, _jumpForce);
+            _mover.ApplyForce(Vector3.up, _jumpForce);
             
             if (previous is Run
-                || previous is Sliding) _animator.SetTrigger("Jump");
+                || previous is Sliding) _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
             
             _mover.IsGraunded = false;
             _controller.IsJumping = true;
@@ -34,13 +32,13 @@ namespace Assets._Scripts.StateMachine
 
             if (_timerActive)
             {
-                if (_currntTimer <= 0)
+                if (_currentTimer <= 0)
                 {
                     _timerActive = false;
                     _controller.CanLand = true;
-                    _currntTimer = _timer;
+                    _currentTimer = _timer;
                 }
-                else _currntTimer -= Time.deltaTime;
+                else _currentTimer -= Time.deltaTime;
             }
             else _mover.UpdateIsGraunded();
         }

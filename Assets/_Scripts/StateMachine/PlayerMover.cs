@@ -31,13 +31,13 @@ namespace Assets._Scripts
             transform.position = newPos;
         }
 
-        public void AppluForce(Vector3 direction, float force) => 
+        public void ApplyForce(Vector3 direction, float force) => 
             _rb.AddForce(transform.forward + direction * force, ForceMode.Impulse);
 
         public void UpdateIsGraunded()
         {
             IsGraunded = Physics.Raycast(transform.position, Vector3.down, _groundedRayLength);
-            Debug.DrawRay(transform.position, Vector3.down * _groundedRayLength, IsGraunded ? Color.green : Color.red);
+            // Debug.DrawRay(transform.position, Vector3.down * _groundedRayLength, IsGraunded ? Color.green : Color.red);
         }
     }
 }
