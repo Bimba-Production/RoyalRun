@@ -12,6 +12,7 @@ namespace Assets._Scripts.StateMachine
         [SerializeField] private float _slidingColdown;
         [SerializeField] private float _jumpingColdown;
         [SerializeField] private Animator _animator;
+        [SerializeField] private Animator _colliderAnimator;
         [SerializeField] private PlayerMover _mover;
 
         public bool IsCriticalCondition = false;
@@ -33,6 +34,7 @@ namespace Assets._Scripts.StateMachine
 
         public float MaxX => _maxX;
         public float MinX => _minX;
+        public Animator ColliderAnimator => _colliderAnimator;
         public float CriticalCooldown { get; } = 3;
 
         public CameraController CameraController => _cameraController;

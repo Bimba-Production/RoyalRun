@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Scripts.StateMachine;
+using UnityEngine;
 
 namespace Assets._Scripts.StateMachine
 {
@@ -17,6 +18,7 @@ namespace Assets._Scripts.StateMachine
         {
             _mover.ApplyForce(Vector3.down, 8f);
 
+            _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Sit.ToString());
             if (previous is Jump) _animator.SetTrigger(PlayerAnimationTriggers.Roll.ToString());
 
             _controller.IsJumping = false;
@@ -42,6 +44,10 @@ namespace Assets._Scripts.StateMachine
             else _mover.UpdateIsGraunded();
         }
 
-        public void Exit() => _controller.IsRolling = false;
+        public void Exit()
+        {
+            _controller.IsRolling = false;
+            _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Stand.ToString());
+        }
     }
 }

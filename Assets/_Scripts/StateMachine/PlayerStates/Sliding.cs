@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Scripts.StateMachine;
+using UnityEngine;
 
 namespace Assets._Scripts.StateMachine
 {
@@ -15,6 +16,7 @@ namespace Assets._Scripts.StateMachine
 
         public void Enter(IState previous)
         {
+            _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Sit.ToString());
             if (previous is Run) _animator.SetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());
 
             _controller.CanLand = false;
@@ -39,6 +41,9 @@ namespace Assets._Scripts.StateMachine
             }
         }
 
-        public void Exit() => _controller.IsSliding = false;
+        public void Exit() {
+            _controller.IsSliding = false;
+            _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Stand.ToString());
+        }
     }
 }
