@@ -1,4 +1,4 @@
-﻿namespace Assets._Scripts.StateMachine
+﻿namespace _Scripts.StateMachine
 {
     public enum PlayerAnimationTriggers
     {

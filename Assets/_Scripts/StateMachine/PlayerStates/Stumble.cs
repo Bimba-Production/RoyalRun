@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using _Scripts.StateMachine.Abstractions;
+using _Scripts.StateMachine.Interfaces;
+using UnityEngine;
 
-namespace Assets._Scripts.StateMachine
+namespace _Scripts.StateMachine.PlayerStates
 {
     public class Stumble : State, IEnterState, IUpdateState
     {
@@ -32,16 +34,15 @@ namespace Assets._Scripts.StateMachine
             _mover.Move(_controller.MinX, _controller.MaxX, _speed);
             _mover.UpdateIsGraunded();
 
-            if (_timerActive)
+            if (!_timerActive) return;
+            
+            if (_currentTimer <= 0)
             {
-                if (_currentTimer <= 0)
-                {
-                    _timerActive = false;
-                    _controller.CanLand = true;
-                    _currentTimer = _timer;
-                }
-                else _currentTimer -= Time.deltaTime;
+                _timerActive = false;
+                _controller.CanLand = true;
+                _currentTimer = _timer;
             }
+            else _currentTimer -= Time.deltaTime;
         }
     }
 }

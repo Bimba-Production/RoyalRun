@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets._Scripts.StateMachine
+namespace _Scripts.StateMachine.Abstractions
 {
     public abstract class State
     {

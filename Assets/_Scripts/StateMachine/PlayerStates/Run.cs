@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using _Scripts.StateMachine.Abstractions;
+using _Scripts.StateMachine.Interfaces;
+using UnityEngine;
 
-namespace Assets._Scripts.StateMachine
+namespace _Scripts.StateMachine.PlayerStates
 {
     public class Run : State, IEnterState, IUpdateState
     {

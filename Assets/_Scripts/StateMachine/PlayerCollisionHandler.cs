@@ -1,58 +1,28 @@
-using Assets._Scripts.StateMachine;
+using _Scripts.Pickups;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.StateMachine
 {
     public class PlayerCollisionHandler : MonoBehaviour
     {
-        [Header("References")]
+        [Header("References")] 
         [SerializeField] private PlayerController _playerController;
-        [SerializeField] private LevelGenerator _levelGenerator;
-        [SerializeField] private ScoreDisplay _scoreDisplay;
 
         private void OnTriggerEnter(Collider other)
         {
-            switch (other.tag)
+            if (other.CompareTag(nameof(Tags.Obstacle)))
             {
-                case nameof(Tags.Obstacle):
-                    if (!_playerController.IsCriticalCondition) _playerController.IsStumble = true;
-                    else
-                    {
-                        _playerController.IsFall = true;
-                        _playerController.OnGameOverEvent.Invoke();
-                    }
-                    break;
+                if (!_playerController.IsCriticalCondition) _playerController.IsStumble = true;
+                else
+                {
+                    _playerController.IsFall = true;
+                    _playerController.OnGameOverEvent.Invoke();
+                }
 
-                case nameof(Tags.Coin):
-                    other.GetComponent<Pickup>().OnPickup();
-                    _scoreDisplay.IncreaseScore(1);
-                    break;
-
-                case nameof(Tags.Crown):
-                    other.GetComponent<Pickup>().OnPickup();
-                    _levelGenerator.SlowDownTheLevel();
-                    break;
-
-                case nameof(Tags.Star):
-                    other.GetComponent<Pickup>().OnPickup();
-                    break;
-
-                case nameof(Tags.Electric):
-                    other.GetComponent<Pickup>().OnPickup();
-                    break;
-
-                case nameof(Tags.Explosion):
-                    other.GetComponent<Pickup>().OnPickup();
-                    break;
-
-                case nameof(Tags.Shield):
-                    other.GetComponent<Pickup>().OnPickup();
-                    break;
-
-                default:
-                    print("Unknown tag: " + other.gameObject.tag);
-                    break;
+                return;
             }
+
+            other.GetComponent<Pickup>()?.OnPickup();
         }
     }
 

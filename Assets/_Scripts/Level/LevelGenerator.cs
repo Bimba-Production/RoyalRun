@@ -1,17 +1,23 @@
+using System.Collections;
+using _Scripts.Camera;
+using _Scripts.Chunks;
+using _Scripts.UI;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.Level
 {
-    public class LevelGenerator : MonoBehaviour
+    public class LevelGenerator : Singleton<LevelGenerator>
     {
-        [Header("References")]
+        [Header("References")] 
         [SerializeField] private GameObject _chunkPrefab;
+
         [SerializeField] private Transform _chunkParent;
         [SerializeField] private CameraController _cameraController;
         [SerializeField] private DistanceDisplay _distanceDisplay;
-        
-        [Header("Level Settings")]
+
+        [Header("Level Settings")] 
         [SerializeField] private int _startingChunksAmount = 12;
+
         [SerializeField] private float _minChunkPos;
         [SerializeField] private float _minMoveSpeed = 8f;
         [SerializeField] private float _levelAcceleration = 2f;
@@ -29,31 +35,49 @@ namespace Assets._Scripts
         private float _currentSpeed;
 
         public bool IsPaused { get; set; }
-        
-        private void Awake()
+
+        public void UnPause()
+        {
+            IsPaused = false;
+            StartCoroutine(AccelerationCoroutine());
+        }
+
+        public void Pause()
+        {
+            IsPaused = true;
+            StopCoroutine(AccelerationCoroutine());
+        }
+
+        protected override void Awake()
         {
             _accelerationCooldownValue = _accelerationCooldown;
             _currentSpeed = _minMoveSpeed;
+            StartCoroutine(AccelerationCoroutine());
+            base.Awake();
         }
 
-        private void Start() => InitChunks();
+        private void Start()
+        {
+            InitChunks();
+        }
 
         private void Update()
         {
             float currSpeed = _chunkMovers[0].Speed;
             _distanceDisplay.IncreaseDistance(currSpeed * Time.deltaTime);
-            
-            if (!IsPaused) UpdateSpeedUp();
         }
 
-        private void UpdateSpeedUp()
+        private IEnumerator AccelerationCoroutine()
         {
-            _accelerationCooldownValue -= Time.deltaTime;
-
-            if (_accelerationCooldownValue <= 0)
+            yield return new WaitForSeconds(_accelerationCooldownValue);
+            
+            while (true)
             {
                 _accelerationCooldownValue = _accelerationCooldown;
                 ChangeChunkMoveSpeed(_levelAcceleration);
+
+                // Wait for the specified acceleration delay
+                yield return new WaitForSeconds(_accelerationCooldownValue);
             }
         }
 
@@ -76,7 +100,7 @@ namespace Assets._Scripts
 
             foreach (var mover in _chunkMovers) mover.Speed = newSpeed;
         }
-        
+
         public void StopChunks()
         {
             _cameraController.SetDefaultFov();
@@ -107,24 +131,23 @@ namespace Assets._Scripts
 
         private void UpdateChunksPos()
         {
-            if (_currentClosestChunk.transform.position.z <= _minChunkPos)
-            {
-                Chunk closestChunk = _chunks[_closestChunkIndex];
+            if (_currentClosestChunk.transform.position.z > _minChunkPos) return;
 
-                closestChunk.ResetChunkSlots();
-                closestChunk.SpawnFence();
-                closestChunk.SpawnPickup();
-                closestChunk.SpawnCoin();
+            Chunks.Chunk closestChunk = _chunks[_closestChunkIndex];
 
-                _currentClosestChunk.transform.position = new Vector3(transform.position.x, transform.position.y,
-                    _currentDistantChunk.transform.position.z + _chunkLength);
-                _currentDistantChunk = _currentClosestChunk;
+            closestChunk.ResetChunkSlots();
+            closestChunk.SpawnFence();
+            closestChunk.SpawnPickup();
+            closestChunk.SpawnCoin();
 
-                if (_closestChunkIndex < _chunks.Length - 1) _closestChunkIndex += 1;
-                else _closestChunkIndex = 0;
+            _currentClosestChunk.transform.position = new Vector3(transform.position.x, transform.position.y,
+                _currentDistantChunk.transform.position.z + _chunkLength);
+            _currentDistantChunk = _currentClosestChunk;
 
-                _currentClosestChunk = _chunkObjects[_closestChunkIndex];
-            }
+            if (_closestChunkIndex < _chunks.Length - 1) _closestChunkIndex += 1;
+            else _closestChunkIndex = 0;
+
+            _currentClosestChunk = _chunkObjects[_closestChunkIndex];
         }
     }
 }

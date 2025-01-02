@@ -1,9 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.UI
 {
-    public class ScoreDisplay: MonoBehaviour
+    public class ScoreDisplay: Singleton<ScoreDisplay>
     {
         [Header("References")]
         [SerializeField] private TMP_Text _label;

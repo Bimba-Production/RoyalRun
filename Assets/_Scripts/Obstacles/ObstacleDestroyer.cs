@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.Obstacles
 {
     public class ObstacleDestroyer : MonoBehaviour
     {

@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using _Scripts.Camera;
+using _Scripts.StateMachine.Interfaces;
+using _Scripts.StateMachine.PlayerStates;
 using UnityEngine;
 
-namespace Assets._Scripts.StateMachine
+namespace _Scripts.StateMachine
 {
     public class PlayerController: MonoBehaviour
     {
@@ -46,14 +49,13 @@ namespace Assets._Scripts.StateMachine
         {
             _stateMachine.Update();
 
-            if (IsCriticalCondition)
+            if (!IsCriticalCondition) return;
+            
+            if (CurrentCriticalCuldown > 0) CurrentCriticalCuldown -= Time.deltaTime;
+            else
             {
-                if (CurrentCriticalCuldown > 0) CurrentCriticalCuldown -= Time.deltaTime;
-                else
-                {
-                    IsCriticalCondition = false;
-                    _cameraController.DisableyDamageEffect();
-                }
+                IsCriticalCondition = false;
+                _cameraController.DisableyDamageEffect();
             }
         }
 
@@ -77,7 +79,7 @@ namespace Assets._Scripts.StateMachine
                 roll
             };
 
-            Transition[] transitions = new Transition[] {
+            Transition[] transitions = {
                 //Run
                 new Transition(run, fall, CanFall),
                 new Transition(run, stumble, CanStumble),
