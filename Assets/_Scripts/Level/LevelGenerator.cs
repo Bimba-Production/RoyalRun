@@ -73,6 +73,9 @@ namespace _Scripts.Level
             
             while (true)
             {
+                if (IsPaused)
+                    break;
+                
                 _accelerationCooldownValue = _accelerationCooldown;
                 ChangeChunkMoveSpeed(_levelAcceleration);
 
