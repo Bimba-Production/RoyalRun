@@ -5,15 +5,18 @@ namespace Assets._Scripts
 {
     public class Chunk : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private GameObject _fence;
         [SerializeField] private GameObject[] _pickups;
         [SerializeField] private GameObject _coin;
+        [SerializeField] private List<GameObject> _laneObjects;
+
+        [Header("Settings")]
         [SerializeField] private float _pickupSpawnChance = 0.15f;
         [SerializeField] private float _coinSpawnChance = 0.5f;
         [SerializeField] private float _coinSeperationLength = 2f;
         [SerializeField] private int _maxCoinToSpawn = 5;
         [SerializeField] private float[] _lanes = { -2.5f, 0f, 2.5f };
-        [SerializeField] private List<GameObject> _laneObjects;
         [SerializeField] private List<int> _availableLanesIndexes = new List<int> { 0, 1, 2 };
         [SerializeField] private int _maxFenceCount;
         [SerializeField] private int _minFenceCount;

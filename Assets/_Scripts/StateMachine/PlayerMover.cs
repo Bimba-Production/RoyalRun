@@ -5,8 +5,11 @@ namespace Assets._Scripts
 {
     public class PlayerMover : MonoBehaviour
     {
-        [SerializeField] private float _groundedRayLength = 0.2f;
+        [Header("References")]
         [SerializeField] private Rigidbody _rb;
+        
+        [Header("Settings")]
+        [SerializeField] private float _groundedRayLength = 0.2f;
 
         private Vector2 _moveInput;
         public Vector2 MoveInput => _moveInput;

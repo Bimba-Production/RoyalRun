@@ -7,11 +7,15 @@ namespace Assets._Scripts
     [RequireComponent(typeof(Camera))]
     public class CameraController : MonoBehaviour
     {
+        [Header("References")]
+        [SerializeField] private Volume _damagEffect;
+        [SerializeField] private ParticleSystem _speedUpParticleSystem;
+        
+        [Header("Settings")]
         [SerializeField] private float _minFov = 60f;
         [SerializeField] private float _maxFov = 100f;
         [SerializeField] private float _zoomDuration = 1f;
         [SerializeField] private float _damageDuration = 1f;
-        [SerializeField] private Volume _damagEffect;
 
         private Camera _camera;
 
@@ -21,6 +25,8 @@ namespace Assets._Scripts
         {
             StopAllCoroutines();
             StartCoroutine(ChangeFOVRoutine(acceleration));
+
+            if (acceleration > 0f) _speedUpParticleSystem.Play();
         }
 
         IEnumerator ChangeFOVRoutine(float acceleration)

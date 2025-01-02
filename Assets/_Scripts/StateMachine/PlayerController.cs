@@ -5,15 +5,18 @@ namespace Assets._Scripts.StateMachine
 {
     public class PlayerController: MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private CameraController _cameraController;
+        [SerializeField] private Animator _animator;
+        [SerializeField] private Animator _colliderAnimator;
+        [SerializeField] private PlayerMover _mover;
+        
+        [Header("Settings")]
         [SerializeField] private float _minX;
         [SerializeField] private float _maxX;
         [SerializeField] private float _maxSlidingTime;
         [SerializeField] private float _slidingColdown;
         [SerializeField] private float _jumpingColdown;
-        [SerializeField] private Animator _animator;
-        [SerializeField] private Animator _colliderAnimator;
-        [SerializeField] private PlayerMover _mover;
 
         public bool IsCriticalCondition = false;
         public bool IsJumping = false;

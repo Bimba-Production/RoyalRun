@@ -4,6 +4,7 @@ namespace Assets._Scripts
 {
     public class ObstacleDestroyer : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField] float _minZ = -30f;
 
         private void FixedUpdate()

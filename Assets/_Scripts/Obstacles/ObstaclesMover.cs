@@ -5,7 +5,9 @@ namespace Assets._Scripts
 {
     public class ObstaclesMover: MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField] private float _cooldown = 0.25f;
+        
         private float _currentCooldown = 0f;
         private Rigidbody _rb;
 

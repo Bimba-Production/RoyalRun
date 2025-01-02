@@ -5,6 +5,7 @@ namespace Assets._Scripts
 {
     public class GameController: MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private LevelGenerator _levelGenerator;
         [SerializeField] private ObstacleSpawner _obstacleSpawner;

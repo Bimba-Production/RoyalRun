@@ -5,6 +5,7 @@ namespace Assets._Scripts
 {
     public class PlayerCollisionHandler : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private LevelGenerator _levelGenerator;
 

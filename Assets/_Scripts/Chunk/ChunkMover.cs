@@ -4,6 +4,7 @@ namespace Assets._Scripts
 {
     public class ChunkMover : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField] private float _speed = 8f;
 
         public float Speed

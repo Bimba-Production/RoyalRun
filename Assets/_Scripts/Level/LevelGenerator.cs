@@ -4,15 +4,18 @@ namespace Assets._Scripts
 {
     public class LevelGenerator : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private GameObject _chunkPrefab;
-        [SerializeField] private int _startingChunksAmount = 12;
         [SerializeField] private Transform _chunkParent;
+        [SerializeField] private CameraController _cameraController;
+        
+        [Header("Level Settings")]
+        [SerializeField] private int _startingChunksAmount = 12;
         [SerializeField] private float _minChunkPos;
         [SerializeField] private float _minMoveSpeed = 8f;
         [SerializeField] private float _levelAcceleration = 2f;
         [SerializeField] private float _levelDecceleration = 1.5f;
         [SerializeField] private float _accelerationCooldown = 10f;
-        [SerializeField] private CameraController _cameraController;
 
         private readonly float _chunkLength = 10f;
         private readonly GameObject[] _chunkObjects = new GameObject[12];

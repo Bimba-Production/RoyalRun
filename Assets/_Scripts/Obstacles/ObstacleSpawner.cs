@@ -5,7 +5,10 @@ namespace Assets._Scripts
 {
     public class ObstacleSpawner : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private GameObject[] _prefabs;
+        
+        [Header("Settings")]
         [SerializeField] private float _spawnCooldownTime;
         [SerializeField] private Transform _parent;
         [SerializeField] private float _spawnBoundaries = 4f;
