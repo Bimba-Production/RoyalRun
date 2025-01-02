@@ -8,15 +8,15 @@ namespace _Scripts.Level
 {
     public class LevelGenerator : Singleton<LevelGenerator>
     {
-        [Header("References")] [SerializeField]
-        private GameObject _chunkPrefab;
+        [Header("References")] 
+        [SerializeField] private GameObject _chunkPrefab;
 
         [SerializeField] private Transform _chunkParent;
         [SerializeField] private CameraController _cameraController;
         [SerializeField] private DistanceDisplay _distanceDisplay;
 
-        [Header("Level Settings")] [SerializeField]
-        private int _startingChunksAmount = 12;
+        [Header("Level Settings")] 
+        [SerializeField] private int _startingChunksAmount = 12;
 
         [SerializeField] private float _minChunkPos;
         [SerializeField] private float _minMoveSpeed = 8f;
@@ -120,7 +120,7 @@ namespace _Scripts.Level
                 Vector3 pos = new Vector3(transform.position.x, transform.position.y, _chunkLength * i);
                 GameObject chunk = Instantiate(_chunkPrefab, pos, Quaternion.identity, _chunkParent);
                 _chunkObjects[i] = chunk;
-                _chunks[i] = chunk.GetComponent<Chunks.Chunk>();
+                _chunks[i] = chunk.GetComponent<Chunk>();
                 _chunkMovers[i] = chunk.GetComponent<ChunkMover>();
             }
 
