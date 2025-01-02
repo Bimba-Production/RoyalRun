@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.Obstacles
 {
     public class ObstaclesMover: MonoBehaviour
     {

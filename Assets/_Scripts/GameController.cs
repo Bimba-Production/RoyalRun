@@ -1,13 +1,15 @@
-﻿using Assets._Scripts.StateMachine;
+﻿using _Scripts.Level;
+using _Scripts.Obstacles;
+using _Scripts.StateMachine;
+using _Scripts.UI;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts
 {
-    public class GameController: MonoBehaviour
+    public class GameController: Singleton<GameController>
     {
         [Header("References")]
         [SerializeField] private PlayerController _playerController;
-        [SerializeField] private LevelGenerator _levelGenerator;
         [SerializeField] private ObstacleSpawner _obstacleSpawner;
         [SerializeField] private Rigidbody _rb;
         [SerializeField] private CapsuleCollider _playerCollider;
@@ -18,17 +20,23 @@ namespace Assets._Scripts
         private void HandleGameOver()
         {
             _obstacleSpawner.IsPaused = true;
-            _levelGenerator.IsPaused = true;
-            _levelGenerator.StopChunks();
             _rb.useGravity = false;
             _playerCollider.isTrigger = true;
+            
+            LevelGenerator.Instance.Pause();
+            LevelGenerator.Instance.StopChunks();
+            
+            TimerDisplay.Instance.IsPaused = true;
         }
 
         private void ResetGame()
         {
             _obstacleSpawner.IsPaused = false;
-            _levelGenerator.IsPaused = false;
-            _levelGenerator.ResetChunksSpeed();
+            
+            LevelGenerator.Instance.UnPause();
+            LevelGenerator.Instance.ResetChunksSpeed();
+            TimerDisplay.Instance.IsPaused = false;
+            
             _rb.useGravity = true;
             _playerCollider.isTrigger = false;
         }

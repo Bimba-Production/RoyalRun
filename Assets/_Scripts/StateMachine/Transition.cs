@@ -1,6 +1,7 @@
 ﻿using System;
+using _Scripts.StateMachine.Interfaces;
 
-namespace Assets._Scripts.StateMachine
+namespace _Scripts.StateMachine
 {
     public class Transition
     {

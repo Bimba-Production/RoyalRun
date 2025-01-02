@@ -2,9 +2,9 @@
 using TMPro;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.UI
 {
-    public class TimerDisplay: MonoBehaviour
+    public class TimerDisplay: Singleton<TimerDisplay>
     {
         [Header("References")]
         [SerializeField] private TMP_Text _label;

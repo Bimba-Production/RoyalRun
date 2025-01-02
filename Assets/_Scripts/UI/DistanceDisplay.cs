@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.UI
 {
     public class DistanceDisplay: MonoBehaviour
     {

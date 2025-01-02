@@ -1,4 +1,4 @@
-namespace Assets._Scripts
+namespace _Scripts.Pickups
 {
     public class Explosion : Pickup
     {
