@@ -8,6 +8,7 @@ namespace Assets._Scripts
         [Header("References")]
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private LevelGenerator _levelGenerator;
+        [SerializeField] private ScoreDisplay _scoreDisplay;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -24,6 +25,7 @@ namespace Assets._Scripts
 
                 case nameof(Tags.Coin):
                     other.GetComponent<Pickup>().OnPickup();
+                    _scoreDisplay.IncreaseScore(1);
                     break;
 
                 case nameof(Tags.Crown):

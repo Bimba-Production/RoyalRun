@@ -8,6 +8,7 @@ namespace Assets._Scripts
         [SerializeField] private GameObject _chunkPrefab;
         [SerializeField] private Transform _chunkParent;
         [SerializeField] private CameraController _cameraController;
+        [SerializeField] private DistanceDisplay _distanceDisplay;
         
         [Header("Level Settings")]
         [SerializeField] private int _startingChunksAmount = 12;
@@ -39,6 +40,9 @@ namespace Assets._Scripts
 
         private void Update()
         {
+            float currSpeed = _chunkMovers[0].Speed;
+            _distanceDisplay.IncreaseDistance(currSpeed * Time.deltaTime);
+            
             if (!IsPaused) UpdateSpeedUp();
         }
 

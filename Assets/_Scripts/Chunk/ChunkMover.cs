@@ -9,15 +9,11 @@ namespace Assets._Scripts
 
         public float Speed
         {
-            get { return _speed; }
+            get => _speed;
             set
             {
-                if (value >= 0)
-                {
-                    _speed = value;
-                }
+                if (value >= 0) _speed = value;
             }
-
         }
 
         private void Update() => Move();
