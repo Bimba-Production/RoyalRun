@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.UI
 {
     public class FPSDisplay : MonoBehaviour
     {
@@ -10,12 +10,12 @@ namespace Assets._Scripts
         
         private float _deltaTime = 0.0f;
 
-        void Update()
+        private void Update()
         {
             _deltaTime += (Time.deltaTime - _deltaTime) * 0.1f;
         }
 
-        void OnGUI()
+        private void OnGUI()
         {
             float fps = 1.0f / _deltaTime;
             _fpsLabel.text = $"{fps:0.} FPS";

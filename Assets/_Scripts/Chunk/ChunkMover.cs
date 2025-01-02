@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.Chunk
 {
     public class ChunkMover : MonoBehaviour
     {

@@ -1,7 +1,9 @@
-﻿using Assets._Scripts.StateMachine;
+﻿using _Scripts.Level;
+using _Scripts.Obstacles;
+using _Scripts.StateMachine;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts
 {
     public class GameController: MonoBehaviour
     {

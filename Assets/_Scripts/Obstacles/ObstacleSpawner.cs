@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.Obstacles
 {
     public class ObstacleSpawner : MonoBehaviour
     {

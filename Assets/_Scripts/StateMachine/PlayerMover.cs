@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Assets._Scripts
+namespace _Scripts.StateMachine
 {
     public class PlayerMover : MonoBehaviour
     {

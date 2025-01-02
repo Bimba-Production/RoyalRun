@@ -1,7 +1,8 @@
-﻿using _Scripts.StateMachine;
+﻿using _Scripts.StateMachine.Abstractions;
+using _Scripts.StateMachine.Interfaces;
 using UnityEngine;
 
-namespace Assets._Scripts.StateMachine
+namespace _Scripts.StateMachine.PlayerStates
 {
     public class Roll : State, IEnterState, IUpdateState, IExitState
     {

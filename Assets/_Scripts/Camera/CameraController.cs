@@ -2,9 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Assets._Scripts
+namespace _Scripts.Camera
 {
-    [RequireComponent(typeof(Camera))]
+    [RequireComponent(typeof(UnityEngine.Camera))]
     public class CameraController : MonoBehaviour
     {
         [Header("References")]
@@ -17,9 +17,9 @@ namespace Assets._Scripts
         [SerializeField] private float _zoomDuration = 1f;
         [SerializeField] private float _damageDuration = 1f;
 
-        private Camera _camera;
+        private UnityEngine.Camera _camera;
 
-        private void Awake() => _camera = GetComponent<Camera>();
+        private void Awake() => _camera = GetComponent<UnityEngine.Camera>();
 
         public void ChangeCameraFOV(float acceleration)
         {

@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using _Scripts.Camera;
+using _Scripts.StateMachine.Interfaces;
+using _Scripts.StateMachine.PlayerStates;
 using UnityEngine;
 
-namespace Assets._Scripts.StateMachine
+namespace _Scripts.StateMachine
 {
     public class PlayerController: MonoBehaviour
     {
