@@ -6,7 +6,7 @@ namespace _Scripts.Pickups
     {
         public override void OnPickup()
         {
-            ScoreDisplay.Instance.IncreaseScore(1);
+            CoinDisplay.Instance.IncreaseScore(1);
             Destroy(gameObject);
         }
     }

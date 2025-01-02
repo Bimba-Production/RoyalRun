@@ -14,6 +14,8 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Enter(IState previous)
         {
+            _controller.Restart = false;
+                        
             if (previous is Jump)_animator.SetTrigger(PlayerAnimationTriggers.Land.ToString());
             else if (previous is Sliding) _animator.SetTrigger(PlayerAnimationTriggers.SlidingToRun.ToString());
         }

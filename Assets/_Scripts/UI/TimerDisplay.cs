@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Models;
 using TMPro;
 using UnityEngine;
 
@@ -28,7 +29,8 @@ namespace _Scripts.UI
             {
                 _tickCooldownTimer = 0f;
                 _timer += 1;
-
+                
+                ScoreModel.Instance.time = _timer;
                 UpdateTimer();
             }
         }
@@ -49,6 +51,7 @@ namespace _Scripts.UI
             _timer = 0;
             UpdateTimer();
             IsPaused = false;
+            ScoreModel.Instance.time = 0;
         }
     }
 }

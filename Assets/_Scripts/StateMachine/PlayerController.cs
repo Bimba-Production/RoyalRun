@@ -118,5 +118,20 @@ namespace _Scripts.StateMachine
         private bool CanStumble() => _mover.IsGraunded && IsStumble;
         private bool CanFall() => IsFall;
         private bool CanRestart() => Restart && !IsFall;
+
+        public void Reset()
+        {
+            _animator.ResetTrigger(PlayerAnimationTriggers.Fall.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.Jump.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.Roll.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.Land.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.Stumble.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.SlidingToRun.ToString());
+
+            IsFall = false;
+            Restart = true;
+            _animator.SetTrigger(PlayerAnimationTriggers.Reset.ToString());
+        }
     }
 }

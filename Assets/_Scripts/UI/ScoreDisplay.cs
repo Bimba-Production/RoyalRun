@@ -1,23 +1,28 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 namespace _Scripts.UI
 {
-    public class ScoreDisplay: Singleton<ScoreDisplay>
+    public class ScoreDisplay: MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private TMP_Text _label;
+        [SerializeField] private TMP_Text _coinLabel;
+        [SerializeField] private TMP_Text _distanceLabel;
+        [SerializeField] private TMP_Text _timerLabel;
 
-        private int _score = 0;
-
-        public void IncreaseScore(int amount)
+        public void UpdateScore(int coin, float distance, int timer)
         {
-            if (amount <= 0) return;
+            _coinLabel.text = coin.ToString();
+            _distanceLabel.text = $"{((int)distance).ToString()} m";
             
-            _score += amount;
-            _label.text = _score.ToString();
-        }
+            TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
 
-        public void ResetScore() => _score = 0;
+            string formattedTime = string.Format("{0:D2}:{1:D2}",
+                timeSpan.Minutes,
+                timeSpan.Seconds);
+            
+            _timerLabel.text = formattedTime;
+        }
     }
 }

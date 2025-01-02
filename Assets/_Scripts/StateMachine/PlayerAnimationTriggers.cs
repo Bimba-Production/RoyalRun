@@ -9,5 +9,6 @@
         SlidingToRun = 4,
         RunToSliding = 5,
         Stumble = 6,
+        Reset = 7,
     }
 }

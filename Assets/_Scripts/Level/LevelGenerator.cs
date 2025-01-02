@@ -10,10 +10,8 @@ namespace _Scripts.Level
     {
         [Header("References")] 
         [SerializeField] private GameObject _chunkPrefab;
-
         [SerializeField] private Transform _chunkParent;
         [SerializeField] private CameraController _cameraController;
-        [SerializeField] private DistanceDisplay _distanceDisplay;
 
         [Header("Level Settings")] 
         [SerializeField] private int _startingChunksAmount = 12;
@@ -64,7 +62,7 @@ namespace _Scripts.Level
         private void Update()
         {
             float currSpeed = _chunkMovers[0].Speed;
-            _distanceDisplay.IncreaseDistance(currSpeed * Time.deltaTime);
+            DistanceDisplay.Instance.IncreaseDistance(currSpeed * Time.deltaTime);
         }
 
         private IEnumerator AccelerationCoroutine()
@@ -107,7 +105,7 @@ namespace _Scripts.Level
         public void StopChunks()
         {
             _cameraController.SetDefaultFov();
-
+            _currentSpeed = _minMoveSpeed;
             foreach (var mover in _chunkMovers) mover.Speed = 0f;
         }
 
