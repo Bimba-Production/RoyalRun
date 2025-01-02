@@ -49,14 +49,13 @@ namespace _Scripts.StateMachine
         {
             _stateMachine.Update();
 
-            if (IsCriticalCondition)
+            if (!IsCriticalCondition) return;
+            
+            if (CurrentCriticalCuldown > 0) CurrentCriticalCuldown -= Time.deltaTime;
+            else
             {
-                if (CurrentCriticalCuldown > 0) CurrentCriticalCuldown -= Time.deltaTime;
-                else
-                {
-                    IsCriticalCondition = false;
-                    _cameraController.DisableyDamageEffect();
-                }
+                IsCriticalCondition = false;
+                _cameraController.DisableyDamageEffect();
             }
         }
 
@@ -80,7 +79,7 @@ namespace _Scripts.StateMachine
                 roll
             };
 
-            Transition[] transitions = new Transition[] {
+            Transition[] transitions = {
                 //Run
                 new Transition(run, fall, CanFall),
                 new Transition(run, stumble, CanStumble),

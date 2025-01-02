@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.Chunk
+namespace _Scripts.Chunks
 {
     public class Chunk : MonoBehaviour
     {

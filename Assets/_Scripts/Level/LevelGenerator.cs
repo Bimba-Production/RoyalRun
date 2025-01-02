@@ -1,5 +1,6 @@
+using System.Collections;
 using _Scripts.Camera;
-using _Scripts.Chunk;
+using _Scripts.Chunks;
 using _Scripts.UI;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ namespace _Scripts.Level
 
         private readonly float _chunkLength = 10f;
         private readonly GameObject[] _chunkObjects = new GameObject[12];
-        private readonly Chunk.Chunk[] _chunks = new Chunk.Chunk[12];
+        private readonly Chunk[] _chunks = new Chunk[12];
         private readonly ChunkMover[] _chunkMovers = new ChunkMover[12];
         private GameObject _currentDistantChunk;
         private GameObject _currentClosestChunk;
@@ -35,30 +36,48 @@ namespace _Scripts.Level
 
         public bool IsPaused { get; set; }
 
-        private void Awake()
+        public void UnPause()
+        {
+            IsPaused = false;
+            StartCoroutine(AccelerationCoroutine());
+        }
+
+        public void Pause()
+        {
+            IsPaused = true;
+            StopCoroutine(AccelerationCoroutine());
+        }
+
+        protected override void Awake()
         {
             _accelerationCooldownValue = _accelerationCooldown;
             _currentSpeed = _minMoveSpeed;
+            StartCoroutine(AccelerationCoroutine());
+            base.Awake();
         }
 
-        private void Start() => InitChunks();
+        private void Start()
+        {
+            InitChunks();
+        }
 
         private void Update()
         {
             float currSpeed = _chunkMovers[0].Speed;
             _distanceDisplay.IncreaseDistance(currSpeed * Time.deltaTime);
-
-            if (!IsPaused) UpdateSpeedUp();
         }
 
-        private void UpdateSpeedUp()
+        private IEnumerator AccelerationCoroutine()
         {
-            _accelerationCooldownValue -= Time.deltaTime;
-
-            if (_accelerationCooldownValue <= 0)
+            yield return new WaitForSeconds(_accelerationCooldownValue);
+            
+            while (true)
             {
                 _accelerationCooldownValue = _accelerationCooldown;
                 ChangeChunkMoveSpeed(_levelAcceleration);
+
+                // Wait for the specified acceleration delay
+                yield return new WaitForSeconds(_accelerationCooldownValue);
             }
         }
 
@@ -101,7 +120,7 @@ namespace _Scripts.Level
                 Vector3 pos = new Vector3(transform.position.x, transform.position.y, _chunkLength * i);
                 GameObject chunk = Instantiate(_chunkPrefab, pos, Quaternion.identity, _chunkParent);
                 _chunkObjects[i] = chunk;
-                _chunks[i] = chunk.GetComponent<Chunk.Chunk>();
+                _chunks[i] = chunk.GetComponent<Chunks.Chunk>();
                 _chunkMovers[i] = chunk.GetComponent<ChunkMover>();
             }
 
@@ -114,7 +133,7 @@ namespace _Scripts.Level
         {
             if (_currentClosestChunk.transform.position.z > _minChunkPos) return;
 
-            Chunk.Chunk closestChunk = _chunks[_closestChunkIndex];
+            Chunks.Chunk closestChunk = _chunks[_closestChunkIndex];
 
             closestChunk.ResetChunkSlots();
             closestChunk.SpawnFence();
