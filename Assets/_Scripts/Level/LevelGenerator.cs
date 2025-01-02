@@ -1,17 +1,22 @@
+using _Scripts.Camera;
+using _Scripts.Chunk;
+using _Scripts.UI;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts.Level
 {
-    public class LevelGenerator : MonoBehaviour
+    public class LevelGenerator : Singleton<LevelGenerator>
     {
-        [Header("References")]
-        [SerializeField] private GameObject _chunkPrefab;
+        [Header("References")] [SerializeField]
+        private GameObject _chunkPrefab;
+
         [SerializeField] private Transform _chunkParent;
         [SerializeField] private CameraController _cameraController;
         [SerializeField] private DistanceDisplay _distanceDisplay;
-        
-        [Header("Level Settings")]
-        [SerializeField] private int _startingChunksAmount = 12;
+
+        [Header("Level Settings")] [SerializeField]
+        private int _startingChunksAmount = 12;
+
         [SerializeField] private float _minChunkPos;
         [SerializeField] private float _minMoveSpeed = 8f;
         [SerializeField] private float _levelAcceleration = 2f;
@@ -20,7 +25,7 @@ namespace Assets._Scripts
 
         private readonly float _chunkLength = 10f;
         private readonly GameObject[] _chunkObjects = new GameObject[12];
-        private readonly Chunk[] _chunks = new Chunk[12];
+        private readonly Chunk.Chunk[] _chunks = new Chunk.Chunk[12];
         private readonly ChunkMover[] _chunkMovers = new ChunkMover[12];
         private GameObject _currentDistantChunk;
         private GameObject _currentClosestChunk;
@@ -29,7 +34,7 @@ namespace Assets._Scripts
         private float _currentSpeed;
 
         public bool IsPaused { get; set; }
-        
+
         private void Awake()
         {
             _accelerationCooldownValue = _accelerationCooldown;
@@ -42,7 +47,7 @@ namespace Assets._Scripts
         {
             float currSpeed = _chunkMovers[0].Speed;
             _distanceDisplay.IncreaseDistance(currSpeed * Time.deltaTime);
-            
+
             if (!IsPaused) UpdateSpeedUp();
         }
 
@@ -76,7 +81,7 @@ namespace Assets._Scripts
 
             foreach (var mover in _chunkMovers) mover.Speed = newSpeed;
         }
-        
+
         public void StopChunks()
         {
             _cameraController.SetDefaultFov();
@@ -96,7 +101,7 @@ namespace Assets._Scripts
                 Vector3 pos = new Vector3(transform.position.x, transform.position.y, _chunkLength * i);
                 GameObject chunk = Instantiate(_chunkPrefab, pos, Quaternion.identity, _chunkParent);
                 _chunkObjects[i] = chunk;
-                _chunks[i] = chunk.GetComponent<Chunk>();
+                _chunks[i] = chunk.GetComponent<Chunk.Chunk>();
                 _chunkMovers[i] = chunk.GetComponent<ChunkMover>();
             }
 
@@ -107,24 +112,23 @@ namespace Assets._Scripts
 
         private void UpdateChunksPos()
         {
-            if (_currentClosestChunk.transform.position.z <= _minChunkPos)
-            {
-                Chunk closestChunk = _chunks[_closestChunkIndex];
+            if (_currentClosestChunk.transform.position.z > _minChunkPos) return;
 
-                closestChunk.ResetChunkSlots();
-                closestChunk.SpawnFence();
-                closestChunk.SpawnPickup();
-                closestChunk.SpawnCoin();
+            Chunk.Chunk closestChunk = _chunks[_closestChunkIndex];
 
-                _currentClosestChunk.transform.position = new Vector3(transform.position.x, transform.position.y,
-                    _currentDistantChunk.transform.position.z + _chunkLength);
-                _currentDistantChunk = _currentClosestChunk;
+            closestChunk.ResetChunkSlots();
+            closestChunk.SpawnFence();
+            closestChunk.SpawnPickup();
+            closestChunk.SpawnCoin();
 
-                if (_closestChunkIndex < _chunks.Length - 1) _closestChunkIndex += 1;
-                else _closestChunkIndex = 0;
+            _currentClosestChunk.transform.position = new Vector3(transform.position.x, transform.position.y,
+                _currentDistantChunk.transform.position.z + _chunkLength);
+            _currentDistantChunk = _currentClosestChunk;
 
-                _currentClosestChunk = _chunkObjects[_closestChunkIndex];
-            }
+            if (_closestChunkIndex < _chunks.Length - 1) _closestChunkIndex += 1;
+            else _closestChunkIndex = 0;
+
+            _currentClosestChunk = _chunkObjects[_closestChunkIndex];
         }
     }
 }
