@@ -21,7 +21,7 @@ namespace _Scripts.Chunks
         [SerializeField] private int _maxFenceCount;
         [SerializeField] private int _minFenceCount;
 
-        private void Start()
+        public void Init()
         {
             SpawnFence();
             SpawnPickup();

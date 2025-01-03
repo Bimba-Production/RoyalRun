@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ClickItem : MonoBehaviour
 {
 
-public Camera camera;
+public new Camera camera;
 //public AudioSource SoundPlayer;
 public GameObject[] CollectedEffect;
 public AudioClip[] ItemSounds;
