@@ -104,6 +104,7 @@ namespace _Scripts.StateMachine
                 //Stumble
                 new Transition(stumble, fall, CanFall),
                 new Transition(stumble, run, CanRun),
+                new Transition(stumble, jump, CanJump),
 
                 //Fall
                 new Transition(fall, run, CanRestart),
