@@ -1,9 +1,10 @@
-﻿using TMPro;
+﻿using _Scripts.Models;
+using TMPro;
 using UnityEngine;
 
 namespace _Scripts.UI
 {
-    public class DistanceDisplay: MonoBehaviour
+    public class DistanceDisplay: Singleton<DistanceDisplay>
     {
         [Header("References")]
         [SerializeField] private TMP_Text _label;
@@ -15,9 +16,14 @@ namespace _Scripts.UI
             if (amount <= 0) return;
             
             _distance += amount;
+            ScoreModel.Instance.distance = _distance;
             _label.text = $"{((int)_distance).ToString()} m";
         }
 
-        public void ResetDistance() => _distance = 0;
+        public void ResetDistance()
+        {
+            _distance = 0;
+            ScoreModel.Instance.distance = 0;
+        }
     }
 }

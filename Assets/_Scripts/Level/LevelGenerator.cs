@@ -9,20 +9,19 @@ namespace _Scripts.Level
     public class LevelGenerator : Singleton<LevelGenerator>
     {
         [Header("References")] 
-        [SerializeField] private GameObject _chunkPrefab;
-
+        [SerializeField] private GameObject[] _chunkPrefabs;
         [SerializeField] private Transform _chunkParent;
         [SerializeField] private CameraController _cameraController;
-        [SerializeField] private DistanceDisplay _distanceDisplay;
 
         [Header("Level Settings")] 
         [SerializeField] private int _startingChunksAmount = 12;
-
         [SerializeField] private float _minChunkPos;
         [SerializeField] private float _minMoveSpeed = 8f;
+        [SerializeField] private float _maxMoveSpeed = 36f;
         [SerializeField] private float _levelAcceleration = 2f;
         [SerializeField] private float _levelDecceleration = 1.5f;
         [SerializeField] private float _accelerationCooldown = 10f;
+        [SerializeField] [Range(0, 100)] private int _probabilityOfChunkChange = 40;
 
         private readonly float _chunkLength = 10f;
         private readonly GameObject[] _chunkObjects = new GameObject[12];
@@ -64,7 +63,7 @@ namespace _Scripts.Level
         private void Update()
         {
             float currSpeed = _chunkMovers[0].Speed;
-            _distanceDisplay.IncreaseDistance(currSpeed * Time.deltaTime);
+            DistanceDisplay.Instance.IncreaseDistance(currSpeed * Time.deltaTime);
         }
 
         private IEnumerator AccelerationCoroutine()
@@ -73,8 +72,8 @@ namespace _Scripts.Level
             
             while (true)
             {
-                if (IsPaused)
-                    break;
+                if (IsPaused) break;
+                if (_currentSpeed >= _maxMoveSpeed) yield return new WaitForSeconds(_accelerationCooldownValue);;
                 
                 _accelerationCooldownValue = _accelerationCooldown;
                 ChangeChunkMoveSpeed(_levelAcceleration);
@@ -107,7 +106,7 @@ namespace _Scripts.Level
         public void StopChunks()
         {
             _cameraController.SetDefaultFov();
-
+            _currentSpeed = _minMoveSpeed;
             foreach (var mover in _chunkMovers) mover.Speed = 0f;
         }
 
@@ -121,7 +120,8 @@ namespace _Scripts.Level
             for (int i = 0; i < _startingChunksAmount; i += 1)
             {
                 Vector3 pos = new Vector3(transform.position.x, transform.position.y, _chunkLength * i);
-                GameObject chunk = Instantiate(_chunkPrefab, pos, Quaternion.identity, _chunkParent);
+                GameObject chunkToSpawn = _chunkPrefabs[Random.Range(0, _chunkPrefabs.Length)];
+                GameObject chunk = Instantiate(chunkToSpawn, pos, Quaternion.identity, _chunkParent);
                 _chunkObjects[i] = chunk;
                 _chunks[i] = chunk.GetComponent<Chunk>();
                 _chunkMovers[i] = chunk.GetComponent<ChunkMover>();
@@ -137,12 +137,32 @@ namespace _Scripts.Level
             if (_currentClosestChunk.transform.position.z > _minChunkPos) return;
 
             Chunks.Chunk closestChunk = _chunks[_closestChunkIndex];
+            
+            if (Random.Range(0, 100) < _probabilityOfChunkChange)
+            {
+                Chunks.Chunk oldChunk = _chunks[_closestChunkIndex];
+                oldChunk.ResetChunkSlots(0);
 
-            closestChunk.ResetChunkSlots();
+                Vector3 pos = new Vector3(oldChunk.transform.position.x, oldChunk.transform.position.y, oldChunk.transform.position.z);
+
+                GameObject chunkToSpawn = _chunkPrefabs[Random.Range(0, _chunkPrefabs.Length)];
+                GameObject chunk = Instantiate(chunkToSpawn, pos, Quaternion.identity, _chunkParent);
+                _chunkObjects[_closestChunkIndex] = chunk;
+                _chunks[_closestChunkIndex] = chunk.GetComponent<Chunk>();
+                _chunkMovers[_closestChunkIndex] = chunk.GetComponent<ChunkMover>();
+                _chunkMovers[_closestChunkIndex].Speed = oldChunk.GetComponent<ChunkMover>().Speed;
+
+                Destroy(oldChunk.gameObject);
+
+                closestChunk = _chunks[_closestChunkIndex];
+            }
+
+            closestChunk.ResetChunkSlots(1);
             closestChunk.SpawnFence();
             closestChunk.SpawnPickup();
             closestChunk.SpawnCoin();
 
+            _currentClosestChunk = closestChunk.gameObject;
             _currentClosestChunk.transform.position = new Vector3(transform.position.x, transform.position.y,
                 _currentDistantChunk.transform.position.z + _chunkLength);
             _currentDistantChunk = _currentClosestChunk;

@@ -18,14 +18,16 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Enter(IState previous)
         {
+            _mover.IsGraunded = false;
+            _controller.CanLand = false;
+            _controller.IsJumping = true;
+            _timerActive = true;
+            
             _mover.ApplyForce(Vector3.up, _jumpForce);
             
             if (previous is Run
-                || previous is Sliding) _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
-            
-            _mover.IsGraunded = false;
-            _controller.IsJumping = true;
-            _timerActive = true;
+                || previous is Sliding
+                || previous is Roll) _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
         }
 
         public void Update()

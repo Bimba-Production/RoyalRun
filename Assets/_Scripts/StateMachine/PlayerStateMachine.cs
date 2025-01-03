@@ -11,6 +11,11 @@ namespace _Scripts.StateMachine
         private readonly Dictionary<IState, List<Transition>> _transitionsPerState;
         private bool _canTransition = true;
 
+        public void SetCurrentState(IState state)
+        {
+            _current = state;
+        } 
+        
         public PlayerStateMachine(List<IState> states, Transition[] transitions, IState startState)
         {
             _states = states;

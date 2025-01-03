@@ -76,19 +76,19 @@ namespace _Scripts.Chunks
 
             for (int i = 0; i < fencesToSpawn; i += 1)
             {
-                if (_availableLanesIndexes.Count == 0) break;
+                if (_availableLanesIndexes.Count <= 1) break;
 
                 InstantiateObjOnLine(_fence);
             }
         }
 
-        public void ResetChunkSlots()
+        public void ResetChunkSlots(float delay)
         {
             _availableLanesIndexes = new List<int> { 0, 1, 2 };
 
             foreach (var item in _laneObjects)
             {
-                Destroy(item, 1);
+                Destroy(item, delay);
             }
 
             _laneObjects.Clear();
