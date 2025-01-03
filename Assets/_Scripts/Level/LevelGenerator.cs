@@ -155,12 +155,13 @@ namespace _Scripts.Level
                 Destroy(oldChunk.gameObject);
 
                 closestChunk = _chunks[_closestChunkIndex];
+            } else
+            {
+                closestChunk.ResetChunkSlots(1);
+                closestChunk.SpawnFence();
+                closestChunk.SpawnPickup();
+                closestChunk.SpawnCoin();
             }
-
-            closestChunk.ResetChunkSlots(1);
-            closestChunk.SpawnFence();
-            closestChunk.SpawnPickup();
-            closestChunk.SpawnCoin();
 
             _currentClosestChunk = closestChunk.gameObject;
             _currentClosestChunk.transform.position = new Vector3(transform.position.x, transform.position.y,
