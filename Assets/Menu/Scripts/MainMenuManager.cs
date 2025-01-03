@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Assets._Scripts
+namespace _Scripts
 {
     public class MainMenuManager : MonoBehaviour
     {
@@ -45,8 +45,7 @@ namespace Assets._Scripts
         [SerializeField] AudioClip sound_click;
         [SerializeField] AudioClip sound_hover;
         [SerializeField] AudioClip sound_loadScene;
-
-        // Refs
+        
         [Header("---- References")]
         [Space(50)] public Animator main_animator;
         [SerializeField] Image background_sprite;
@@ -75,18 +74,12 @@ namespace Assets._Scripts
         [SerializeField] AudioClip demo_soundtrack_shorter;
         [SerializeField] Slider volumeSlider;
 
-        private void Awake()
-        {
-            IntroSequence();
-        }
+        private void Awake() => IntroSequence();
 
-        void Start()
+        private void Start()
         {
-            if (!manualModeTexts)
-                UpdateTexts();
-
-            if (!manualModeButtons)
-                UpdateButtons();
+            if (!manualModeTexts) UpdateTexts();
+            if (!manualModeButtons) UpdateButtons();
 
             SetStartVolume();
         }
@@ -94,7 +87,6 @@ namespace Assets._Scripts
         #region Levels
         public void LoadLevel()
         {
-            // Fade Animation
             main_animator.enabled = true;
             main_animator.SetTrigger("LoadScene");
 
@@ -105,38 +97,25 @@ namespace Assets._Scripts
         {
             yield return new WaitForSeconds(delayBeforeLoading);
 
-            // Scene Load
             SceneManager.LoadScene(sceneToLoad);
         }
 
-        public void Quit()
-        {
-            Application.Quit();
-        }
+        public void Quit() => Application.Quit();
         #endregion
 
         #region Audio
 
         public void SetVolume(float _volume)
         {
-            // Adjust volume
             AudioListener.volume = _volume;
-
-            // Save volume
             PlayerPrefs.SetFloat("Volume", _volume);
         }
 
         void SetStartVolume()
         {
-            if (!PlayerPrefs.HasKey("Volume"))
-            {
-                PlayerPrefs.SetFloat("Volume", defaultVolume);
-                LoadVolume();
-            }
-            else
-            {
-                LoadVolume();
-            }
+            if (!PlayerPrefs.HasKey("Volume")) PlayerPrefs.SetFloat("Volume", defaultVolume);
+
+            LoadVolume();
         }
 
         public void LoadVolume()
@@ -161,127 +140,70 @@ namespace Assets._Scripts
 
         #endregion
 
-        void IntroSequence()
+        private void IntroSequence()
         {
             switch (introState)
             {
-                case Intro.OneLiner_FadingMenu:
-
-                    if (!manualModeTexts && introText != null)
-                    {
-                        introText.text = introTextContent;
-                    }
-
-                    // Animator
-                    main_animator.SetTrigger("OneLiner_FadingMenu");
-
-                    // Soundtracks
-                    if(customSoundtrack)
-                    {
-                        audioSourceSountrack.clip = customSoundtrackAudio;
-                        audioSourceSountrack.Play();
-                    }
-                    else
-                    {
-                        audioSourceSountrack.clip = demo_soundtrack;
-                        audioSourceSountrack.Play();
-                    }
-
-                    break;
-                case Intro.FadingMenu:
-
-                    // Animator
-                    main_animator.SetTrigger("FadingMenu");
-
-                    // Soundtracks
-                    if (customSoundtrack)
-                    {
-                        audioSourceSountrack.clip = customSoundtrackAudio;
-                        audioSourceSountrack.Play();
-                    }
-                    else
-                    {
-                        audioSourceSountrack.clip = demo_soundtrack_shorter;
-                        audioSourceSountrack.Play();
-                    }
-
-                    break;
-                case Intro.MenuOnly:
-
-                    // Animator
-                    main_animator.SetTrigger("MenuOnly");
-
-                    // Soundtracks
-                    if (customSoundtrack)
-                    {
-                        audioSourceSountrack.clip = customSoundtrackAudio;
-                        audioSourceSountrack.Play();
-                    }
-                    else
-                    {
-                        audioSourceSountrack.clip = demo_soundtrack_shorter;
-                        audioSourceSountrack.Play();
-                    }
-
+                case Intro.MenuOnly or Intro.FadingMenu:
+                    PlayIntro("MenuOnly", customSoundtrack ? customSoundtrackAudio : demo_soundtrack_shorter);
                     break;
                 default:
-
-                    // Animator
-                    main_animator.SetTrigger("OneLiner_FadingMenu");
-
-                    // Soundtracks
-                    if (customSoundtrack)
-                    {
-                        audioSourceSountrack.clip = customSoundtrackAudio;
-                        audioSourceSountrack.Play();
-                    }
-                    else
-                    {
-                        audioSourceSountrack.clip = demo_soundtrack;
-                        audioSourceSountrack.Play();
-                    }
+                    if (introState == Intro.OneLiner_FadingMenu && !manualModeTexts && introText != null) introText.text = introTextContent;
+            
+                    PlayIntro("OneLiner_FadingMenu", customSoundtrack ? customSoundtrackAudio : demo_soundtrack);
                     break;
             }
         }
 
-        void UpdateButtons()
+        private void PlayIntro(string triggerName, AudioClip clip)
         {
-            for (int i = 0; i < buttons.Length; i++)
+            main_animator.SetTrigger(triggerName);
+            audioSourceSountrack.clip = clip;
+            audioSourceSountrack.Play();
+        }
+
+        private void UpdateButtons()
+        {
+            Sprite spriteToApply = null;
+            RuntimeAnimatorController animatorToApply = null;
+
+            switch (buttonsAppearance)
             {
-                if (buttonsAppearance == Buttons.Rounded)
-                {
-                    buttons[i].sprite = buttonRounded;
-                    buttonsAnimators[i].runtimeAnimatorController = buttonsAnimator_darkText;
-                }
-                else if (buttonsAppearance == Buttons.Squared)
-                {
-                    buttons[i].sprite = buttonSquared;
-                    buttonsAnimators[i].runtimeAnimatorController = buttonsAnimator_darkText;
-                }
-                else if (buttonsAppearance == Buttons.Squared_Outlined)
-                {
-                    buttons[i].sprite = buttonSquaredOutlined;
-                    buttonsAnimators[i].runtimeAnimatorController = buttonsAnimator_lightText;
-                }
-                else if (buttonsAppearance == Buttons.Rounded_Outlined)
-                {
-                    buttons[i].sprite = buttonRoundedOutlined;
-                    buttonsAnimators[i].runtimeAnimatorController = buttonsAnimator_lightText;
-                }
-                else if (buttonsAppearance == Buttons.Rounded_AlwaysFilled)
-                {
-                    buttons[i].sprite = buttonRounded;
-                    buttonsAnimators[i].runtimeAnimatorController = buttonsAnimator_alwaysFilled;
-                }
-                else if (buttonsAppearance == Buttons.Squared_AlwaysFilled)
-                {
-                    buttons[i].sprite = buttonSquared;
-                    buttonsAnimators[i].runtimeAnimatorController = buttonsAnimator_alwaysFilled;
-                }
+                case Buttons.Rounded:
+                    spriteToApply = buttonRounded;
+                    animatorToApply = buttonsAnimator_darkText;
+                    break;
+                case Buttons.Squared:
+                    spriteToApply = buttonSquared;
+                    animatorToApply = buttonsAnimator_darkText;
+                    break;
+                case Buttons.Squared_Outlined:
+                    spriteToApply = buttonSquaredOutlined;
+                    animatorToApply = buttonsAnimator_lightText;
+                    break;
+                case Buttons.Rounded_Outlined:
+                    spriteToApply = buttonRoundedOutlined;
+                    animatorToApply = buttonsAnimator_lightText;
+                    break;
+                case Buttons.Rounded_AlwaysFilled:
+                    spriteToApply = buttonRounded;
+                    animatorToApply = buttonsAnimator_alwaysFilled;
+                    break;
+                case Buttons.Squared_AlwaysFilled:
+                    spriteToApply = buttonSquared;
+                    animatorToApply = buttonsAnimator_alwaysFilled;
+                    break;
+            }
+
+            for (int i = 0; i < buttons.Length; i+=1)
+            {
+                buttons[i].sprite = spriteToApply;
+                buttonsAnimators[i].runtimeAnimatorController = animatorToApply;
             }
         }
 
-        void UpdateTexts()
+
+        private void UpdateTexts()
         {
             if (homePanel_text_play != null)
                 homePanel_text_play.text = play;
@@ -345,11 +267,9 @@ namespace Assets._Scripts
             }
             #endregion
 
-            if (!manualModeTexts)
-                UpdateTexts();
+            if (!manualModeTexts) UpdateTexts();
 
-            if (!manualModeButtons)
-                UpdateButtons();
+            if (!manualModeButtons) UpdateButtons();
 
             #region Particles
             if (particles.Length > 0)

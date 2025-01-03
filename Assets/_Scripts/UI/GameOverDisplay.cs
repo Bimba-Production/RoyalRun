@@ -16,14 +16,14 @@ namespace _Scripts.UI
 
         private void OnDisable() => _button.onClick.RemoveListener(OnRestartClicked.Invoke);
 
-        public void Show() =>_anim.Play(GameOverKeys.GameOverShow.ToString());
+        public void Show() =>_anim.Play(GameOverKeys.Show.ToString());
 
-        public void Hide() => _anim.Play(GameOverKeys.GameOverHide.ToString());
+        public void Hide() => _anim.Play(GameOverKeys.Hide.ToString());
     }
 
     public enum GameOverKeys
     {
-        GameOverShow = 0,
-        GameOverHide = 1,
+        Show = 0,
+        Hide = 1,
     }
 }

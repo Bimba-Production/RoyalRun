@@ -1,21 +1,16 @@
-using Assets._Scripts;
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace _Scripts
 {
     [CustomEditor(typeof(MainMenuManager))]
     public class MainMenuEditor : Editor
     {
-        #region SerializedProperty
         private SerializedProperty mainColor;
-        #endregion
 
-        #region Private
         SerializedObject soTarget;
         MainMenuManager mainMenuManager;
         Texture2D texturePanel1;
-        #endregion
 
         private void OnEnable()
         {
@@ -29,22 +24,11 @@ namespace Assets.Scripts
 
         public override void OnInspectorGUI()
         {
-            // Image
             EditorGUI.DrawPreviewTexture(new Rect(18, 10, 520, 80), texturePanel1, mat: null, ScaleMode.ScaleToFit);
             EditorGUILayout.Space(91);
 
             base.OnInspectorGUI();
             mainMenuManager.UIEditorUpdate();
-        }
-
-        void Start()
-        {
-            
-        }
-
-        void Update()
-        {
-
         }
     }
 }

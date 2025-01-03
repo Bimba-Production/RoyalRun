@@ -11,16 +11,14 @@ namespace _Scripts.UI
         [SerializeField] private TMP_Text _distanceLabel;
         [SerializeField] private TMP_Text _timerLabel;
 
-        public void UpdateScore(int coin, float distance, int timer)
+        public void UpdateScore(int coin, float distance, int seconds)
         {
             _coinLabel.text = coin.ToString();
-            _distanceLabel.text = $"{((int)distance).ToString()} m";
-            
-            TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
+            _distanceLabel.text = $"{(int)distance} m";
 
-            string formattedTime = string.Format("{0:D2}:{1:D2}",
-                timeSpan.Minutes,
-                timeSpan.Seconds);
+            TimeSpan timeSpan = TimeSpan.FromSeconds(seconds);
+
+            string formattedTime = $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
             
             _timerLabel.text = formattedTime;
         }

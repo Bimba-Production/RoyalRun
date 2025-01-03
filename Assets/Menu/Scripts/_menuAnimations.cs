@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets._Scripts
+namespace _Scripts
 {
     public class _menuAnimations : MonoBehaviour
     {
