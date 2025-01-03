@@ -3144,7 +3144,7 @@ MonoBehaviour:
   _startingChunksAmount: 12
   _minChunkPos: -15
   _minMoveSpeed: 8
-  _maxMoveSpeed: 36
+  _maxMoveSpeed: 24
   _levelAcceleration: 2
   _levelDecceleration: 4
   _accelerationCooldown: 10

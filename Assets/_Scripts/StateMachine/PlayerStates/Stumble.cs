@@ -19,7 +19,6 @@ namespace _Scripts.StateMachine.PlayerStates
         public void Enter(IState previous)
         {
             _controller.IsStumble = false;
-
             _controller.CurrentCriticalCuldown = _controller.CriticalCooldown;
             _controller.IsCriticalCondition = true;
             _controller.CameraController.ApplyDamageEffect();

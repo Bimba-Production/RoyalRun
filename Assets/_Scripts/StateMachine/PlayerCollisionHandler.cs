@@ -1,3 +1,4 @@
+using _Scripts.Camera;
 using _Scripts.Pickups;
 using UnityEngine;
 
@@ -12,7 +13,11 @@ namespace _Scripts.StateMachine
         {
             if (other.CompareTag(nameof(Tags.Obstacle)))
             {
-                if (!_playerController.IsCriticalCondition) _playerController.IsStumble = true;
+                if (!_playerController.IsCriticalCondition)
+                {
+                    CameraController.Instance.ApplyDamageEffect();
+                    _playerController.IsStumble = true;
+                }
                 else
                 {
                     _playerController.IsFall = true;

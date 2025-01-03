@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 namespace _Scripts.Camera
 {
     [RequireComponent(typeof(UnityEngine.Camera))]
-    public class CameraController : MonoBehaviour
+    public class CameraController : Singleton<CameraController>
     {
         [Header("References")]
         [SerializeField] private Volume _damagEffect;
@@ -19,11 +19,15 @@ namespace _Scripts.Camera
 
         private UnityEngine.Camera _camera;
 
-        private void Awake() => _camera = GetComponent<UnityEngine.Camera>();
+        protected override void Awake()
+        {
+            _camera = GetComponent<UnityEngine.Camera>();
+            base.Awake();
+        }
 
         public void ChangeCameraFOV(float acceleration)
         {
-            StopAllCoroutines();
+            StopCoroutine(ChangeFOVRoutine(acceleration));
             StartCoroutine(ChangeFOVRoutine(acceleration));
 
             if (acceleration > 0f) _speedUpParticleSystem.Play();
@@ -48,13 +52,13 @@ namespace _Scripts.Camera
 
         public void ApplyDamageEffect()
         {
-            StopAllCoroutines();
+            StopCoroutine(ApplyDamageEffectRoutine(0f));
             StartCoroutine(ApplyDamageEffectRoutine(0.7f));
         }
 
         public void DisableyDamageEffect()
         {
-            StopAllCoroutines();
+            StopCoroutine(ApplyDamageEffectRoutine(0.7f));
             StartCoroutine(ApplyDamageEffectRoutine(0f));
         }
 

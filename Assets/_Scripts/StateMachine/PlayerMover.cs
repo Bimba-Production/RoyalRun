@@ -30,11 +30,7 @@ namespace _Scripts.StateMachine
             if (newPosX > minX && newPosX < maxX) transform.position = new Vector3(newPosX, newPos.y, newPos.z);
         }
 
-        public void ApplyForce(Vector3 direction, float force)
-        {
-            _rb.AddForce(transform.forward + direction * force, ForceMode.Impulse);
-        }
-            
+        public void ApplyForce(Vector3 direction, float force) => _rb.AddForce(transform.forward + direction * force, ForceMode.Impulse);
 
         public void UpdateIsGraunded()
         {
