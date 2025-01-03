@@ -816,7 +816,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11655382, y: 0, z: 0, w: 0.9931844}
-  m_LocalPosition: {x: -1.645, y: 2.6, z: -6.47}
+  m_LocalPosition: {x: -1.645, y: 3.6, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3191,7 +3191,6 @@ MonoBehaviour:
   - {fileID: 2850450639993251497, guid: 61f6bea2a12ae2e44b7b6bf00983f0cc, type: 3}
   - {fileID: 2850450639993251497, guid: 61709a12c519f254b8de6b1e38393e9d, type: 3}
   - {fileID: 2850450639993251497, guid: 77ab84beb1d43794e909dcb40b83c339, type: 3}
-  - {fileID: 2850450639993251497, guid: e0e4a4a28e181d14481552bdc517a7f4, type: 3}
   - {fileID: 2850450639993251497, guid: c6706b9c80a82074ab1f059a983da166, type: 3}
   - {fileID: 2850450639993251497, guid: f89e126bed8a53e4f9b646ade350208d, type: 3}
   _chunkParent: {fileID: 760978439}
@@ -3199,7 +3198,7 @@ MonoBehaviour:
   _startingChunksAmount: 12
   _minChunkPos: -15
   _minMoveSpeed: 8
-  _maxMoveSpeed: 24
+  _maxMoveSpeed: 16
   _levelAcceleration: 2
   _levelDecceleration: 4
   _accelerationCooldown: 10
@@ -9214,6 +9213,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9f1385bf-ddc8-4f22-b039-2142b38d0dd3
     m_ActionName: 'Player/Sliding[/Keyboard/ctrl]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1888416091}
+        m_TargetAssemblyTypeName: _Scripts.StateMachine.PlayerMover, Assembly-CSharp
+        m_MethodName: ReadShiftRightInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fcd8af38-1a29-4464-ae3f-2cf085957677
+    m_ActionName: 'Player/ShiftRight[/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1888416091}
+        m_TargetAssemblyTypeName: _Scripts.StateMachine.PlayerMover, Assembly-CSharp
+        m_MethodName: ReadShiftLeftInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4c662a82-6ce2-4541-96d2-76c8671333fb
+    m_ActionName: 'Player/ShiftLeft[/Keyboard/a]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
