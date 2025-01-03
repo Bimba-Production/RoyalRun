@@ -27,7 +27,8 @@ namespace _Scripts.StateMachine.PlayerStates
             
             if (previous is Run
                 || previous is Sliding
-                || previous is Roll) _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
+                || previous is Roll
+                || previous is Stumble) _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
         }
 
         public void Update()

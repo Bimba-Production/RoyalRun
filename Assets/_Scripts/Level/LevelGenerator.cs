@@ -17,7 +17,7 @@ namespace _Scripts.Level
         [SerializeField] private int _startingChunksAmount = 12;
         [SerializeField] private float _minChunkPos;
         [SerializeField] private float _minMoveSpeed = 8f;
-        [SerializeField] private float _maxMoveSpeed = 36f;
+        [SerializeField] private float _maxMoveSpeed = 24f;
         [SerializeField] private float _levelAcceleration = 2f;
         [SerializeField] private float _levelDecceleration = 1.5f;
         [SerializeField] private float _accelerationCooldown = 10f;

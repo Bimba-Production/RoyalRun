@@ -7,8 +7,8 @@ namespace _Scripts.StateMachine.PlayerStates
     public class Stumble : State, IEnterState, IUpdateState, IExitState
     {
         private readonly float _speed = 8f;
-        private readonly float _timer = 0.1f;
-        private float _currentTimer = 0.1f;
+        private readonly float _timer = 0f;
+        private float _currentTimer = 0f;
         private bool _timerActive = false;
         
 
@@ -19,7 +19,6 @@ namespace _Scripts.StateMachine.PlayerStates
         public void Enter(IState previous)
         {
             _controller.IsStumble = false;
-
             _controller.CurrentCriticalCuldown = _controller.CriticalCooldown;
             _controller.IsCriticalCondition = true;
             _controller.CameraController.ApplyDamageEffect();
