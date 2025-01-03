@@ -21,7 +21,7 @@ namespace _Scripts.StateMachine
                 else
                 {
                     _playerController.IsFall = true;
-                    _playerController.OnGameOverEvent.Invoke();
+                    _playerController.OnGameOverEvent?.Invoke();
                 }
 
                 return;
