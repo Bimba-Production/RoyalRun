@@ -41,6 +41,7 @@ namespace _Scripts.Chunks
 
         public void SpawnPickup()
         {
+            if (_lanes.Length == 0) return;
             if (Random.value > _pickupSpawnChance) return;
             if (_availableLanesIndexes.Count == 0) return;
 
@@ -51,6 +52,7 @@ namespace _Scripts.Chunks
 
         public void SpawnCoin()
         {
+            if (_lanes.Length == 0) return;
             if (Random.value > _coinSpawnChance) return;
             if (_availableLanesIndexes.Count == 0) return;
 
@@ -72,7 +74,11 @@ namespace _Scripts.Chunks
 
         public void SpawnFence()
         {
+            if (_lanes.Length == 0) return;
+
             int fencesToSpawn = Random.Range(_minFenceCount, _maxFenceCount + 1);
+
+            if (fencesToSpawn > _lanes.Length) fencesToSpawn = _lanes.Length;
 
             for (int i = 0; i < fencesToSpawn; i += 1)
             {
@@ -84,7 +90,12 @@ namespace _Scripts.Chunks
 
         public void ResetChunkSlots(float delay)
         {
-            _availableLanesIndexes = new List<int> { 0, 1, 2 };
+            _availableLanesIndexes = new List<int>();
+
+            for(var i = 0; i < _lanes.Length; i+=1)
+            {
+                _availableLanesIndexes.Add(i);
+            }
 
             foreach (var item in _laneObjects)
             {
