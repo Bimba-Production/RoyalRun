@@ -99,6 +99,7 @@ namespace _Scripts.StateMachine
                 //Roll
                 new Transition(roll, fall, CanFall),
                 new Transition(roll, run, CanRun),
+                new Transition(roll, jump, CanJump),
 
                 //Stumble
                 new Transition(stumble, fall, CanFall),

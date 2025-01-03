@@ -7,8 +7,8 @@ namespace _Scripts.StateMachine.PlayerStates
     public class Roll : State, IEnterState, IUpdateState, IExitState
     {
         private readonly float _speed = 8f;
-        private readonly float _timer = 1f;
-        private float _currentTimer = 1f;
+        private readonly float _timer = 0.3f;
+        private float _currentTimer = 0.3f;
         private bool _timerActive = false;
 
         public Roll(Animator animator, PlayerMover mover, PlayerController controller) : base(animator, mover, controller)

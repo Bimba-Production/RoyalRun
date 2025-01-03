@@ -816,7 +816,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11655382, y: 0, z: 0, w: 0.9931844}
-  m_LocalPosition: {x: -1.645, y: 1.5400001, z: -5.5399995}
+  m_LocalPosition: {x: -1.645, y: 2.6, z: -6.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3131,16 +3131,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a7d65accb55a947bdd06fb39035be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chunkPrefab: {fileID: 8289467346979195122, guid: 767c74f176793d64d8ab7cbb2b8b49d3, type: 3}
+  _chunkPrefabs:
+  - {fileID: 8289467346979195122, guid: 767c74f176793d64d8ab7cbb2b8b49d3, type: 3}
+  - {fileID: 2850450639993251497, guid: 61f6bea2a12ae2e44b7b6bf00983f0cc, type: 3}
+  - {fileID: 2850450639993251497, guid: 6056c7ef1f2913e4ca6975632a7f1818, type: 3}
+  - {fileID: 2850450639993251497, guid: e23c55ea3c4aabc409b614a5bf1f3f13, type: 3}
+  - {fileID: 5719011635377865849, guid: 1a1fe6d33c853e34abc8dfa1ec7aba13, type: 3}
+  - {fileID: 2850450639993251497, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
+  - {fileID: 2850450639993251497, guid: 2d32d3b3ad91323498d25bdf00a0dada, type: 3}
+  - {fileID: 2850450639993251497, guid: 7b563fd044020f949b3c41c51489c352, type: 3}
   _chunkParent: {fileID: 760978439}
   _cameraController: {fileID: 330585549}
-  _distanceDisplay: {fileID: 1787858546}
   _startingChunksAmount: 12
   _minChunkPos: -15
   _minMoveSpeed: 8
+  _maxMoveSpeed: 36
   _levelAcceleration: 2
   _levelDecceleration: 4
   _accelerationCooldown: 10
+  _probabilityOfChunkChange: 100
 --- !u!1 &824050217
 GameObject:
   m_ObjectHideFlags: 0
@@ -9253,7 +9262,7 @@ MonoBehaviour:
   - {fileID: 3278563006293523258, guid: fd494fe248654d1498c12e6805b7ffc7, type: 3}
   - {fileID: 2893295431627026550, guid: 7bb767f9252953545aed7f462279a8c8, type: 3}
   - {fileID: 1223167891177073820, guid: 0b06fc405cf3cbb48808433901993c0c, type: 3}
-  _spawnCooldownTime: 1.8
+  _spawnCooldownTime: 2.4
   _parent: {fileID: 1102038959}
   _spawnBoundaries: 4
 --- !u!4 &1946160493
