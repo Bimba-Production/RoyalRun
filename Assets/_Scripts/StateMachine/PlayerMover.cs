@@ -18,10 +18,7 @@ namespace _Scripts.StateMachine
         public bool IsGraunded = false;
 
         public void ReadMoveInput(InputAction.CallbackContext context) => _moveInput = context.ReadValue<Vector2>(); 
-        public void ReadJumpInput(InputAction.CallbackContext context)
-        {
-            JumpInput = context.ReadValueAsButton();
-        }
+        public void ReadJumpInput(InputAction.CallbackContext context) => JumpInput = context.ReadValueAsButton();
         public void ReadSlidingInput(InputAction.CallbackContext context) => SlidingInput = context.ReadValueAsButton();
 
         public void Move(float minX, float maxX, float speed)
@@ -30,13 +27,14 @@ namespace _Scripts.StateMachine
             float newPosX = transform.position.x + velocityX;
             Vector3 newPos = transform.position;
 
-            if (newPosX > minX && newPosX < maxX) newPos = new Vector3(newPosX, newPos.y, newPos.z);
-
-            transform.position = newPos;
+            if (newPosX > minX && newPosX < maxX) transform.position = new Vector3(newPosX, newPos.y, newPos.z);
         }
 
-        public void ApplyForce(Vector3 direction, float force) => 
+        public void ApplyForce(Vector3 direction, float force)
+        {
             _rb.AddForce(transform.forward + direction * force, ForceMode.Impulse);
+        }
+            
 
         public void UpdateIsGraunded()
         {

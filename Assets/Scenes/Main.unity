@@ -3133,13 +3133,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chunkPrefabs:
   - {fileID: 8289467346979195122, guid: 767c74f176793d64d8ab7cbb2b8b49d3, type: 3}
-  - {fileID: 2850450639993251497, guid: 61f6bea2a12ae2e44b7b6bf00983f0cc, type: 3}
   - {fileID: 2850450639993251497, guid: 6056c7ef1f2913e4ca6975632a7f1818, type: 3}
   - {fileID: 2850450639993251497, guid: e23c55ea3c4aabc409b614a5bf1f3f13, type: 3}
   - {fileID: 5719011635377865849, guid: 1a1fe6d33c853e34abc8dfa1ec7aba13, type: 3}
   - {fileID: 2850450639993251497, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
   - {fileID: 2850450639993251497, guid: 2d32d3b3ad91323498d25bdf00a0dada, type: 3}
-  - {fileID: 2850450639993251497, guid: 7b563fd044020f949b3c41c51489c352, type: 3}
+  - {fileID: 2850450639993251497, guid: 61f6bea2a12ae2e44b7b6bf00983f0cc, type: 3}
   _chunkParent: {fileID: 760978439}
   _cameraController: {fileID: 330585549}
   _startingChunksAmount: 12
@@ -9086,7 +9085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 1888416092}
-  _groundedRayLength: 0.1
+  _groundedRayLength: 0.2
   IsGraunded: 1
 --- !u!54 &1888416092
 Rigidbody:
@@ -9137,7 +9136,7 @@ CapsuleCollider:
   m_Radius: 0.17551756
   m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0.87, z: -0.0027599335}
+  m_Center: {x: 0, y: 0.85, z: -0.0027599335}
 --- !u!95 &1888416095
 Animator:
   serializedVersion: 7
@@ -9154,7 +9153,7 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
+  m_AnimatePhysics: 1
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
