@@ -23,7 +23,7 @@ namespace _Scripts.StateMachine
         private float[] _lanes = { -2.5f, 0f, 2.5f };
         private float _currentLane = 0f;
         private bool _isMoving = false;
-        private float _shiftDuration = 0.15f;
+        private float _shiftDuration = 0.17f;
 
         public void ReadMoveInput(InputAction.CallbackContext context) => _moveInput = context.ReadValue<Vector2>(); 
         public void ReadJumpInput(InputAction.CallbackContext context) => JumpInput = context.ReadValueAsButton();
@@ -39,11 +39,7 @@ namespace _Scripts.StateMachine
 
             if (ShiftRightInput && newPos < _lanes[_lanes.Length - 1]) newPos += 2.5f;
             if (ShiftLeftInput && newPos > _lanes[0]) newPos -= 2.5f;
-
-            if (newPos != _currentLane)
-            {
-                StartCoroutine(ApplyDamageEffectRoutine(newPos));
-            }
+            if (newPos != _currentLane)  StartCoroutine(ApplyDamageEffectRoutine(newPos));
 
             //float velocityX = _moveInput.x * (speed * Time.deltaTime);
             //float newPosX = transform.position.x + velocityX;
@@ -79,5 +75,7 @@ namespace _Scripts.StateMachine
             IsGraunded = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, _groundedRayLength);
             Debug.DrawRay(transform.position, Vector3.down * _groundedRayLength, IsGraunded ? Color.green : Color.red);
         }
+
+        public void ResetPlayerPos() => transform.position = new Vector3(_lanes[1], 0, 0);
     }
 }

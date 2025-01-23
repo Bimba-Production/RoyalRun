@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Scripts.Level
 {
-    public class LevelGenerator : Singleton<LevelGenerator>
+    public sealed class LevelGenerator : Singleton<LevelGenerator>
     {
         [Header("References")] 
         [SerializeField] private GameObject[] _chunkPrefabs;
@@ -93,6 +93,7 @@ namespace _Scripts.Level
 
         private void ChangeChunkMoveSpeed(float acceleration)
         {
+            if (_currentSpeed + acceleration > _maxMoveSpeed) return;
             _cameraController.ChangeCameraFOV(acceleration);
 
             float speed = _currentSpeed + acceleration;

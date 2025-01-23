@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Scripts.Obstacles
 {
-    public class ObstacleSpawner : MonoBehaviour
+    public sealed class ObstacleSpawner : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private GameObject[] _prefabs;

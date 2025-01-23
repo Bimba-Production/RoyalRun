@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Scripts.UI
 {
-    public class TimerDisplay: Singleton<TimerDisplay>
+    public sealed class TimerDisplay: Singleton<TimerDisplay>
     {
         [Header("References")]
         [SerializeField] private TMP_Text _label;

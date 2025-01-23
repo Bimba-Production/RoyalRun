@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Scripts.Obstacles
 {
-    public class ObstacleDestroyer : MonoBehaviour
+    public sealed class ObstacleDestroyer : MonoBehaviour
     {
         [Header("Settings")]
         [SerializeField] float _minZ = -30f;

@@ -3,12 +3,12 @@ using _Scripts.Models;
 using _Scripts.Obstacles;
 using _Scripts.StateMachine;
 using _Scripts.UI;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts
 {
-    public class GameController: Singleton<GameController>
+    public sealed class GameController: Singleton<GameController>
     {
         [Header("References")]
         [SerializeField] private Rigidbody _rb;
@@ -31,6 +31,10 @@ namespace _Scripts
 
         private void HandleGameOver()
         {
+            //Метод ресетящий позицию игрока и сбрасывающий его текущее ускорение.
+
+            StopAllCoroutines();
+
             _obstacleSpawner.IsPaused = true;
             _rb.useGravity = false;
             _playerCollider.isTrigger = true;
@@ -46,6 +50,14 @@ namespace _Scripts
 
         private void ResetGame()
         {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentSceneName);
+        }
+
+        private void ContinueGame()
+        {
+            // Метод который очищает несколько ближайших чанков от перепятствий.
+
             UIController.Instance.GameOverDisplay.Hide();
 
             _playerController.Reset();

@@ -3,7 +3,7 @@ using _Scripts.StateMachine.Interfaces;
 
 namespace _Scripts.StateMachine
 {
-    public class PlayerStateMachine
+    public sealed class PlayerStateMachine
     {
         private IState _current;
         private IState _previous;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.StateMachine.PlayerStates
 {
-    public class Stumble : State, IEnterState, IUpdateState, IExitState
+    public sealed class Stumble : State, IEnterState, IUpdateState, IExitState
     {
         private readonly float _speed = 8f;
         private readonly float _timer = 0f;

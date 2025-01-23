@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Scripts.Chunks
 {
-    public class Chunk : MonoBehaviour
+    public sealed class Chunk : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private GameObject _fence;

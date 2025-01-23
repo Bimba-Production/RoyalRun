@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 namespace _Scripts.Camera
 {
     [RequireComponent(typeof(UnityEngine.Camera))]
-    public class CameraController : Singleton<CameraController>
+    public sealed class CameraController : Singleton<CameraController>
     {
         [Header("References")]
         [SerializeField] private Volume _damagEffect;

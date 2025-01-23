@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.StateMachine.PlayerStates
 {
-    public class Run : State, IEnterState, IUpdateState
+    public sealed class Run : State, IEnterState, IUpdateState
     {
         private readonly float _speed = 8f;
 

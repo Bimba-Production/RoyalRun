@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Scripts.StateMachine
 {
-    public class PlayerController: MonoBehaviour
+    public sealed class PlayerController: MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private CameraController _cameraController;

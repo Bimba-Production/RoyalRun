@@ -232,7 +232,7 @@ namespace _Scripts
                 if (godrays_sprite.Length > 0)
                 {
                     // Apply the new color to the godrays
-                    for (int i = 0; i < godrays_sprite.Length; i++)
+                    for (int i = 0; i < godrays_sprite.Length; i+=1)
                     {
                         godrays_sprite[i].color = newColor_godrays;
                     }
@@ -250,18 +250,11 @@ namespace _Scripts
                 if (particles.Length > 0)
                 {
                     // Apply the new color to the godrays
-                    for (int i = 0; i < particles.Length; i++)
+                    for (int i = 0; i < particles.Length; i+=1)
                     {
-                        if(i != 2)
-                        {
-                            var main1 = particles[i].main;
-                            main1.startColor = new ParticleSystem.MinMaxGradient(newColor_slowNormal);
-                        }
-                        else
-                        {
-                            var main1 = particles[i].main;
-                            main1.startColor = new ParticleSystem.MinMaxGradient(newColor_huge);
-                        }
+
+                        var main1 = particles[i].main;
+                        main1.startColor = new ParticleSystem.MinMaxGradient(i != 2 ? newColor_slowNormal : newColor_huge);
                     }
                 }
             }
@@ -275,7 +268,7 @@ namespace _Scripts
             if (particles.Length > 0)
             {
                 // Prewarm the particles
-                for (int i = 0; i < particles.Length; i++)
+                for (int i = 0; i < particles.Length; i+=1)
                 {
                     if(introState == Intro.MenuOnly)
                     {
