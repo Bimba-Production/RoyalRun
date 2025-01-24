@@ -23,7 +23,7 @@ namespace _Scripts.StateMachine.PlayerStates
         public void Update()
         {
             _mover.Move(_controller.MinX, _controller.MaxX, _speed);
-            _mover.UpdateIsGraunded();
+            _mover.UpdateIsGrounded();
         }
     }
 }

@@ -10611,7 +10611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcbf31a5921ef23489f09d677958563d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damagEffect: {fileID: 326056627}
+  _damageEffect: {fileID: 326056627}
   _speedUpParticleSystem: {fileID: 1646198008}
   _minFov: 60
   _maxFov: 70
@@ -60490,7 +60490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1888416092}
   _groundedRayLength: 0.2
-  IsGraunded: 1
+  IsGrounded: 0
 --- !u!54 &1888416092
 Rigidbody:
   m_ObjectHideFlags: 0

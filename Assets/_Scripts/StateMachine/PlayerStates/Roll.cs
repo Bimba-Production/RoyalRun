@@ -7,6 +7,7 @@ namespace _Scripts.StateMachine.PlayerStates
     public sealed class Roll : State, IEnterState, IUpdateState, IExitState
     {
         private readonly float _speed = 8f;
+        private readonly float _force = 11f;
         private readonly float _timer = 0.3f;
         private float _currentTimer = 0.3f;
         private bool _timerActive = false;
@@ -17,7 +18,7 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Enter(IState previous)
         {
-            _mover.ApplyForce(Vector3.down, 8f);
+            _mover.ApplyForce(Vector3.down, _force);
 
             _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Sit.ToString());
             if (previous is Jump) _animator.SetTrigger(PlayerAnimationTriggers.Roll.ToString());
@@ -42,7 +43,7 @@ namespace _Scripts.StateMachine.PlayerStates
                 }
                 else _currentTimer -= Time.deltaTime;
             }
-            else _mover.UpdateIsGraunded();
+            else _mover.UpdateIsGrounded();
         }
 
         public void Exit()

@@ -8,7 +8,7 @@ namespace _Scripts.Camera
     public sealed class CameraController : Singleton<CameraController>
     {
         [Header("References")]
-        [SerializeField] private Volume _damagEffect;
+        [SerializeField] private Volume _damageEffect;
         [SerializeField] private ParticleSystem _speedUpParticleSystem;
         
         [Header("Settings")]
@@ -56,7 +56,7 @@ namespace _Scripts.Camera
             StartCoroutine(ApplyDamageEffectRoutine(0.7f));
         }
 
-        public void DisableyDamageEffect()
+        public void DisableDamageEffect()
         {
             StopCoroutine(ApplyDamageEffectRoutine(0.7f));
             StartCoroutine(ApplyDamageEffectRoutine(0f));
@@ -64,7 +64,7 @@ namespace _Scripts.Camera
 
         IEnumerator ApplyDamageEffectRoutine(float intensity)
         {
-            float startWeight = _damagEffect.weight;
+            float startWeight = _damageEffect.weight;
             float targetWeight = intensity;
 
             float elapsedTime = 0f;
@@ -72,11 +72,11 @@ namespace _Scripts.Camera
             {
                 float t = elapsedTime / _damageDuration;
                 elapsedTime += Time.deltaTime;
-                _damagEffect.weight = Mathf.Lerp(startWeight, targetWeight, t);
+                _damageEffect.weight = Mathf.Lerp(startWeight, targetWeight, t);
                 yield return null;
             }
 
-            _damagEffect.weight = targetWeight;
+            _damageEffect.weight = targetWeight;
         }
 
         public void SetDefaultFov() => _camera.fieldOfView = _minFov;

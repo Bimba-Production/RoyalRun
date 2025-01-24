@@ -18,7 +18,7 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Enter(IState previous)
         {
-            _mover.IsGraunded = false;
+            _mover.IsGrounded = false;
             _controller.CanLand = false;
             _controller.IsJumping = true;
             _timerActive = true;
@@ -45,14 +45,14 @@ namespace _Scripts.StateMachine.PlayerStates
                 }
                 else _currentTimer -= Time.deltaTime;
             }
-            else _mover.UpdateIsGraunded();
+            else _mover.UpdateIsGrounded();
         }
 
         public void Exit()
         {
             _controller.IsJumping = false;
             _controller.CanLand = false;
-            _mover.IsGraunded = true;
+            _mover.IsGrounded = true;
         }
     }
 }

@@ -36,8 +36,8 @@ namespace _Scripts
             StopAllCoroutines();
 
             _obstacleSpawner.IsPaused = true;
-            _rb.useGravity = false;
-            _playerCollider.isTrigger = true;
+            // _rb.useGravity = false;
+            // _playerCollider.isTrigger = true;
             
             LevelGenerator.Instance.Pause();
             LevelGenerator.Instance.StopChunks();
@@ -73,8 +73,8 @@ namespace _Scripts
             DistanceDisplay.Instance.ResetDistance();
             TimerDisplay.Instance.RestartTimer();
             
-            _rb.useGravity = true;
-            _playerCollider.isTrigger = false;
+            // _rb.useGravity = true;
+            // _playerCollider.isTrigger = false;
         }
     }
 }

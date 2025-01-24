@@ -55,7 +55,7 @@ namespace _Scripts.StateMachine
             else
             {
                 IsCriticalCondition = false;
-                _cameraController.DisableyDamageEffect();
+                _cameraController.DisableDamageEffect();
             }
         }
 
@@ -113,11 +113,11 @@ namespace _Scripts.StateMachine
             _stateMachine = new PlayerStateMachine(states, transitions, run);
         }
 
-        private bool CanRun() => _mover.IsGraunded && !IsSliding && !IsRolling && CanLand;
-        private bool CanSliding() => _mover.IsGraunded && !IsSliding && !IsRolling && !IsJumping && _mover.SlidingInput;
-        private bool CanJump() => !IsJumping && !IsRolling && _mover.JumpInput && _mover.IsGraunded;
-        private bool CanRoll() => IsJumping && _mover.SlidingInput && !IsRolling && !_mover.IsGraunded;
-        private bool CanStumble() => _mover.IsGraunded && IsStumble;
+        private bool CanRun() => _mover.IsGrounded && !IsSliding && !IsRolling && CanLand;
+        private bool CanSliding() => _mover.IsGrounded && !IsSliding && !IsRolling && !IsJumping && _mover.SlidingInput;
+        private bool CanJump() => !IsJumping && !IsRolling && _mover.JumpInput && _mover.IsGrounded;
+        private bool CanRoll() => IsJumping && _mover.SlidingInput && !IsRolling && !_mover.IsGrounded;
+        private bool CanStumble() => _mover.IsGrounded && IsStumble;
         private bool CanFall() => IsFall;
         private bool CanRestart() => Restart && !IsFall;
 

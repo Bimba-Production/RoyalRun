@@ -18,34 +18,50 @@ namespace _Scripts.StateMachine
         public bool SlidingInput { get; private set; }
         public bool ShiftRightInput { get; private set; }
         public bool ShiftLeftInput { get; private set; }
-        public bool IsGraunded = false;
+        public bool IsGrounded = false;
 
         private float[] _lanes = { -2.5f, 0f, 2.5f };
         private float _currentLane = 0f;
         private bool _isMoving = false;
+        private bool _canRightMove = true;
+        private bool _canLeftMove = true;
         private float _shiftDuration = 0.17f;
 
         public void ReadMoveInput(InputAction.CallbackContext context) => _moveInput = context.ReadValue<Vector2>(); 
         public void ReadJumpInput(InputAction.CallbackContext context) => JumpInput = context.ReadValueAsButton();
         public void ReadSlidingInput(InputAction.CallbackContext context) => SlidingInput = context.ReadValueAsButton();
-        public void ReadShiftRightInput(InputAction.CallbackContext context) => ShiftRightInput = context.ReadValueAsButton();
-        public void ReadShiftLeftInput(InputAction.CallbackContext context) => ShiftLeftInput = context.ReadValueAsButton();
+
+        public void ReadShiftRightInput(InputAction.CallbackContext context)
+        {
+            ShiftRightInput = context.ReadValueAsButton();
+            if (!_canRightMove && !ShiftRightInput) _canRightMove = true;
+        }
+
+        public void ReadShiftLeftInput(InputAction.CallbackContext context)
+        {
+            ShiftLeftInput = context.ReadValueAsButton();
+            if (!_canLeftMove && !ShiftLeftInput) _canLeftMove = true;
+        }
 
         public void Move(float minX, float maxX, float speed)
         {
             if (_isMoving) return;
+            if (!_canLeftMove || !_canRightMove) return;
 
             float newPos = _currentLane;
 
-            if (ShiftRightInput && newPos < _lanes[_lanes.Length - 1]) newPos += 2.5f;
-            if (ShiftLeftInput && newPos > _lanes[0]) newPos -= 2.5f;
+            if (ShiftRightInput && newPos < _lanes[_lanes.Length - 1])
+            {
+                _canRightMove = false;
+                newPos += 2.5f;
+            }
+
+            if (ShiftLeftInput && newPos > _lanes[0])
+            {
+                _canLeftMove = false;
+                newPos -= 2.5f;
+            }
             if (newPos != _currentLane)  StartCoroutine(ApplyDamageEffectRoutine(newPos));
-
-            //float velocityX = _moveInput.x * (speed * Time.deltaTime);
-            //float newPosX = transform.position.x + velocityX;
-            //Vector3 newPos = transform.position;
-
-            //if (newPosX > minX && newPosX < maxX) transform.position = new Vector3(newPosX, newPos.y, newPos.z);
         }
 
         IEnumerator ApplyDamageEffectRoutine(float targetPos)
@@ -70,10 +86,10 @@ namespace _Scripts.StateMachine
 
         public void ApplyForce(Vector3 direction, float force) => _rb.AddForce(transform.forward + direction * force, ForceMode.Impulse);
 
-        public void UpdateIsGraunded()
+        public void UpdateIsGrounded()
         {
-            IsGraunded = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, _groundedRayLength);
-            Debug.DrawRay(transform.position, Vector3.down * _groundedRayLength, IsGraunded ? Color.green : Color.red);
+            IsGrounded = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, _groundedRayLength);
+            // Debug.DrawRay(transform.position, Vector3.down * _groundedRayLength, IsGrounded ? Color.green : Color.red);
         }
 
         public void ResetPlayerPos() => transform.position = new Vector3(_lanes[1], 0, 0);
