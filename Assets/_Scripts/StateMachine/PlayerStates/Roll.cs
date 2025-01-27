@@ -6,8 +6,7 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Roll : State, IEnterState, IUpdateState, IExitState
     {
-        private readonly float _speed = 8f;
-        private readonly float _force = 11f;
+        private readonly float _force = 16f;
         private readonly float _timer = 0.3f;
         private float _currentTimer = 0.3f;
         private bool _timerActive = false;
@@ -30,7 +29,7 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Update()
         {
-            _mover.Move(_controller.MinX, _controller.MaxX, _speed);
+            _mover.Move();
 
             if (_timerActive)
             {

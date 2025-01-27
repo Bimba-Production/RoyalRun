@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace _Scripts.StateMachine
 {
-    public class PlayerMover : MonoBehaviour
+    public class PlayerMover : Singleton<PlayerMover>
     {
         [Header("References")]
         [SerializeField] private Rigidbody _rb;
@@ -16,8 +16,8 @@ namespace _Scripts.StateMachine
         public Vector2 MoveInput => _moveInput;
         public bool JumpInput { get; private set; }
         public bool SlidingInput { get; private set; }
-        public bool ShiftRightInput { get; private set; }
-        public bool ShiftLeftInput { get; private set; }
+        private bool ShiftRightInput { get; set; }
+        private bool ShiftLeftInput { get; set; }
         public bool IsGrounded = false;
 
         private float[] _lanes = { -2.5f, 0f, 2.5f };
@@ -26,11 +26,28 @@ namespace _Scripts.StateMachine
         private bool _canRightMove = true;
         private bool _canLeftMove = true;
         private float _shiftDuration = 0.17f;
+        private float _speedMultiplier = 2f;
 
+        public bool CanCancelMove => _lastPosition != -1f;
+        private float _lastPosition = -1f;
+        private float _lastPositionTime = 0.2f;
+        private float _lastPositionCooldownTime = 0f;
+        
         public void ReadMoveInput(InputAction.CallbackContext context) => _moveInput = context.ReadValue<Vector2>(); 
         public void ReadJumpInput(InputAction.CallbackContext context) => JumpInput = context.ReadValueAsButton();
         public void ReadSlidingInput(InputAction.CallbackContext context) => SlidingInput = context.ReadValueAsButton();
 
+        private void Update()
+        {
+            if (_lastPosition == -1f) return;
+            
+            if (_lastPositionCooldownTime <= Time.realtimeSinceStartup)
+            {
+                _lastPositionCooldownTime = 0;
+                _lastPosition = -1f;
+            }
+        }
+        
         public void ReadShiftRightInput(InputAction.CallbackContext context)
         {
             ShiftRightInput = context.ReadValueAsButton();
@@ -43,13 +60,13 @@ namespace _Scripts.StateMachine
             if (!_canLeftMove && !ShiftLeftInput) _canLeftMove = true;
         }
 
-        public void Move(float minX, float maxX, float speed)
+        public void Move()
         {
             if (_isMoving) return;
             if (!_canLeftMove || !_canRightMove) return;
 
             float newPos = _currentLane;
-
+            
             if (ShiftRightInput && newPos < _lanes[_lanes.Length - 1])
             {
                 _canRightMove = false;
@@ -61,18 +78,31 @@ namespace _Scripts.StateMachine
                 _canLeftMove = false;
                 newPos -= 2.5f;
             }
-            if (newPos != _currentLane)  StartCoroutine(ApplyDamageEffectRoutine(newPos));
+
+            if (newPos != _currentLane)
+            {
+                _lastPosition = _currentLane;
+                _lastPositionCooldownTime = Time.realtimeSinceStartup + _lastPositionTime;
+                float speed = EffectController.Instance.ElectricalEffectIsActive() ? _shiftDuration / _speedMultiplier : _shiftDuration;
+                StartCoroutine(ApplyMoveRoutine(newPos, speed));
+            }
         }
 
-        IEnumerator ApplyDamageEffectRoutine(float targetPos)
+        public void CancelMove()
+        {
+            StopCoroutine(nameof(ApplyMoveRoutine));
+            StartCoroutine(ApplyMoveRoutine(_lastPosition, 0.14f));
+        }
+        
+        IEnumerator ApplyMoveRoutine(float targetPos, float duration = 0.2f)
         {
             _isMoving = true;
             float startPos = _currentLane;
 
             float elapsedTime = 0f;
-            while (elapsedTime < _shiftDuration)
+            while (elapsedTime < duration)
             {
-                float t = elapsedTime / _shiftDuration;
+                float t = elapsedTime / duration;
                 elapsedTime += Time.deltaTime;
                 float newPosX = Mathf.Lerp(startPos, targetPos, t);
                 transform.position = new Vector3(newPosX, transform.position.y, transform.position.z);
@@ -91,7 +121,5 @@ namespace _Scripts.StateMachine
             IsGrounded = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, _groundedRayLength);
             // Debug.DrawRay(transform.position, Vector3.down * _groundedRayLength, IsGrounded ? Color.green : Color.red);
         }
-
-        public void ResetPlayerPos() => transform.position = new Vector3(_lanes[1], 0, 0);
     }
 }

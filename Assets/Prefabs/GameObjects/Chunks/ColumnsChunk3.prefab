@@ -1,58 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &924562107613083200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 517071170316397546}
-  - component: {fileID: 5697780792511318181}
-  m_Layer: 0
-  m_Name: DamageTrigger (1)
-  m_TagString: Obstacle
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &517071170316397546
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924562107613083200}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.010000706, y: 0, z: -4.12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5259613357455425243}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5697780792511318181
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924562107613083200}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.34, y: 1.85, z: 9.7}
-  m_Center: {x: 0.76, y: 1.2, z: 4.31}
 --- !u!1 &1086726438828795948
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,11 +255,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fence: {fileID: 1307294487077442551, guid: e1e61a325562d1d4aa035551d5538959, type: 3}
   _pickups:
+  - {fileID: 5210616843378803823, guid: cb58a72c19de46e4488526d90cc24195, type: 3}
   - {fileID: 5709535559621206218, guid: 9fecf059c822fe74c9c92856e4e4dfd2, type: 3}
   - {fileID: 4808722692184877589, guid: 488e8fcc15945c84c884dd3dfdcdd647, type: 3}
-  - {fileID: 8960820245511633407, guid: 88e75d35190fe4643b88eef1517031de, type: 3}
-  - {fileID: 5210616843378803823, guid: cb58a72c19de46e4488526d90cc24195, type: 3}
   - {fileID: 2434093014094815450, guid: a66a5a4cef40bcc43ac89bb0460a26ac, type: 3}
+  - {fileID: 8960820245511633407, guid: 88e75d35190fe4643b88eef1517031de, type: 3}
   _coin: {fileID: 5914648575831173617, guid: acdf8f258627e84438a1a89917a786a7, type: 3}
   _laneObjects:
   - {fileID: 0}
@@ -320,7 +267,7 @@ MonoBehaviour:
   - {fileID: 0}
   _pickupSpawnChance: 0.05
   _coinSpawnChance: 0.5
-  _coinSeperationLength: 2
+  _coinSeparationLength: 2
   _maxCoinToSpawn: 5
   _lanes:
   - -2.5
@@ -337,6 +284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5333694193944784007}
+  - component: {fileID: 2396571199325775069}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -367,6 +315,27 @@ Transform:
   - {fileID: 5259613357455425243}
   m_Father: {fileID: 8531153723311054869}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2396571199325775069
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3619983934436348851}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.649613, y: 2.9571557, z: 9.683431}
+  m_Center: {x: -0.11, y: 0.52, z: -0.03}
 --- !u!1 &7779973111251026210
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,59 +422,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &8756865025864658279
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 501117504448452234}
-  - component: {fileID: 6285234920933110537}
-  m_Layer: 0
-  m_Name: DamageTrigger
-  m_TagString: Obstacle
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &501117504448452234
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8756865025864658279}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 0, z: -4.22}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5259613357455425243}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6285234920933110537
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8756865025864658279}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 1.8, z: 9.2}
-  m_Center: {x: 0.76, y: 1.2, z: 4.31}
 --- !u!1 &9146893500031779384
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +434,7 @@ GameObject:
   - component: {fileID: 1694443758450133523}
   m_Layer: 0
   m_Name: Content
-  m_TagString: Untagged
+  m_TagString: CriticalObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -532,7 +448,7 @@ Transform:
   m_GameObject: {fileID: 9146893500031779384}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.55, y: -0.34, z: -0.18}
+  m_LocalPosition: {x: -0.87, y: -0.34, z: -0.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -552,8 +468,6 @@ Transform:
   - {fileID: 8154680899302147991}
   - {fileID: 3398513110712020504}
   - {fileID: 4859163543896572950}
-  - {fileID: 501117504448452234}
-  - {fileID: 517071170316397546}
   m_Father: {fileID: 5333694193944784007}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1694443758450133523
@@ -575,8 +489,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.649613, y: 2.9571557, z: 9.683431}
-  m_Center: {x: 0.6653359, y: 0.9785776, z: 0.2138133}
+  m_Size: {x: 2.7, y: 1.75, z: 9.7}
+  m_Center: {x: 0.76, y: 1.1, z: 0.17}
 --- !u!1001 &644136194457283677
 PrefabInstance:
   m_ObjectHideFlags: 0

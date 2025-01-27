@@ -8,6 +8,7 @@ namespace _Scripts.UI
     {
         [Header("References")]
         [SerializeField] private TMP_Text _label;
+        private readonly int _multiplier = 2;
 
         private int _score = 0;
 
@@ -15,9 +16,10 @@ namespace _Scripts.UI
         {
             if (amount <= 0) return;
             
-            _score += amount;
+            int realAmount = EffectController.Instance.SpeedUpEffectIsActive() ? amount * _multiplier : amount;
+            _score += realAmount;
             
-            ScoreModel.Instance.coin += amount;
+            ScoreModel.Instance.coin += realAmount;
             _label.text = _score.ToString();
         }
 

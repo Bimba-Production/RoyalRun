@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -7,15 +8,26 @@ namespace _Scripts.Camera
     [RequireComponent(typeof(UnityEngine.Camera))]
     public sealed class CameraController : Singleton<CameraController>
     {
-        [Header("References")]
+        [Header("Damage Effect")]
+        [SerializeField] private float _damageDuration = 1f;
         [SerializeField] private Volume _damageEffect;
+        
+        [Header("SpeedUp Effect")]
+        [SerializeField] private float _speedUpDuration = 1f;
+        [SerializeField] private Volume _speedUpEffect;
+        
+        [Header("Shield Effect")]
+        [SerializeField] private float _shieldDuration = 1f;
+        [SerializeField] private Volume _shieldEffect;
+
+        [Header("SpeedUp Particle")]
         [SerializeField] private ParticleSystem _speedUpParticleSystem;
+        [SerializeField] private ParticleSystem _electricalSpeedUpParticleSystem;
         
         [Header("Settings")]
         [SerializeField] private float _minFov = 60f;
         [SerializeField] private float _maxFov = 100f;
         [SerializeField] private float _zoomDuration = 1f;
-        [SerializeField] private float _damageDuration = 1f;
 
         private UnityEngine.Camera _camera;
 
@@ -24,6 +36,8 @@ namespace _Scripts.Camera
             _camera = GetComponent<UnityEngine.Camera>();
             base.Awake();
         }
+
+        public void Shake() => transform.DOShakePosition(0.2f);
 
         public void ChangeCameraFOV(float acceleration)
         {
@@ -49,35 +63,18 @@ namespace _Scripts.Camera
 
             _camera.fieldOfView = targetFOV;
         }
-
-        public void ApplyDamageEffect()
-        {
-            StopCoroutine(ApplyDamageEffectRoutine(0f));
-            StartCoroutine(ApplyDamageEffectRoutine(0.7f));
-        }
-
-        public void DisableDamageEffect()
-        {
-            StopCoroutine(ApplyDamageEffectRoutine(0.7f));
-            StartCoroutine(ApplyDamageEffectRoutine(0f));
-        }
-
-        IEnumerator ApplyDamageEffectRoutine(float intensity)
-        {
-            float startWeight = _damageEffect.weight;
-            float targetWeight = intensity;
-
-            float elapsedTime = 0f;
-            while (elapsedTime < _damageDuration)
-            {
-                float t = elapsedTime / _damageDuration;
-                elapsedTime += Time.deltaTime;
-                _damageEffect.weight = Mathf.Lerp(startWeight, targetWeight, t);
-                yield return null;
-            }
-
-            _damageEffect.weight = targetWeight;
-        }
+        
+        public void ApplyDamageEffect() => VolumeEffectsController.Instance.ApplyEffect(0.7f, _damageEffect, _damageDuration);
+        public void DisableDamageEffect() => VolumeEffectsController.Instance.DisableEffect(_damageEffect, _damageDuration);
+        
+        public void ApplySpeedUpEffect() => VolumeEffectsController.Instance.ApplyEffect(1f, _speedUpEffect, _speedUpDuration);
+        public void DisableSpeedUpEffect() => VolumeEffectsController.Instance.DisableEffect(_speedUpEffect, _speedUpDuration);
+        
+        public void ApplyShieldEffect() => VolumeEffectsController.Instance.ApplyEffect(1f, _shieldEffect, _shieldDuration);
+        public void DisableShieldEffect() => VolumeEffectsController.Instance.DisableEffect(_shieldEffect, _shieldDuration);
+        
+        public void ApplyElectricEffect() => _electricalSpeedUpParticleSystem.Play();
+        public void DisableElectricEffect() => _electricalSpeedUpParticleSystem.Stop();
 
         public void SetDefaultFov() => _camera.fieldOfView = _minFov;
     }

@@ -17,6 +17,8 @@ namespace _Scripts
         [SerializeField] private ObstacleSpawner _obstacleSpawner;
         [SerializeField] private PlayerController _playerController;
 
+        public bool IsGameOver { get; private set; } = false;
+
         private void OnEnable()
         {
             UIController.Instance.GameOverDisplay.OnRestartClicked.AddListener(ResetGame);
@@ -31,6 +33,7 @@ namespace _Scripts
 
         private void HandleGameOver()
         {
+            IsGameOver = true;
             //Метод ресетящий позицию игрока и сбрасывающий его текущее ускорение.
 
             StopAllCoroutines();
@@ -50,6 +53,7 @@ namespace _Scripts
 
         private void ResetGame()
         {
+            IsGameOver = false;
             string currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
         }

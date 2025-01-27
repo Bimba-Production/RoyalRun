@@ -6,8 +6,7 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Jump : State, IEnterState, IUpdateState, IExitState
     {
-        private readonly float _speed = 8f;
-        private readonly float _jumpForce = 10f;
+        private readonly float _jumpForce = 12f;
         private readonly float _timer = 0.6f;
         private float _currentTimer = 0.6f;
         private bool _timerActive = false;
@@ -33,7 +32,7 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Update()
         {
-            _mover.Move(_controller.MinX, _controller.MaxX, _speed);
+            _mover.Move();
 
             if (_timerActive)
             {
