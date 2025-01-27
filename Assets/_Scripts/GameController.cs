@@ -7,6 +7,7 @@ using _Scripts.StateMachine;
 using _Scripts.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace _Scripts
 {
@@ -15,7 +16,8 @@ namespace _Scripts
         [Header("References")] [SerializeField]
         private Rigidbody _rb;
 
-        [SerializeField] private ScoreDisplay _scoreDisplay;
+        [FormerlySerializedAs("_scoreDisplay")] [SerializeField] private CurrentScoreDisplay currentScoreDisplay;
+        [SerializeField] private BestScoreDisplay _bestScoreDisplay;
         [SerializeField] private CapsuleCollider _playerCollider;
         [SerializeField] private ObstacleSpawner _obstacleSpawner;
         [SerializeField] private PlayerController _playerController;
@@ -25,7 +27,7 @@ namespace _Scripts
             var savedBestScore = SaveManager.Load();
             
             BestScore.Instance.SetScore(savedBestScore.Coin , savedBestScore.Distance, savedBestScore.Time); 
-            _scoreDisplay.UpdateScore(CurrentScore.Instance.coin, CurrentScore.Instance.distance, CurrentScore.Instance.time);
+            _bestScoreDisplay.UpdateScore(savedBestScore.Coin , savedBestScore.Distance, savedBestScore.Time);
             
             base.Awake();
         }
@@ -33,13 +35,13 @@ namespace _Scripts
         private void OnEnable()
         {
             UIController.Instance.GameOverDisplay.OnRestartClicked.AddListener(ResetGame);
-            _playerController.OnGameOverEvent += HandleGameOver;
+            _playerController.OnGameOverEvent.AddListener(HandleGameOver);
         }
 
         private void OnDisable()
         {
             UIController.Instance.GameOverDisplay.OnRestartClicked.RemoveListener(ResetGame);
-            _playerController.OnGameOverEvent -= HandleGameOver;
+            _playerController.OnGameOverEvent.RemoveListener(HandleGameOver);
         }
 
         private void HandleGameOver()
@@ -53,15 +55,18 @@ namespace _Scripts
 
             TimerDisplay.Instance.IsPaused = true;
 
-            _scoreDisplay.UpdateScore(CurrentScore.Instance.coin, CurrentScore.Instance.distance, CurrentScore.Instance.time);
+            currentScoreDisplay.UpdateScore(CurrentScore.Instance.Coin, CurrentScore.Instance.Distance, CurrentScore.Instance.Time);
 
             var savedBestScore = SaveManager.Load();
             var updatedBestScore = new GameData(0, 
-                Math.Max(CurrentScore.Instance.coin, savedBestScore.Coin), 
-                Math.Max(CurrentScore.Instance.time, savedBestScore.Time), 
-                Math.Max(CurrentScore.Instance.distance, savedBestScore.Distance));
+                Math.Max(CurrentScore.Instance.Coin, savedBestScore.Coin), 
+                Math.Max(CurrentScore.Instance.Time, savedBestScore.Time), 
+                Math.Max(CurrentScore.Instance.Distance, savedBestScore.Distance));
 
             SaveManager.Save(updatedBestScore);
+            
+            _bestScoreDisplay.UpdateScore(updatedBestScore.Coin , updatedBestScore.Distance, updatedBestScore.Time);
+            
             UIController.Instance.GameOverDisplay.Show();
         }
 

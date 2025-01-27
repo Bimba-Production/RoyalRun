@@ -16,14 +16,14 @@ namespace _Scripts.UI
             if (amount <= 0) return;
             
             _distance += amount;
-            CurrentScore.Instance.distance = _distance;
+            CurrentScore.Instance.Distance = _distance;
             _label.text = $"{((int)_distance).ToString()} m";
         }
 
         public void ResetDistance()
         {
             _distance = 0;
-            CurrentScore.Instance.distance = 0;
+            CurrentScore.Instance.Distance = 0;
         }
     }
 }

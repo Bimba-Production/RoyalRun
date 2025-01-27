@@ -17,14 +17,14 @@ namespace _Scripts.UI
             
             _score += amount;
             
-            CurrentScore.Instance.coin += amount;
+            CurrentScore.Instance.Coin += amount;
             _label.text = _score.ToString();
         }
 
         public void ResetScore()
         {
             _score = 0;
-            CurrentScore.Instance.coin = 0;
+            CurrentScore.Instance.Coin = 0;
         }
     }
 }

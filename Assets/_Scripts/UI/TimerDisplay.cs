@@ -30,7 +30,7 @@ namespace _Scripts.UI
                 _tickCooldownTimer = 0f;
                 _timer += 1;
                 
-                CurrentScore.Instance.time = _timer;
+                CurrentScore.Instance.Time = _timer;
                 UpdateTimer();
             }
         }
@@ -51,7 +51,7 @@ namespace _Scripts.UI
             _timer = 0;
             UpdateTimer();
             IsPaused = false;
-            CurrentScore.Instance.time = 0;
+            CurrentScore.Instance.Time = 0;
         }
     }
 }

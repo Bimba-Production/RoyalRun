@@ -1,9 +1,9 @@
 ﻿namespace _Scripts.Models
 {
-    public class CurrentScore: Score
+    public class CurrentScore: Singleton<CurrentScore> , IScore
     {
-        public CurrentScore(int coin, float distance, int time) : base(coin, distance, time)
-        {
-        }
+        public int Coin { get; set; }
+        public float Distance { get; set; }
+        public int Time { get; set; }
     }
 }
