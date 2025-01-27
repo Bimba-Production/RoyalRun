@@ -31,13 +31,9 @@ namespace _Scripts
 
         private void HandleGameOver()
         {
-            //Метод ресетящий позицию игрока и сбрасывающий его текущее ускорение.
-
             StopAllCoroutines();
 
             _obstacleSpawner.IsPaused = true;
-            // _rb.useGravity = false;
-            // _playerCollider.isTrigger = true;
             
             LevelGenerator.Instance.Pause();
             LevelGenerator.Instance.StopChunks();
@@ -56,8 +52,6 @@ namespace _Scripts
 
         private void ContinueGame()
         {
-            // Метод который очищает несколько ближайших чанков от перепятствий.
-
             UIController.Instance.GameOverDisplay.Hide();
 
             _playerController.Reset();
@@ -72,9 +66,6 @@ namespace _Scripts
             CoinDisplay.Instance.ResetScore();
             DistanceDisplay.Instance.ResetDistance();
             TimerDisplay.Instance.RestartTimer();
-            
-            // _rb.useGravity = true;
-            // _playerCollider.isTrigger = false;
         }
     }
 }

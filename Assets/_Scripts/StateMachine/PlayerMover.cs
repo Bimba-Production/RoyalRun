@@ -64,7 +64,7 @@ namespace _Scripts.StateMachine
             if (newPos != _currentLane)  StartCoroutine(ApplyDamageEffectRoutine(newPos));
         }
 
-        IEnumerator ApplyDamageEffectRoutine(float targetPos)
+        private IEnumerator ApplyDamageEffectRoutine(float targetPos)
         {
             _isMoving = true;
             float startPos = _currentLane;
@@ -89,7 +89,6 @@ namespace _Scripts.StateMachine
         public void UpdateIsGrounded()
         {
             IsGrounded = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, _groundedRayLength);
-            // Debug.DrawRay(transform.position, Vector3.down * _groundedRayLength, IsGrounded ? Color.green : Color.red);
         }
 
         public void ResetPlayerPos() => transform.position = new Vector3(_lanes[1], 0, 0);
