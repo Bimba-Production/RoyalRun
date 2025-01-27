@@ -12,5 +12,12 @@ namespace _Scripts.Models
             this.distance = distance;
             this.time = time;
         }
+
+        public void SetScore(int coin, float distance, int time)
+        {
+            this.coin = coin;
+            this.distance = distance;
+            this.time = time;
+        }
     }
 }

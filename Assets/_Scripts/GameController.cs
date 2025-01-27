@@ -20,6 +20,16 @@ namespace _Scripts
         [SerializeField] private ObstacleSpawner _obstacleSpawner;
         [SerializeField] private PlayerController _playerController;
 
+        protected override void Awake()
+        {
+            var savedBestScore = SaveManager.Load();
+            
+            BestScore.Instance.SetScore(savedBestScore.Coin , savedBestScore.Distance, savedBestScore.Time); 
+            _scoreDisplay.UpdateScore(CurrentScore.Instance.coin, CurrentScore.Instance.distance, CurrentScore.Instance.time);
+            
+            base.Awake();
+        }
+
         private void OnEnable()
         {
             UIController.Instance.GameOverDisplay.OnRestartClicked.AddListener(ResetGame);
