@@ -19,14 +19,14 @@ namespace _Scripts.UI
             int realAmount = EffectController.Instance.SpeedUpEffectIsActive() ? amount * _multiplier : amount;
             _score += realAmount;
             
-            ScoreModel.Instance.coin += realAmount;
+            CurrentScore.Instance.Coin += realAmount;
             _label.text = _score.ToString();
         }
 
         public void ResetScore()
         {
             _score = 0;
-            ScoreModel.Instance.coin = 0;
+            CurrentScore.Instance.Coin = 0;
         }
     }
 }

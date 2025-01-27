@@ -3,6 +3,7 @@ using _Scripts.Camera;
 using _Scripts.StateMachine.Interfaces;
 using _Scripts.StateMachine.PlayerStates;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace _Scripts.StateMachine
 {
@@ -24,8 +25,7 @@ namespace _Scripts.StateMachine
         public bool Restart = false;
         public float CurrentCriticalCuldown = 0f;
 
-        public delegate void OnGameOver();
-        public OnGameOver OnGameOverEvent;
+        public UnityEvent OnGameOverEvent;
 
         private PlayerStateMachine _stateMachine;
 

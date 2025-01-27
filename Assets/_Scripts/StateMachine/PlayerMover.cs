@@ -94,7 +94,7 @@ namespace _Scripts.StateMachine
             StartCoroutine(ApplyMoveRoutine(_lastPosition, 0.14f));
         }
         
-        IEnumerator ApplyMoveRoutine(float targetPos, float duration = 0.2f)
+        private IEnumerator ApplyMoveRoutine(float targetPos, float duration = 0.2f)
         {
             _isMoving = true;
             float startPos = _currentLane;
@@ -119,7 +119,6 @@ namespace _Scripts.StateMachine
         public void UpdateIsGrounded()
         {
             IsGrounded = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down, _groundedRayLength);
-            // Debug.DrawRay(transform.position, Vector3.down * _groundedRayLength, IsGrounded ? Color.green : Color.red);
         }
     }
 }
