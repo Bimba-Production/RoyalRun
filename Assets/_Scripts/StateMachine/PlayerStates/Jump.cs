@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.StateMachine.PlayerStates
 {
-    public class Jump : State, IEnterState, IUpdateState, IExitState
+    public sealed class Jump : State, IEnterState, IUpdateState, IExitState
     {
         private readonly float _speed = 8f;
         private readonly float _jumpForce = 10f;
@@ -18,7 +18,7 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Enter(IState previous)
         {
-            _mover.IsGraunded = false;
+            _mover.IsGrounded = false;
             _controller.CanLand = false;
             _controller.IsJumping = true;
             _timerActive = true;
@@ -45,14 +45,14 @@ namespace _Scripts.StateMachine.PlayerStates
                 }
                 else _currentTimer -= Time.deltaTime;
             }
-            else _mover.UpdateIsGraunded();
+            else _mover.UpdateIsGrounded();
         }
 
         public void Exit()
         {
             _controller.IsJumping = false;
             _controller.CanLand = false;
-            _mover.IsGraunded = true;
+            _mover.IsGrounded = true;
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.UI
 {
-    public class ScoreDisplay: MonoBehaviour
+    public sealed class ScoreDisplay: MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private TMP_Text _coinLabel;

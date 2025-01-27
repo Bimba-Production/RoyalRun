@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.UI
 {
-    public class DistanceDisplay: Singleton<DistanceDisplay>
+    public sealed class DistanceDisplay: Singleton<DistanceDisplay>
     {
         [Header("References")]
         [SerializeField] private TMP_Text _label;

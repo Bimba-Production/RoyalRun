@@ -3,7 +3,7 @@ using _Scripts.StateMachine.Interfaces;
 
 namespace _Scripts.StateMachine
 {
-    public class Transition
+    public sealed class Transition
     {
         public IState From { get; }
         public IState To { get; }

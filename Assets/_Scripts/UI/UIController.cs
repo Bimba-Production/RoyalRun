@@ -2,7 +2,7 @@
 
 namespace _Scripts.UI
 {
-    public class UIController: Singleton<UIController>
+    public sealed class UIController: Singleton<UIController>
     {
         [Header("References")]
         [SerializeField] private GameOverDisplay _gameOverDisplay;

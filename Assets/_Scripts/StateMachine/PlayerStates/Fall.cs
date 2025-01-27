@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.StateMachine.PlayerStates
 {
-    public class Fall : State, IEnterState
+    public sealed class Fall : State, IEnterState
     {
         public Fall(Animator animator, PlayerMover mover, PlayerController controller) : base(animator, mover, controller)
         {

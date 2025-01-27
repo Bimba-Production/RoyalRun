@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightpostLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 6605103087646778674, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.77
+      objectReference: {fileID: 0}
     - target: {fileID: 8531153723311054869, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

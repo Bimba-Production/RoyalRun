@@ -2,7 +2,7 @@ namespace _Scripts.Pickups
 {
     public class Explosion : Pickup
     {
-        public override void OnPickup()
+        public sealed override void OnPickup()
         {
             Destroy(gameObject);
         }

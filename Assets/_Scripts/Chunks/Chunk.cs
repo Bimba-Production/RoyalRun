@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Scripts.Chunks
 {
-    public class Chunk : MonoBehaviour
+    public sealed class Chunk : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private GameObject _fence;
@@ -14,14 +14,14 @@ namespace _Scripts.Chunks
         [Header("Settings")]
         [SerializeField] private float _pickupSpawnChance = 0.15f;
         [SerializeField] private float _coinSpawnChance = 0.5f;
-        [SerializeField] private float _coinSeperationLength = 2f;
+        [SerializeField] private float _coinSeparationLength = 2f;
         [SerializeField] private int _maxCoinToSpawn = 5;
         [SerializeField] private float[] _lanes = { -2.5f, 0f, 2.5f };
         [SerializeField] private List<int> _availableLanesIndexes = new List<int> { 0, 1, 2 };
         [SerializeField] private int _maxFenceCount;
         [SerializeField] private int _minFenceCount;
 
-        private void Start()
+        public void Init()
         {
             SpawnFence();
             SpawnPickup();
@@ -59,12 +59,12 @@ namespace _Scripts.Chunks
             int randIndex = Random.Range(0, _availableLanesIndexes.Count);
             int coinsToSpawn = Random.Range(3, _maxCoinToSpawn + 1);
 
-            float topOfChunkZpos = transform.position.z + (_coinSeperationLength * 2f);
+            float topOfChunkZpos = transform.position.z + (_coinSeparationLength * 2f);
 
             for (int i = 0; i < coinsToSpawn; i += 1)
             {
                 Vector3 pos = new Vector3(_lanes[_availableLanesIndexes[randIndex]], transform.position.y,
-                    (topOfChunkZpos - (i * _coinSeperationLength)));
+                    (topOfChunkZpos - (i * _coinSeparationLength)));
                 GameObject obj = Instantiate(_coin, pos, Quaternion.identity, transform);
                 _laneObjects.Add(obj);
             }

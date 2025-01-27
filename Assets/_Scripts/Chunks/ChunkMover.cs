@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Scripts.Chunks
 {
-    public class ChunkMover : MonoBehaviour
+    public sealed class ChunkMover : MonoBehaviour
     {
         [Header("Settings")]
         [SerializeField] private float _speed = 8f;

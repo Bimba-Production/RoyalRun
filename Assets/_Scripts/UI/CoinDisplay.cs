@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.UI
 {
-    public class CoinDisplay: Singleton<CoinDisplay>
+    public sealed class CoinDisplay: Singleton<CoinDisplay>
     {
         [Header("References")]
         [SerializeField] private TMP_Text _label;
