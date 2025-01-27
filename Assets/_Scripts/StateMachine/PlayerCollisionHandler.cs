@@ -23,7 +23,7 @@ namespace _Scripts.StateMachine
                 {
                     DestructionObstacleSpawner.Instance.Play(collider.transform.position, Vector3.zero);
                     Destroy(collider.gameObject);
-                    EffectController.Instance.DisableShieldEffect();
+                    // EffectController.Instance.DisableShieldEffect();
                     return;
                 }
                 
