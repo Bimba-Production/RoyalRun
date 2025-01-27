@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Scripts.Level
 {
-    public class LevelGenerator : Singleton<LevelGenerator>
+    public sealed class LevelGenerator : Singleton<LevelGenerator>
     {
         [Header("References")] 
         [SerializeField] private GameObject[] _chunkPrefabs;
@@ -78,7 +78,6 @@ namespace _Scripts.Level
                 _accelerationCooldownValue = _accelerationCooldown;
                 ChangeChunkMoveSpeed(_levelAcceleration);
 
-                // Wait for the specified acceleration delay
                 yield return new WaitForSeconds(_accelerationCooldownValue);
             }
         }
@@ -94,6 +93,7 @@ namespace _Scripts.Level
 
         private void ChangeChunkMoveSpeed(float acceleration)
         {
+            if (_currentSpeed + acceleration > _maxMoveSpeed) return;
             _cameraController.ChangeCameraFOV(acceleration);
 
             float speed = _currentSpeed + acceleration;
@@ -121,10 +121,15 @@ namespace _Scripts.Level
             {
                 Vector3 pos = new Vector3(transform.position.x, transform.position.y, _chunkLength * i);
                 GameObject chunkToSpawn = _chunkPrefabs[Random.Range(0, _chunkPrefabs.Length)];
+
+                if (i < 2) chunkToSpawn = _chunkPrefabs[0];
+
                 GameObject chunk = Instantiate(chunkToSpawn, pos, Quaternion.identity, _chunkParent);
                 _chunkObjects[i] = chunk;
                 _chunks[i] = chunk.GetComponent<Chunk>();
                 _chunkMovers[i] = chunk.GetComponent<ChunkMover>();
+
+                if (i > 2) _chunks[i].Init();
             }
 
             _closestChunkIndex = 0;
@@ -155,6 +160,7 @@ namespace _Scripts.Level
                 Destroy(oldChunk.gameObject);
 
                 closestChunk = _chunks[_closestChunkIndex];
+                closestChunk.Init();
             } else
             {
                 closestChunk.ResetChunkSlots(1);

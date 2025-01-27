@@ -2,7 +2,7 @@
 
 namespace _Scripts.Obstacles
 {
-    public class ObstaclesMover: MonoBehaviour
+    public sealed class ObstaclesMover: MonoBehaviour
     {
         [Header("Settings")]
         [SerializeField] private float _cooldown = 0.25f;

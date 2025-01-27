@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Scripts.UI
 {
-    public class FPSDisplay : MonoBehaviour
+    public sealed class FPSDisplay : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private TMP_Text _fpsLabel;

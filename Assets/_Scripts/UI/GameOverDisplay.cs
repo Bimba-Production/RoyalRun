@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace _Scripts.UI
 {
-    public class GameOverDisplay: Singleton<GameOverDisplay>
+    public sealed class GameOverDisplay: Singleton<GameOverDisplay>
     {
         [Header("References")]
         [SerializeField] private Animator _anim;

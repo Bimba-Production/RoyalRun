@@ -717,6 +717,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Light_Hanging_Pole_Furn
       objectReference: {fileID: 0}
+    - target: {fileID: 2583430288482892998, guid: 9e3740eea4654ff4595607f1fa3a28c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.77
+      objectReference: {fileID: 0}
     - target: {fileID: 8194768595191807696, guid: 9e3740eea4654ff4595607f1fa3a28c2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.4

@@ -1,6 +1,6 @@
 namespace _Scripts.Pickups
 {
-    public class Star : Pickup
+    public sealed class Star : Pickup
     {
         public override void OnPickup()
         {

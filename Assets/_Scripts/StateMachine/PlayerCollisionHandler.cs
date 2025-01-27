@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.StateMachine
 {
-    public class PlayerCollisionHandler : MonoBehaviour
+    public sealed class PlayerCollisionHandler : MonoBehaviour
     {
         [Header("References")] 
         [SerializeField] private PlayerController _playerController;

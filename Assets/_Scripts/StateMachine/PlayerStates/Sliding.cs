@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.StateMachine.PlayerStates
 {
-    public class Sliding : State, IEnterState, IUpdateState, IExitState
+    public sealed class Sliding : State, IEnterState, IUpdateState, IExitState
     {
         private readonly float _speed = 8f;
         private readonly float _timer = 0.8f;

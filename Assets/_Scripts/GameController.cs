@@ -3,12 +3,12 @@ using _Scripts.Models;
 using _Scripts.Obstacles;
 using _Scripts.StateMachine;
 using _Scripts.UI;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts
 {
-    public class GameController: Singleton<GameController>
+    public sealed class GameController: Singleton<GameController>
     {
         [Header("References")]
         [SerializeField] private Rigidbody _rb;
@@ -31,9 +31,9 @@ namespace _Scripts
 
         private void HandleGameOver()
         {
+            StopAllCoroutines();
+
             _obstacleSpawner.IsPaused = true;
-            _rb.useGravity = false;
-            _playerCollider.isTrigger = true;
             
             LevelGenerator.Instance.Pause();
             LevelGenerator.Instance.StopChunks();
@@ -45,6 +45,12 @@ namespace _Scripts
         }
 
         private void ResetGame()
+        {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentSceneName);
+        }
+
+        private void ContinueGame()
         {
             UIController.Instance.GameOverDisplay.Hide();
 
@@ -60,9 +66,6 @@ namespace _Scripts
             CoinDisplay.Instance.ResetScore();
             DistanceDisplay.Instance.ResetDistance();
             TimerDisplay.Instance.RestartTimer();
-            
-            _rb.useGravity = true;
-            _playerCollider.isTrigger = false;
         }
     }
 }
