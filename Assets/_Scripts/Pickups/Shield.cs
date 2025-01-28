@@ -5,6 +5,7 @@ namespace _Scripts.Pickups
         public sealed override void OnPickup()
         {
             EffectController.Instance.ApplyShieldEffect();
+            PowerUpIconController.Instance.ShowShield();
             Destroy(gameObject);
         }
     }

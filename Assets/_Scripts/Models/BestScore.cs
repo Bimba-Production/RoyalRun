@@ -1,6 +1,6 @@
 ﻿namespace _Scripts.Models
 {
-    public class BestScore : Singleton<BestScore> , IScore
+    public class BestScore: Singleton<BestScore> , IScore
     {
         public int Coin { get; set; }
         public float Distance { get; set; }

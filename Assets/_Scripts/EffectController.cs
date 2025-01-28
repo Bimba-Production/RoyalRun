@@ -11,7 +11,7 @@ namespace _Scripts
         [SerializeField] private bool _sUEffectIsActive = false;
 
         [Header("Shield Effect Activity")] 
-        [SerializeField] private float _sEffectActivityTime = 8f;
+        [SerializeField] private float _sEffectActivityTime = 12f;
         [SerializeField] private float _sEffectEndTime = 0f;
         [SerializeField] private bool _sEffectIsActive = false;
         
@@ -75,6 +75,7 @@ namespace _Scripts
 
         public void DisableSpeedUpEffect()
         {
+            PowerUpIconController.Instance.HideDoubleCoin();
             _sUEffectIsActive = false;
             _sUEffectEndTime = 0f;
             CameraController.Instance.DisableSpeedUpEffect();
@@ -82,6 +83,7 @@ namespace _Scripts
 
         public void DisableShieldEffect()
         {
+            PowerUpIconController.Instance.HideShield();
             _sEffectIsActive = false;
             _sEffectEndTime = 0f;
             CameraController.Instance.DisableShieldEffect();
@@ -89,6 +91,7 @@ namespace _Scripts
 
         public void DisableElectricEffect()
         {
+            PowerUpIconController.Instance.HideEvasion();
             _eEffectIsActive = false;
             _eEffectEndTime = 0f;
             CameraController.Instance.DisableElectricEffect();

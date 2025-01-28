@@ -26,7 +26,7 @@ namespace _Scripts
         {
             var savedBestScore = SaveManager.Load();
             
-            BestScore.Instance.SetScore(savedBestScore.Coin , savedBestScore.Distance, savedBestScore.Time); 
+            // BestScore.Instance.SetScore(savedBestScore.Coin , savedBestScore.Distance, savedBestScore.Time); 
             _bestScoreDisplay.UpdateScore(savedBestScore.Coin , savedBestScore.Distance, savedBestScore.Time);
             
             base.Awake();
