@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using _Scripts.StateMachine.Interfaces;
 
 namespace _Scripts.StateMachine
@@ -10,6 +11,8 @@ namespace _Scripts.StateMachine
         private readonly List<IState> _states;
         private readonly Dictionary<IState, List<Transition>> _transitionsPerState;
         private bool _canTransition = true;
+
+        public String CurrentState => _current.Name;
 
         public void SetCurrentState(IState state)
         {

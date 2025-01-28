@@ -1,6 +1,11 @@
-﻿namespace _Scripts.StateMachine.Interfaces
+﻿using System;
+
+namespace _Scripts.StateMachine.Interfaces
 {
-    public interface IState {}
+    public interface IState
+    {
+        public String Name { get; set;}
+    }
 
     public interface IEnterState : IState
     {

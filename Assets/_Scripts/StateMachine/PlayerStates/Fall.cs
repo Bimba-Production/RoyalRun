@@ -1,4 +1,5 @@
-﻿using _Scripts.StateMachine.Abstractions;
+﻿using System;
+using _Scripts.StateMachine.Abstractions;
 using _Scripts.StateMachine.Interfaces;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Fall : State, IEnterState
     {
+        public String Name { get; set;} = "Fall";
         public Fall(Animator animator, PlayerMover mover, PlayerController controller) : base(animator, mover, controller)
         {
         }
