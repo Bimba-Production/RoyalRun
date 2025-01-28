@@ -13,6 +13,7 @@ TagManager:
   - Explosion
   - Shield
   - Star
+  - CriticalObstacle
   layers:
   - Default
   - TransparentFX

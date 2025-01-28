@@ -82,12 +82,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3775027360108091480, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}
       insertIndex: -1
       addedObject: {fileID: -6017075621889616862}
-    - targetCorrespondingSourceObject: {fileID: 3775027360108091480, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 526582726648910205}
-    - targetCorrespondingSourceObject: {fileID: 3775027360108091480, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 719084092088994286}
   m_SourcePrefab: {fileID: 100100000, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}
 --- !u!1 &3325822060110342132 stripped
 GameObject:
@@ -151,50 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cooldown: 1
---- !u!136 &526582726648910205
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3325822060110342132}
-  m_Material: {fileID: 13400000, guid: 6f5361ad6e0f9d14094dbe1e950b9b41, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.37633333
-  m_Height: 2.1058128
-  m_Direction: 0
-  m_Center: {x: 0.019122481, y: 0.26623228, z: -0.082203895}
---- !u!135 &719084092088994286
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3325822060110342132}
-  m_Material: {fileID: 13400000, guid: 6f5361ad6e0f9d14094dbe1e950b9b41, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5309683
-  m_Center: {x: 0, y: 0.26663172, z: 0}
 --- !u!4 &8826916694759010608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6934319804908310172, guid: 8429f637bb5f0ae45a895151cc49fa8f, type: 3}

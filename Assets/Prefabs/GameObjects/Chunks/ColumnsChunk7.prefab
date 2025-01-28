@@ -255,11 +255,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fence: {fileID: 1307294487077442551, guid: e1e61a325562d1d4aa035551d5538959, type: 3}
   _pickups:
+  - {fileID: 5210616843378803823, guid: cb58a72c19de46e4488526d90cc24195, type: 3}
   - {fileID: 5709535559621206218, guid: 9fecf059c822fe74c9c92856e4e4dfd2, type: 3}
   - {fileID: 4808722692184877589, guid: 488e8fcc15945c84c884dd3dfdcdd647, type: 3}
-  - {fileID: 8960820245511633407, guid: 88e75d35190fe4643b88eef1517031de, type: 3}
-  - {fileID: 5210616843378803823, guid: cb58a72c19de46e4488526d90cc24195, type: 3}
   - {fileID: 2434093014094815450, guid: a66a5a4cef40bcc43ac89bb0460a26ac, type: 3}
+  - {fileID: 8960820245511633407, guid: 88e75d35190fe4643b88eef1517031de, type: 3}
   _coin: {fileID: 5914648575831173617, guid: acdf8f258627e84438a1a89917a786a7, type: 3}
   _laneObjects:
   - {fileID: 0}
@@ -267,7 +267,7 @@ MonoBehaviour:
   - {fileID: 0}
   _pickupSpawnChance: 0.05
   _coinSpawnChance: 0.5
-  _coinSeperationLength: 2
+  _coinSeparationLength: 2
   _maxCoinToSpawn: 5
   _lanes:
   - 0

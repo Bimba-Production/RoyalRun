@@ -6,8 +6,6 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Run : State, IEnterState, IUpdateState
     {
-        private readonly float _speed = 8f;
-
         public Run(Animator animator, PlayerMover mover, PlayerController controller) : base(animator, mover, controller)
         {
         }
@@ -22,7 +20,7 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Update()
         {
-            _mover.Move(_controller.MinX, _controller.MaxX, _speed);
+            _mover.Move();
             _mover.UpdateIsGrounded();
         }
     }

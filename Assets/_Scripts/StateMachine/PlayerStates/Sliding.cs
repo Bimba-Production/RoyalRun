@@ -6,7 +6,6 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Sliding : State, IEnterState, IUpdateState, IExitState
     {
-        private readonly float _speed = 8f;
         private readonly float _timer = 0.8f;
         private float _currentTimer = 0.8f;
         private bool _timerActive = false;
@@ -27,7 +26,7 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Update()
         {
-            _mover.Move(_controller.MinX, _controller.MaxX, _speed);
+            _mover.Move();
 
             if (_timerActive)
             {

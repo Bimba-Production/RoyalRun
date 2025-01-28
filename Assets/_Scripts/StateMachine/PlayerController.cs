@@ -14,13 +14,6 @@ namespace _Scripts.StateMachine
         [SerializeField] private Animator _animator;
         [SerializeField] private Animator _colliderAnimator;
         [SerializeField] private PlayerMover _mover;
-        
-        [Header("Settings")]
-        [SerializeField] private float _minX;
-        [SerializeField] private float _maxX;
-        [SerializeField] private float _maxSlidingTime;
-        [SerializeField] private float _slidingColdown;
-        [SerializeField] private float _jumpingColdown;
 
         public bool IsCriticalCondition = false;
         public bool IsJumping = false;
@@ -37,9 +30,6 @@ namespace _Scripts.StateMachine
         private PlayerStateMachine _stateMachine;
 
         private void Awake() => InitStateMachine();
-
-        public float MaxX => _maxX;
-        public float MinX => _minX;
         public Animator ColliderAnimator => _colliderAnimator;
         public float CriticalCooldown { get; } = 3;
 

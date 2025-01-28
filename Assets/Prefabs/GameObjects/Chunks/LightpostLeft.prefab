@@ -56,6 +56,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8726376222767804888, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
+      propertyPath: _pickups.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8726376222767804888, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
+      propertyPath: '_pickups.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5210616843378803823, guid: cb58a72c19de46e4488526d90cc24195, type: 3}
+    - target: {fileID: 8726376222767804888, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
+      propertyPath: '_pickups.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5709535559621206218, guid: 9fecf059c822fe74c9c92856e4e4dfd2, type: 3}
+    - target: {fileID: 8726376222767804888, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
+      propertyPath: '_pickups.Array.data[2]'
+      value: 
+      objectReference: {fileID: 4808722692184877589, guid: 488e8fcc15945c84c884dd3dfdcdd647, type: 3}
+    - target: {fileID: 8726376222767804888, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
+      propertyPath: '_pickups.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2434093014094815450, guid: a66a5a4cef40bcc43ac89bb0460a26ac, type: 3}
+    - target: {fileID: 8726376222767804888, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
+      propertyPath: '_pickups.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8960820245511633407, guid: 88e75d35190fe4643b88eef1517031de, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

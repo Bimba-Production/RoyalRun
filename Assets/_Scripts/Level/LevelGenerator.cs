@@ -32,26 +32,30 @@ namespace _Scripts.Level
         private int _closestChunkIndex;
         private float _accelerationCooldownValue;
         private float _currentSpeed;
+        
+        public float Speed => _currentSpeed;
 
-        public bool IsPaused { get; set; }
+        private bool IsPaused { get; set; }
 
+        public void ApplyAcceleration(float acceleration) => ChangeChunkMoveSpeed(acceleration);
+        
         public void UnPause()
         {
             IsPaused = false;
-            StartCoroutine(AccelerationCoroutine());
+            StartCoroutine(AccelerationCoroutine(_levelAcceleration));
         }
 
         public void Pause()
         {
             IsPaused = true;
-            StopCoroutine(AccelerationCoroutine());
+            StopCoroutine(nameof(AccelerationCoroutine));
         }
 
         protected override void Awake()
         {
             _accelerationCooldownValue = _accelerationCooldown;
             _currentSpeed = _minMoveSpeed;
-            StartCoroutine(AccelerationCoroutine());
+            StartCoroutine(AccelerationCoroutine(_levelAcceleration));
             base.Awake();
         }
 
@@ -66,7 +70,7 @@ namespace _Scripts.Level
             DistanceDisplay.Instance.IncreaseDistance(currSpeed * Time.deltaTime);
         }
 
-        private IEnumerator AccelerationCoroutine()
+        private IEnumerator AccelerationCoroutine(float acceleration)
         {
             yield return new WaitForSeconds(_accelerationCooldownValue);
             
@@ -76,7 +80,7 @@ namespace _Scripts.Level
                 if (_currentSpeed >= _maxMoveSpeed) yield return new WaitForSeconds(_accelerationCooldownValue);;
                 
                 _accelerationCooldownValue = _accelerationCooldown;
-                ChangeChunkMoveSpeed(_levelAcceleration);
+                ChangeChunkMoveSpeed(acceleration);
 
                 yield return new WaitForSeconds(_accelerationCooldownValue);
             }

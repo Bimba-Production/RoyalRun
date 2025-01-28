@@ -4,6 +4,7 @@ namespace _Scripts.Pickups
     {
         public sealed override void OnPickup()
         {
+            EffectController.Instance.ApplyElectricalEffect();
             Destroy(gameObject);
         }
     }
