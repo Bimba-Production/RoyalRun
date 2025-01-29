@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Scripts.StateMachine.PlayerStates
 {
-    public sealed class Run : State, IEnterState, IUpdateState
+    public sealed class Run : State, IEnterState, IUpdateState, IExitState
     {
         public String Name { get; set;} = nameof(StateNames.Run);
         private IState _previous;
@@ -19,21 +19,16 @@ namespace _Scripts.StateMachine.PlayerStates
             _controller.ResetAllTriggers();
             _controller.Restart = false;
             _previous = previous;
-            Debug.Log(previous.Name);
             
             if (previous.Name == nameof(StateNames.Jump))_animator.SetTrigger(PlayerAnimationTriggers.Land.ToString());
-            else if (previous.Name == nameof(StateNames.Sliding)) _animator.SetTrigger(PlayerAnimationTriggers.SlidingToRun.ToString());
         }
 
         public void Update()
         {
-            if (_controller.CanLand)
-            {
-                
-            }
-            
             _mover.Move();
             _mover.UpdateIsGrounded();
         }
+        
+        public void Exit() => _controller.ResetAllTriggers();
     }
 }

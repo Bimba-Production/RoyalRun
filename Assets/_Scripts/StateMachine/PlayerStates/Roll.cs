@@ -21,6 +21,7 @@ namespace _Scripts.StateMachine.PlayerStates
         public void Enter(IState previous)
         {
             _controller.ResetAllTriggers();
+            _mover.UpdateIsGrounded();
             _mover.ApplyForce(Vector3.down, _force);
 
             _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Sit.ToString());
@@ -52,6 +53,7 @@ namespace _Scripts.StateMachine.PlayerStates
         public void Exit()
         {
             _controller.IsRolling = false;
+            _controller.CanLand = false;
             _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Stand.ToString());
         }
     }

@@ -117,13 +117,7 @@ namespace _Scripts.StateMachine
 
         public void Reset()
         {
-            _animator.ResetTrigger(PlayerAnimationTriggers.Fall.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.Jump.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.Roll.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.Land.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.Stumble.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.SlidingToRun.ToString());
+            ResetAllTriggers();
 
             IsFall = false;
             Restart = true;
@@ -138,7 +132,6 @@ namespace _Scripts.StateMachine
             _animator.ResetTrigger(PlayerAnimationTriggers.Land.ToString());
             _animator.ResetTrigger(PlayerAnimationTriggers.Stumble.ToString());
             _animator.ResetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.SlidingToRun.ToString());
         }
     }
 
