@@ -5,9 +5,10 @@ using UnityEngine;
 
 namespace _Scripts.StateMachine.PlayerStates
 {
-    public sealed class Run : State, IEnterState, IUpdateState
+    public sealed class Run : State, IEnterState, IUpdateState, IExitState
     {
-        public String Name { get; set;} = "Run";
+        public StateNames Name { get; set;} = StateNames.Run;
+        private IState _previous;
         
         public Run(Animator animator, PlayerMover mover, PlayerController controller) : base(animator, mover, controller)
         {
@@ -17,9 +18,8 @@ namespace _Scripts.StateMachine.PlayerStates
         {
             _controller.ResetAllTriggers();
             _controller.Restart = false;
-
-            if (previous is Jump)_animator.SetTrigger(PlayerAnimationTriggers.Land.ToString());
-            else if (previous is Sliding) _animator.SetTrigger(PlayerAnimationTriggers.SlidingToRun.ToString());
+            
+            if (previous.Name == StateNames.Jump)_animator.SetTrigger(PlayerAnimationTriggers.Land.ToString());
         }
 
         public void Update()
@@ -27,5 +27,7 @@ namespace _Scripts.StateMachine.PlayerStates
             _mover.Move();
             _mover.UpdateIsGrounded();
         }
+        
+        public void Exit() => _controller.ResetAllTriggers();
     }
 }

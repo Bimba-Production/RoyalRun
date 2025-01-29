@@ -12,7 +12,7 @@ namespace _Scripts.StateMachine
         private readonly Dictionary<IState, List<Transition>> _transitionsPerState;
         private bool _canTransition = true;
 
-        public String CurrentState => _current.Name;
+        public String CurrentState => _current.Name.ToString();
 
         public void SetCurrentState(IState state)
         {

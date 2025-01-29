@@ -7,11 +7,11 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Jump : State, IEnterState, IUpdateState, IExitState
     {
-        public String Name { get; set;} = "Jump";
+        public StateNames Name { get; set;} = StateNames.Jump;
 
         private readonly float _jumpForce = 12f;
         private readonly float _timer = 0.6f;
-        private float _currentTimer = 0.6f;
+        private float _completeCooldownTime = 0f;
         private bool _timerActive = false;
 
         public Jump(Animator animator, PlayerMover mover, PlayerController controller) : base(animator, mover, controller)
@@ -21,32 +21,29 @@ namespace _Scripts.StateMachine.PlayerStates
         public void Enter(IState previous)
         {
             _controller.ResetAllTriggers();
+            
             _mover.IsGrounded = false;
             _controller.CanLand = false;
             _controller.IsJumping = true;
+            _completeCooldownTime = Time.realtimeSinceStartup + _timer;
             _timerActive = true;
-            _currentTimer = _timer;
             
             _mover.ApplyForce(Vector3.up, _jumpForce);
             
-            if (previous is Run
-                || previous is Sliding
-                || previous is Roll
-                || previous is Stumble) _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
+            if (previous.Name == StateNames.Run
+                || previous.Name == StateNames.Sliding
+                || previous.Name == StateNames.Roll
+                || previous.Name == StateNames.Stumble) _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
         }
 
         public void Update()
         {
             _mover.Move();
             
-            if (_timerActive)
+            if (_timerActive && Time.realtimeSinceStartup >= _completeCooldownTime)
             {
-                if (_currentTimer <= 0)
-                {
-                    _timerActive = false;
-                    _controller.CanLand = true;
-                }
-                else _currentTimer -= Time.deltaTime;
+                _timerActive = false;
+                _controller.CanLand = true;
             }
             else _mover.UpdateIsGrounded();
         }

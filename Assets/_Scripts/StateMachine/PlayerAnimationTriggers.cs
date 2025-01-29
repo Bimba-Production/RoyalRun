@@ -6,7 +6,6 @@
         Jump = 1,
         Roll = 2,
         Land = 3,
-        SlidingToRun = 4,
         RunToSliding = 5,
         Stumble = 6,
         Reset = 7,

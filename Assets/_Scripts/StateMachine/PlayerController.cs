@@ -26,7 +26,7 @@ namespace _Scripts.StateMachine
         public bool IsStumble = false;
         public bool IsFall = false;
         public bool Restart = false;
-        public float CurrentCriticalCuldown = 0f;
+        public float CurrentCriticalCooldown = 0f;
 
         public UnityEvent OnGameOverEvent;
 
@@ -45,7 +45,7 @@ namespace _Scripts.StateMachine
             
             if (!IsCriticalCondition) return;
             
-            if (CurrentCriticalCuldown > 0) CurrentCriticalCuldown -= Time.deltaTime;
+            if (CurrentCriticalCooldown > 0) CurrentCriticalCooldown -= Time.deltaTime;
             else
             {
                 IsCriticalCondition = false;
@@ -117,13 +117,7 @@ namespace _Scripts.StateMachine
 
         public void Reset()
         {
-            _animator.ResetTrigger(PlayerAnimationTriggers.Fall.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.Jump.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.Roll.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.Land.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.Stumble.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.SlidingToRun.ToString());
+            ResetAllTriggers();
 
             IsFall = false;
             Restart = true;
@@ -138,7 +132,16 @@ namespace _Scripts.StateMachine
             _animator.ResetTrigger(PlayerAnimationTriggers.Land.ToString());
             _animator.ResetTrigger(PlayerAnimationTriggers.Stumble.ToString());
             _animator.ResetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());
-            _animator.ResetTrigger(PlayerAnimationTriggers.SlidingToRun.ToString());
         }
+    }
+
+    public enum StateNames
+    {
+        Run = 1,
+        Jump = 2,
+        Fall = 3,
+        Roll = 4,
+        Sliding = 5,
+        Stumble = 6,
     }
 }
