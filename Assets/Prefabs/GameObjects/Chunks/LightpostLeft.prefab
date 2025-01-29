@@ -57,6 +57,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8726376222767804888, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
+      propertyPath: _size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8726376222767804888, guid: 9c446eea7e044f445907eaa82485cca1, type: 3}
       propertyPath: _pickups.Array.size
       value: 5
       objectReference: {fileID: 0}

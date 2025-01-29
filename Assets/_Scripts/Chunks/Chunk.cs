@@ -12,6 +12,7 @@ namespace _Scripts.Chunks
         [SerializeField] private List<GameObject> _laneObjects;
 
         [Header("Settings")]
+        [SerializeField] private float _size = 10f;
         [SerializeField] private float _pickupSpawnChance = 0.15f;
         [SerializeField] private float _coinSpawnChance = 0.5f;
         [SerializeField] private float _coinSeparationLength = 2f;
@@ -21,6 +22,8 @@ namespace _Scripts.Chunks
         [SerializeField] private int _maxFenceCount;
         [SerializeField] private int _minFenceCount;
 
+        public float Size => _size;
+        
         public void Init()
         {
             SpawnFence();

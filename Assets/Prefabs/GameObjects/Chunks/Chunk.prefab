@@ -389,6 +389,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _size: 10
   _pickupSpawnChance: 0.05
   _coinSpawnChance: 0.5
   _coinSeparationLength: 2
