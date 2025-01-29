@@ -23,7 +23,6 @@ namespace _Scripts.Level
         [SerializeField] private float _accelerationCooldown = 10f;
         [SerializeField] [Range(0, 100)] private int _probabilityOfChunkChange = 40;
 
-        private readonly float _chunkLength = 10f;
         private readonly GameObject[] _chunkObjects = new GameObject[12];
         private readonly Chunk[] _chunks = new Chunk[12];
         private readonly ChunkMover[] _chunkMovers = new ChunkMover[12];
@@ -121,9 +120,10 @@ namespace _Scripts.Level
 
         private void InitChunks()
         {
+            float lastChunkSize = 0;
             for (int i = 0; i < _startingChunksAmount; i += 1)
             {
-                Vector3 pos = new Vector3(transform.position.x, transform.position.y, _chunkLength * i);
+                Vector3 pos = new Vector3(transform.position.x, transform.position.y, lastChunkSize);
                 GameObject chunkToSpawn = _chunkPrefabs[Random.Range(0, _chunkPrefabs.Length)];
 
                 if (i < 2) chunkToSpawn = _chunkPrefabs[0];
@@ -134,6 +134,9 @@ namespace _Scripts.Level
                 _chunkMovers[i] = chunk.GetComponent<ChunkMover>();
 
                 if (i > 2) _chunks[i].Init();
+                
+                Debug.Log(_chunks[i].Size);
+                lastChunkSize += _chunks[i].Size;
             }
 
             _closestChunkIndex = 0;
@@ -175,7 +178,7 @@ namespace _Scripts.Level
 
             _currentClosestChunk = closestChunk.gameObject;
             _currentClosestChunk.transform.position = new Vector3(transform.position.x, transform.position.y,
-                _currentDistantChunk.transform.position.z + _chunkLength);
+                _currentDistantChunk.transform.position.z + _currentDistantChunk.GetComponent<Chunk>().Size);
             _currentDistantChunk = _currentClosestChunk;
 
             if (_closestChunkIndex < _chunks.Length - 1) _closestChunkIndex += 1;

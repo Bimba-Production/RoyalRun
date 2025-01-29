@@ -1,5 +1,4 @@
-﻿using System;
-using _Scripts.StateMachine.Abstractions;
+﻿using _Scripts.StateMachine.Abstractions;
 using _Scripts.StateMachine.Interfaces;
 using UnityEngine;
 
