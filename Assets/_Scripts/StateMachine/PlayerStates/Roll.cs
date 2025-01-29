@@ -1,4 +1,5 @@
-﻿using _Scripts.StateMachine.Abstractions;
+﻿using System;
+using _Scripts.StateMachine.Abstractions;
 using _Scripts.StateMachine.Interfaces;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Roll : State, IEnterState, IUpdateState, IExitState
     {
+        public String  Name { get; set;} = "Roll";
+        
         private readonly float _force = 16f;
         private readonly float _timer = 0.3f;
         private float _currentTimer = 0.3f;
@@ -17,6 +20,7 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Enter(IState previous)
         {
+            _controller.ResetAllTriggers();
             _mover.ApplyForce(Vector3.down, _force);
 
             _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Sit.ToString());

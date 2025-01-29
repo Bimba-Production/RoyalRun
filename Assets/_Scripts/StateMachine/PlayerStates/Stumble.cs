@@ -1,4 +1,5 @@
-﻿using _Scripts.StateMachine.Abstractions;
+﻿using System;
+using _Scripts.StateMachine.Abstractions;
 using _Scripts.StateMachine.Interfaces;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Stumble : State, IEnterState, IUpdateState, IExitState
     {
+        public String Name { get; set;} = "Stumble";
+        
         private readonly float _timer = 0f;
         private float _currentTimer = 0f;
         private bool _timerActive = false;

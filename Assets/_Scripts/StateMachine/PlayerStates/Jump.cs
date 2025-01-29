@@ -1,4 +1,5 @@
-﻿using _Scripts.StateMachine.Abstractions;
+﻿using System;
+using _Scripts.StateMachine.Abstractions;
 using _Scripts.StateMachine.Interfaces;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Jump : State, IEnterState, IUpdateState, IExitState
     {
+        public String Name { get; set;} = "Jump";
+
         private readonly float _jumpForce = 12f;
         private readonly float _timer = 0.6f;
         private float _currentTimer = 0.6f;
@@ -17,10 +20,12 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Enter(IState previous)
         {
+            _controller.ResetAllTriggers();
             _mover.IsGrounded = false;
             _controller.CanLand = false;
             _controller.IsJumping = true;
             _timerActive = true;
+            _currentTimer = _timer;
             
             _mover.ApplyForce(Vector3.up, _jumpForce);
             
@@ -33,14 +38,13 @@ namespace _Scripts.StateMachine.PlayerStates
         public void Update()
         {
             _mover.Move();
-
+            
             if (_timerActive)
             {
                 if (_currentTimer <= 0)
                 {
                     _timerActive = false;
                     _controller.CanLand = true;
-                    _currentTimer = _timer;
                 }
                 else _currentTimer -= Time.deltaTime;
             }
@@ -50,7 +54,6 @@ namespace _Scripts.StateMachine.PlayerStates
         public void Exit()
         {
             _controller.IsJumping = false;
-            _controller.CanLand = false;
             _mover.IsGrounded = true;
         }
     }

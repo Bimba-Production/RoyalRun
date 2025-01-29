@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using _Scripts.Camera;
 using _Scripts.StateMachine.Interfaces;
 using _Scripts.StateMachine.PlayerStates;
@@ -14,7 +15,9 @@ namespace _Scripts.StateMachine
         [SerializeField] private Animator _animator;
         [SerializeField] private Animator _colliderAnimator;
         [SerializeField] private PlayerMover _mover;
+        [SerializeField] private String _currentState;
 
+        
         public bool IsCriticalCondition = false;
         public bool IsJumping = false;
         public bool CanLand = false;
@@ -38,7 +41,8 @@ namespace _Scripts.StateMachine
         private void Update()
         {
             _stateMachine.Update();
-
+            _currentState = _stateMachine.CurrentState;
+            
             if (!IsCriticalCondition) return;
             
             if (CurrentCriticalCuldown > 0) CurrentCriticalCuldown -= Time.deltaTime;
@@ -124,6 +128,17 @@ namespace _Scripts.StateMachine
             IsFall = false;
             Restart = true;
             _animator.SetTrigger(PlayerAnimationTriggers.Reset.ToString());
+        }
+
+        public void ResetAllTriggers()
+        {
+            _animator.ResetTrigger(PlayerAnimationTriggers.Fall.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.Jump.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.Roll.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.Land.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.Stumble.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());
+            _animator.ResetTrigger(PlayerAnimationTriggers.SlidingToRun.ToString());
         }
     }
 }
