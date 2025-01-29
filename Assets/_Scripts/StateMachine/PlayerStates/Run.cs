@@ -7,7 +7,7 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Run : State, IEnterState, IUpdateState, IExitState
     {
-        public String Name { get; set;} = nameof(StateNames.Run);
+        public StateNames Name { get; set;} = StateNames.Run;
         private IState _previous;
         
         public Run(Animator animator, PlayerMover mover, PlayerController controller) : base(animator, mover, controller)
@@ -18,9 +18,8 @@ namespace _Scripts.StateMachine.PlayerStates
         {
             _controller.ResetAllTriggers();
             _controller.Restart = false;
-            _previous = previous;
             
-            if (previous.Name == nameof(StateNames.Jump))_animator.SetTrigger(PlayerAnimationTriggers.Land.ToString());
+            if (previous.Name == StateNames.Jump)_animator.SetTrigger(PlayerAnimationTriggers.Land.ToString());
         }
 
         public void Update()

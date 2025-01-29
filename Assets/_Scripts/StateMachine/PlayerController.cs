@@ -26,7 +26,7 @@ namespace _Scripts.StateMachine
         public bool IsStumble = false;
         public bool IsFall = false;
         public bool Restart = false;
-        public float CurrentCriticalCuldown = 0f;
+        public float CurrentCriticalCooldown = 0f;
 
         public UnityEvent OnGameOverEvent;
 
@@ -45,7 +45,7 @@ namespace _Scripts.StateMachine
             
             if (!IsCriticalCondition) return;
             
-            if (CurrentCriticalCuldown > 0) CurrentCriticalCuldown -= Time.deltaTime;
+            if (CurrentCriticalCooldown > 0) CurrentCriticalCooldown -= Time.deltaTime;
             else
             {
                 IsCriticalCondition = false;

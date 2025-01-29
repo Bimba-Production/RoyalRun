@@ -7,7 +7,7 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Fall : State, IEnterState
     {
-        public String Name { get; set;} = nameof(StateNames.Fall);
+        public StateNames Name { get; set;} = StateNames.Fall;
         public Fall(Animator animator, PlayerMover mover, PlayerController controller) : base(animator, mover, controller)
         {
         }
