@@ -141,4 +141,14 @@ namespace _Scripts.StateMachine
             _animator.ResetTrigger(PlayerAnimationTriggers.SlidingToRun.ToString());
         }
     }
+
+    public enum StateNames
+    {
+        Run = 1,
+        Jump = 2,
+        Fall = 3,
+        Roll = 4,
+        Sliding = 5,
+        Stumble = 6,
+    }
 }

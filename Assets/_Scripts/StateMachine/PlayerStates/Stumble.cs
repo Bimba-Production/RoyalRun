@@ -7,7 +7,7 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Stumble : State, IEnterState, IUpdateState, IExitState
     {
-        public String Name { get; set;} = "Stumble";
+        public String Name { get; set;} = nameof(StateNames.Stumble);
         
         private readonly float _timer = 0f;
         private float _currentTimer = 0f;
@@ -28,7 +28,7 @@ namespace _Scripts.StateMachine.PlayerStates
             _controller.CanLand = false;
             _timerActive = true;
 
-            if (previous is Run) _animator.SetTrigger(PlayerAnimationTriggers.Stumble.ToString());
+            if (previous.Name == nameof(StateNames.Run)) _animator.SetTrigger(PlayerAnimationTriggers.Stumble.ToString());
         }
 
         public void Update()

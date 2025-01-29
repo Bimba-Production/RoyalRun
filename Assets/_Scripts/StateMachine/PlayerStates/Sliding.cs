@@ -7,7 +7,7 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Sliding : State, IEnterState, IUpdateState, IExitState
     {
-        public String Name { get; set;} = "Sliding";
+        public String Name { get; set;} = nameof(StateNames.Sliding);
 
         private readonly float _timer = 0.8f;
         private float _currentTimer = 0.8f;
@@ -22,7 +22,7 @@ namespace _Scripts.StateMachine.PlayerStates
             _currentTimer = _timer;
             _controller.ResetAllTriggers();
             _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Sit.ToString());
-            if (previous is Run) _animator.SetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());
+            if (previous.Name == nameof(StateNames.Run)) _animator.SetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());
 
             _controller.CanLand = false;
             _controller.IsSliding = true;
@@ -32,13 +32,9 @@ namespace _Scripts.StateMachine.PlayerStates
         public void Update()
         {
             _mover.Move();
-            // Debug.Log(_controller.CanLand.ToString());
-            //
-            // Debug.Log(_timerActive.ToString());
+            
             if (_timerActive)
             {
-                // Debug.Log(_currentTimer.ToString());
-
                 if (_currentTimer <= 0)
                 {
                     _timerActive = false;

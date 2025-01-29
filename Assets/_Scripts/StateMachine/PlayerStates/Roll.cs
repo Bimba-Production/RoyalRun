@@ -7,7 +7,7 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Roll : State, IEnterState, IUpdateState, IExitState
     {
-        public String  Name { get; set;} = "Roll";
+        public String  Name { get; set;} = nameof(StateNames.Roll);
         
         private readonly float _force = 16f;
         private readonly float _timer = 0.3f;
@@ -24,7 +24,7 @@ namespace _Scripts.StateMachine.PlayerStates
             _mover.ApplyForce(Vector3.down, _force);
 
             _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Sit.ToString());
-            if (previous is Jump) _animator.SetTrigger(PlayerAnimationTriggers.Roll.ToString());
+            if (previous.Name == nameof(StateNames.Jump)) _animator.SetTrigger(PlayerAnimationTriggers.Roll.ToString());
 
             _controller.IsJumping = false;
             _controller.IsRolling = true;

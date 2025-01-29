@@ -7,7 +7,7 @@ namespace _Scripts.StateMachine.PlayerStates
 {
     public sealed class Jump : State, IEnterState, IUpdateState, IExitState
     {
-        public String Name { get; set;} = "Jump";
+        public String Name { get; set;} = nameof(StateNames.Jump);
 
         private readonly float _jumpForce = 12f;
         private readonly float _timer = 0.6f;
@@ -21,18 +21,19 @@ namespace _Scripts.StateMachine.PlayerStates
         public void Enter(IState previous)
         {
             _controller.ResetAllTriggers();
+            
             _mover.IsGrounded = false;
             _controller.CanLand = false;
             _controller.IsJumping = true;
-            _timerActive = true;
             _currentTimer = _timer;
+            _timerActive = true;
             
             _mover.ApplyForce(Vector3.up, _jumpForce);
             
-            if (previous is Run
-                || previous is Sliding
-                || previous is Roll
-                || previous is Stumble) _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
+            if (previous.Name == nameof(StateNames.Run)
+                || previous.Name == nameof(StateNames.Sliding)
+                || previous.Name == nameof(StateNames.Roll)
+                || previous.Name == nameof(StateNames.Stumble)) _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
         }
 
         public void Update()
