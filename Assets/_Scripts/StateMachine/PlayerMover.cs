@@ -39,6 +39,12 @@ namespace _Scripts.StateMachine
 
         private void Update()
         {
+            if (JumpInput)
+            {
+                _lastPosition = -1f;
+                _lastPositionCooldownTime = 0;
+            }
+            
             if (_lastPosition == -1f) return;
             
             if (_lastPositionCooldownTime <= Time.realtimeSinceStartup)

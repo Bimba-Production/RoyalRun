@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.Obstacles
+namespace _Scripts
 {
     //Нужна фабрика для этого дерьма
-    public class DestructionObstacleSpawner: Singleton<DestructionObstacleSpawner>
+    public sealed class DestructionEffectSpawner: Singleton<DestructionEffectSpawner>
     {
         [Header("References")]
         [SerializeField] private ParticleSystem _obstacleDestroyVFX;
         [SerializeField] private Transform _parent;
         
-        private static readonly int _initCapacity = 2;
+        private static readonly int _initCapacity = 10;
         private List<ParticleSystem> _vfxPool = new List<ParticleSystem>(_initCapacity);
 
         private void Start()

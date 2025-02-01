@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.Obstacles
+namespace _Scripts
 {
-    //Нужна фабрика для этого дерьма
-    public sealed class DestructionEffectSpawner: Singleton<DestructionEffectSpawner>
+    public class HitEffectSpawner: Singleton<HitEffectSpawner>
     {
         [Header("References")]
-        [SerializeField] private ParticleSystem _obstacleDestroyVFX;
+        [SerializeField] private ParticleSystem _hitVFX;
         [SerializeField] private Transform _parent;
         
-        private static readonly int _initCapacity = 10;
+        private static readonly int _initCapacity = 2;
         private List<ParticleSystem> _vfxPool = new List<ParticleSystem>(_initCapacity);
 
         private void Start()
         {
             for (int i = 0; i < _initCapacity; i+=1)
             {
-                ParticleSystem vfx = Instantiate(_obstacleDestroyVFX, _parent);
+                ParticleSystem vfx = Instantiate(_hitVFX, _parent);
                 _vfxPool.Add(vfx);
                 vfx.gameObject.SetActive(false);
             }
@@ -40,7 +39,7 @@ namespace _Scripts.Obstacles
                 if (!_vfxPool[i].gameObject.activeSelf) return _vfxPool[i];
             }
             
-            ParticleSystem vfx = Instantiate(_obstacleDestroyVFX, _parent);
+            ParticleSystem vfx = Instantiate(_hitVFX, _parent);
             _vfxPool.Add(vfx);
 
             return vfx;
