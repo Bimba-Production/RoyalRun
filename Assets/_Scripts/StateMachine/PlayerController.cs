@@ -50,6 +50,8 @@ namespace _Scripts.StateMachine
             {
                 IsCriticalCondition = false;
                 _cameraController.DisableDamageEffect();
+                GameController.Instance.DeactivateRock();
+                CameraController.Instance.ResetPosition();
             }
         }
 
