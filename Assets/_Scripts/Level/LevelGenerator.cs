@@ -26,7 +26,7 @@ namespace _Scripts.Level
         private readonly GameObject[] _chunkObjects = new GameObject[12];
         private readonly Chunk[] _chunks = new Chunk[12];
         private readonly ChunkMover[] _chunkMovers = new ChunkMover[12];
-        private GameObject _currentDistantChunk;
+        private Chunk _currentDistantChunk;
         private GameObject _currentClosestChunk;
         private int _closestChunkIndex;
         private float _accelerationCooldownValue;
@@ -71,7 +71,9 @@ namespace _Scripts.Level
 
         private IEnumerator AccelerationCoroutine(float acceleration)
         {
-            yield return new WaitForSeconds(_accelerationCooldownValue);
+            YieldInstruction waitForSeconds = new WaitForSeconds(_accelerationCooldownValue);
+            
+            yield return waitForSeconds;
             
             while (true)
             {
@@ -81,7 +83,7 @@ namespace _Scripts.Level
                 _accelerationCooldownValue = _accelerationCooldown;
                 ChangeChunkMoveSpeed(acceleration);
 
-                yield return new WaitForSeconds(_accelerationCooldownValue);
+                yield return waitForSeconds;
             }
         }
 
@@ -89,13 +91,14 @@ namespace _Scripts.Level
 
         public void GameOver()
         {
-            foreach (var chunk in _chunks) chunk.GetComponent<ChunkMover>().Speed = 0;
+            foreach (var chunk in _chunkMovers) chunk.Speed = 0;
         }
 
         public void SlowDownTheLevel() => ChangeChunkMoveSpeed(-_levelDecceleration);
 
         private void ChangeChunkMoveSpeed(float acceleration)
         {
+            if (IsPaused) return;
             if (_currentSpeed + acceleration > _maxMoveSpeed) return;
             _cameraController.ChangeCameraFOV(acceleration);
 
@@ -134,14 +137,12 @@ namespace _Scripts.Level
                 _chunkMovers[i] = chunk.GetComponent<ChunkMover>();
 
                 if (i > 2) _chunks[i].Init();
-                
-                Debug.Log(_chunks[i].Size);
                 lastChunkSize += _chunks[i].Size;
             }
 
             _closestChunkIndex = 0;
             _currentClosestChunk = _chunkObjects[0];
-            _currentDistantChunk = _chunkObjects[_startingChunksAmount - 1];
+            _currentDistantChunk = _chunks[_startingChunksAmount - 1];
         }
 
         private void UpdateChunksPos()
@@ -178,8 +179,8 @@ namespace _Scripts.Level
 
             _currentClosestChunk = closestChunk.gameObject;
             _currentClosestChunk.transform.position = new Vector3(transform.position.x, transform.position.y,
-                _currentDistantChunk.transform.position.z + _currentDistantChunk.GetComponent<Chunk>().Size);
-            _currentDistantChunk = _currentClosestChunk;
+                _currentDistantChunk.transform.position.z + _currentDistantChunk.Size);
+            _currentDistantChunk = _chunks[_closestChunkIndex];
 
             if (_closestChunkIndex < _chunks.Length - 1) _closestChunkIndex += 1;
             else _closestChunkIndex = 0;

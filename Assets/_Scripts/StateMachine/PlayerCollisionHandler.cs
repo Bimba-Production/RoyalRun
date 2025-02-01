@@ -17,12 +17,14 @@ namespace _Scripts.StateMachine
             
             if (other.CompareTag(nameof(Tags.Obstacle)))
             {
-                Collider collider = other.GetComponent<Collider>()!;
+                Collider otherCollider = other.GetComponent<Collider>()!;
+                
+                HitEffectSpawner.Instance.Play(transform.position + new Vector3(0f, 4.0f, -1.0f), Vector3.zero);
                 
                 if (EffectController.Instance.ShieldEffectIsActive())
                 {
-                    DestructionObstacleSpawner.Instance.Play(collider.transform.position, Vector3.zero);
-                    Destroy(collider.gameObject);
+                    DestructionObstacleSpawner.Instance.Play(otherCollider.transform.position, Vector3.zero);
+                    Destroy(otherCollider.gameObject);
                     // EffectController.Instance.DisableShieldEffect();
                     return;
                 }
@@ -38,10 +40,10 @@ namespace _Scripts.StateMachine
                     _playerController.OnGameOverEvent?.Invoke();
                 }
 
-                collider.enabled = false;
+                otherCollider.enabled = false;
                 other.transform.DOPunchPosition(Vector3.forward, 0.2f, 3).OnComplete(() =>
                 {
-                    collider.enabled = true;
+                    otherCollider.enabled = true;
                 });
                 
                 return;
@@ -49,12 +51,13 @@ namespace _Scripts.StateMachine
 
             if (other.CompareTag(nameof(Tags.CriticalObstacle)))
             {
-                Transform transform = other.transform.GetComponentInParent<Transform>();
-
+                HitEffectSpawner.Instance.Play(transform.position + new Vector3(0f, 4.0f, -1.0f), Vector3.zero);
+                Transform otherTransform = other.transform;
+                
                 if (EffectController.Instance.ShieldEffectIsActive())
                 {
-                    DestructionObstacleSpawner.Instance.Play(transform.transform.position, Vector3.zero);
-                    Destroy(transform.gameObject);
+                    DestructionObstacleSpawner.Instance.Play(otherTransform.position, Vector3.zero);
+                    Destroy(otherTransform.gameObject);
                     EffectController.Instance.DisableShieldEffect();
                     return;
                 }
