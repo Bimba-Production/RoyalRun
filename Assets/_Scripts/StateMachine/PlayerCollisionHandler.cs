@@ -31,6 +31,8 @@ namespace _Scripts.StateMachine
                 
                 if (!_playerController.IsCriticalCondition)
                 {
+                    GameController.Instance.ActivateRock();
+                    CameraController.Instance.OnCriticalStateMove();
                     CameraController.Instance.ApplyDamageEffect();
                     _playerController.IsStumble = true;
                 }

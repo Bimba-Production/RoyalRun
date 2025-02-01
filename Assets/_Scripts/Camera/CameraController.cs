@@ -76,6 +76,17 @@ namespace _Scripts.Camera
         public void ApplyElectricEffect() => _electricalSpeedUpParticleSystem.Play();
         public void DisableElectricEffect() => _electricalSpeedUpParticleSystem.Stop();
 
+        public void OnCriticalStateMove()
+        {
+            transform.DOLocalMove(new Vector3(-1.645f, 9.81f, -13.6f), 0.5f);
+            transform.DORotate(new Vector3(33.6f, 0f, 0f), 0.5f);
+        }
+
+        public void ResetPosition()
+        {
+            transform.DOLocalMove(new Vector3(-1.645f, 3.6f, -7.5f), 0.5f);
+            transform.DORotate(new Vector3(13.387f, 0f, 0f), 0.5f);
+        }
         public void SetDefaultFov() => _camera.fieldOfView = _minFov;
     }
 }
