@@ -1,6 +1,6 @@
-using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.Rendering;
 
 namespace _Scripts.Camera

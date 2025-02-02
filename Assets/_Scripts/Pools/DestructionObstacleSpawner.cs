@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using _Scripts.Audio;
 using UnityEngine;
 
 namespace _Scripts
 {
     //Нужна фабрика для этого дерьма
-    public class DestructionObstacleSpawner: Singleton<DestructionObstacleSpawner>
+    public sealed class DestructionObstacleSpawner: Singleton<DestructionObstacleSpawner>
     {
         [Header("References")]
         [SerializeField] private ParticleSystem _obstacleDestroyVFX;
@@ -25,6 +26,8 @@ namespace _Scripts
 
         public void Play(Vector3 position, Vector3 rotation)
         {
+            AudioEffectController.Instance.Play(AudioEffectNames.explosion1, position);
+            
             ParticleSystem vfx = GetFreeSystem();
             
             vfx.gameObject.SetActive(true);

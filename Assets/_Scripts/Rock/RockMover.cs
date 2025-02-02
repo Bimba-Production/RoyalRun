@@ -2,7 +2,7 @@
 
 namespace _Scripts
 {
-    public class RockMover: MonoBehaviour
+    public sealed class RockMover: MonoBehaviour
     {
         [SerializeField] private float _speed;
 

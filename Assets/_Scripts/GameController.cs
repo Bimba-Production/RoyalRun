@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Audio;
 using _Scripts.Level;
 using _Scripts.Models;
 using _Scripts.Obstacles;
@@ -50,6 +51,8 @@ namespace _Scripts
 
         private void HandleGameOver()
         {
+            AudioEffectController.Instance.Play(AudioEffectNames.onGameOver, PlayerMover.Instance.transform.position);
+
             IsGameOver = true;
             _rockMover.IsGameOver = true;
             //Метод ресетящий позицию игрока и сбрасывающий его текущее ускорение.

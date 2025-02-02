@@ -2,7 +2,7 @@
 
 namespace _Scripts
 {
-    public class RockCollisionHandler: MonoBehaviour
+    public sealed class RockCollisionHandler: MonoBehaviour
     {
         private void OnCollision(Collider other)
         {
