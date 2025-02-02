@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 
 namespace _Scripts
 {
-    public sealed  class VolumeEffectsController: Singleton<VolumeEffectsController>
+    public sealed class VolumeEffectsController: Singleton<VolumeEffectsController>
     {
         public void ApplyEffect(float intensity, Volume damageEffect, float duration)
         {

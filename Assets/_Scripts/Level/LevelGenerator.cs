@@ -1,4 +1,5 @@
 using System.Collections;
+using _Scripts.Audio;
 using _Scripts.Camera;
 using _Scripts.Chunks;
 using _Scripts.UI;
@@ -100,6 +101,11 @@ namespace _Scripts.Level
         {
             if (IsPaused) return;
             if (_currentSpeed + acceleration > _maxMoveSpeed) return;
+
+            // float relativeSpeedValue = GetRelativeSpeedValue(_currentSpeed + acceleration);
+            
+            // AmbienceController.Instance.UpdateAmbience(relativeSpeedValue);
+            
             _cameraController.ChangeCameraFOV(acceleration);
 
             float speed = _currentSpeed + acceleration;
@@ -186,6 +192,14 @@ namespace _Scripts.Level
             else _closestChunkIndex = 0;
 
             _currentClosestChunk = _chunkObjects[_closestChunkIndex];
+        }
+
+        private float GetRelativeSpeedValue(float currentSpeed)
+        {
+            float speedBoundaries =  _maxMoveSpeed - _minMoveSpeed;
+            float currentValue = currentSpeed - _minMoveSpeed;
+            
+            return currentValue / speedBoundaries;
         }
     }
 }

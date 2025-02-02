@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Scripts
 {
-    public class HitEffectSpawner: Singleton<HitEffectSpawner>
+    public sealed class HitEffectSpawner: Singleton<HitEffectSpawner>
     {
         [Header("References")]
         [SerializeField] private ParticleSystem _hitVFX;

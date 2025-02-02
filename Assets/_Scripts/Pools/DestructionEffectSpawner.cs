@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _Scripts.Audio;
 using UnityEngine;
 
 namespace _Scripts
@@ -25,6 +26,8 @@ namespace _Scripts
 
         public void Play(Vector3 position, Vector3 rotation)
         {
+            AudioEffectController.Instance.Play(AudioEffectNames.explosion1, position);
+
             ParticleSystem vfx = GetFreeSystem();
             
             vfx.gameObject.SetActive(true);

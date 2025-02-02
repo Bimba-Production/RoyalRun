@@ -1,4 +1,4 @@
-﻿using System;
+﻿using _Scripts.Audio;
 using _Scripts.StateMachine.Abstractions;
 using _Scripts.StateMachine.Interfaces;
 using UnityEngine;
@@ -20,6 +20,8 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Enter(IState previous)
         {
+            AudioEffectController.Instance.Play(AudioEffectNames.roll, PlayerMover.Instance.transform.position);
+            
             _completeCooldownTime = Time.realtimeSinceStartup + _timer;
             _controller.ResetAllTriggers();
             _mover.UpdateIsGrounded();
