@@ -1,4 +1,4 @@
-namespace _Scripts.Pickups
+namespace _Scripts.Pickups.Models
 {
     public class Shield : Pickup
     {
