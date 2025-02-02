@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Scripts.Pickups
+namespace _Scripts.Pickups.Models
 {
     public abstract class Pickup : MonoBehaviour
     {
