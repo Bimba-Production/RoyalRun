@@ -295,7 +295,7 @@ namespace _Scripts
 
         public void _fadingAnimationIsDone()
         {
-            main_animator.enabled = false;
+            // main_animator.enabled = false;
             homePanel.blocksRaycasts = true;
         }
     }

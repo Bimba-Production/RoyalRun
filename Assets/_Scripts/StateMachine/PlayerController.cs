@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 namespace _Scripts.StateMachine
 {
-    public sealed class PlayerController: MonoBehaviour
+    public sealed class PlayerController: Singleton<PlayerController>
     {
         [Header("References")]
         [SerializeField] private CameraController _cameraController;
@@ -32,7 +32,10 @@ namespace _Scripts.StateMachine
 
         private PlayerStateMachine _stateMachine;
 
-        private void Awake() => InitStateMachine();
+        private void Start() => InitStateMachine();
+        
+        public Animator PlayerAnimator() => _animator;
+        
         public Animator ColliderAnimator => _colliderAnimator;
         public float CriticalCooldown { get; } = 3;
 

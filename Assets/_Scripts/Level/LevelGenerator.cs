@@ -102,9 +102,9 @@ namespace _Scripts.Level
             if (IsPaused) return;
             if (_currentSpeed + acceleration > _maxMoveSpeed) return;
 
-            float relativeSpeedValue = GetRelativeSpeedValue(_currentSpeed + acceleration);
+            // float relativeSpeedValue = GetRelativeSpeedValue(_currentSpeed + acceleration);
             
-            AmbienceController.Instance.UpdateAmbience(relativeSpeedValue);
+            // AmbienceController.Instance.UpdateAmbience(relativeSpeedValue);
             
             _cameraController.ChangeCameraFOV(acceleration);
 

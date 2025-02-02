@@ -119,5 +119,30 @@ namespace _Scripts
             if (!IsGameOver) _rock.SetActive(false);
             else Destroy(_rock.gameObject, 15f);
         }
+
+        public void PauseGame()
+        {
+            StopAllCoroutines();
+            PlayerController.Instance.PlayerAnimator().enabled = false;
+            _obstacleSpawner.IsPaused = true;
+            
+            LevelGenerator.Instance.Pause();
+            LevelGenerator.Instance.StopChunks();
+            
+            TimerDisplay.Instance.IsPaused = true;
+        }
+
+        public void ResumeGame()
+        {
+            if (IsGameOver) return;
+            
+            PlayerController.Instance.PlayerAnimator().enabled = true;
+
+            _obstacleSpawner.IsPaused = false;
+            _obstacleSpawner.ResetSpawn();
+            LevelGenerator.Instance.UnPause();
+            LevelGenerator.Instance.ResetChunksSpeed();
+            TimerDisplay.Instance.IsPaused = false;
+        }
     }
 }

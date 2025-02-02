@@ -9,7 +9,12 @@ namespace _Scripts.Audio
         [SerializeField] private float _minVolumeSpeed = 0.7f;
         [SerializeField] private float _maxVolumeSpeed = 1.25f;
 
+        private float _volume = 0.05f;
+        
         private readonly float _speedUpDuration = 4f;
+
+        private void Start() => _source.volume = _volume;
+        
         public void UpdateAmbience(float relativeSpeedValue)
         {
             float extraSpeed = (_maxVolumeSpeed - _minVolumeSpeed) * relativeSpeedValue;
@@ -40,9 +45,6 @@ namespace _Scripts.Audio
             _source.pitch = targetSpeed;
         }
 
-        public void SetSound(float volume)
-        {
-            _source.volume = volume;
-        }
+        public void SetSound(float volume) => _source.volume = volume;
     }
 }
