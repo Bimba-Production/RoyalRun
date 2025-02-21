@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Scripts
 {
-    public class EffectMover: MonoBehaviour
+    public sealed class EffectMover: MonoBehaviour
     {
         private void Update() => Move();
 

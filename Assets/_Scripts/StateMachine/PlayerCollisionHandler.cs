@@ -1,3 +1,4 @@
+using _Scripts.Audio;
 using _Scripts.Camera;
 using _Scripts.Pickups.Models;
 using _Scripts.Pools;
@@ -18,6 +19,8 @@ namespace _Scripts.StateMachine
             if (other.CompareTag(nameof(Tags.Obstacle)))
             {
                 Collider otherCollider = other.GetComponent<Collider>()!;
+             
+                AudioEffectController.Instance.Play(AudioEffectNames.hit, otherCollider.transform.position);
                 
                 HitEffectSpawner.Instance.Play(transform.position + new Vector3(0f, 4.0f, -1.0f), Vector3.zero);
                 
@@ -31,6 +34,8 @@ namespace _Scripts.StateMachine
                 
                 if (!_playerController.IsCriticalCondition)
                 {
+                    GameController.Instance.ActivateRock();
+                    CameraController.Instance.OnCriticalStateMove();
                     CameraController.Instance.ApplyDamageEffect();
                     _playerController.IsStumble = true;
                 }
@@ -53,6 +58,8 @@ namespace _Scripts.StateMachine
             {
                 HitEffectSpawner.Instance.Play(transform.position + new Vector3(0f, 4.0f, -1.0f), Vector3.zero);
                 Transform otherTransform = other.transform;
+                
+                AudioEffectController.Instance.Play(AudioEffectNames.hit, otherTransform.position);
                 
                 if (EffectController.Instance.ShieldEffectIsActive())
                 {

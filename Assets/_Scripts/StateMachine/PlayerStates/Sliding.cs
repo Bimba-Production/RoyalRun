@@ -2,6 +2,7 @@
 using _Scripts.StateMachine.Interfaces;
 using UnityEngine;
 using System;
+using _Scripts.Audio;
 
 namespace _Scripts.StateMachine.PlayerStates
 {
@@ -19,6 +20,8 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Enter(IState previous)
         {
+            AudioEffectController.Instance.Play(AudioEffectNames.slide, PlayerMover.Instance.transform.position);
+            
             _controller.ResetAllTriggers();
             _controller.ColliderAnimator.SetTrigger(ColliderAnimationTrigger.Sit.ToString());
             if (previous.Name == StateNames.Run) _animator.SetTrigger(PlayerAnimationTriggers.RunToSliding.ToString());

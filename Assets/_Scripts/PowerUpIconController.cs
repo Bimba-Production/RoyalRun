@@ -1,9 +1,9 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Scripts
 {
-    public class PowerUpIconController : Singleton<PowerUpIconController>
+    public sealed class PowerUpIconController: Singleton<PowerUpIconController>
     {
         [Header("References")] 
         [SerializeField] private GameObject _doubleCoin;
