@@ -1,6 +1,7 @@
 using _Scripts.Audio;
 using _Scripts.Camera;
-using _Scripts.Pickups;
+using _Scripts.Pickups.Models;
+using _Scripts.Pools;
 using DG.Tweening;
 using UnityEngine;
 

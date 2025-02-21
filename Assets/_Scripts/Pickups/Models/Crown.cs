@@ -1,6 +1,6 @@
 using _Scripts.Level;
 
-namespace _Scripts.Pickups
+namespace _Scripts.Pickups.Models
 {
     public sealed class Crown : Pickup
     {

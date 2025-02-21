@@ -1,6 +1,6 @@
 using _Scripts.UI;
 
-namespace _Scripts.Pickups
+namespace _Scripts.Pickups.Models
 {
     public sealed class Coin : Pickup
     {

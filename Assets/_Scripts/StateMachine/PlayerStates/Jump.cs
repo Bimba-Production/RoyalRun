@@ -33,10 +33,8 @@ namespace _Scripts.StateMachine.PlayerStates
             
             _mover.ApplyForce(Vector3.up, _jumpForce);
             
-            if (previous.Name == StateNames.Run
-                || previous.Name == StateNames.Sliding
-                || previous.Name == StateNames.Roll
-                || previous.Name == StateNames.Stumble) _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
+            if (previous.Name is StateNames.Run or StateNames.Sliding or StateNames.Roll or StateNames.Stumble)
+                _animator.SetTrigger(PlayerAnimationTriggers.Jump.ToString());
         }
 
         public void Update()

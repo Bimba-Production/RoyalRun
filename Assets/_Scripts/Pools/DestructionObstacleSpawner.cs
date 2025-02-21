@@ -2,7 +2,7 @@
 using _Scripts.Audio;
 using UnityEngine;
 
-namespace _Scripts
+namespace _Scripts.Pools
 {
     //Нужна фабрика для этого дерьма
     public sealed class DestructionObstacleSpawner: Singleton<DestructionObstacleSpawner>
@@ -10,9 +10,9 @@ namespace _Scripts
         [Header("References")]
         [SerializeField] private ParticleSystem _obstacleDestroyVFX;
         [SerializeField] private Transform _parent;
-        
-        private static readonly int _initCapacity = 2;
-        private List<ParticleSystem> _vfxPool = new List<ParticleSystem>(_initCapacity);
+
+        private const int _initCapacity = 2;
+        private readonly List<ParticleSystem> _vfxPool = new(_initCapacity);
 
         private void Start()
         {

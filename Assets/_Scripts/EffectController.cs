@@ -52,6 +52,20 @@ namespace _Scripts
             }
         }
         
+        public void ApplyMagnetEffect()
+        {
+            if (!_sEffectIsActive)
+            {
+                _sEffectIsActive = true;
+                _sEffectEndTime = Time.realtimeSinceStartup + _sEffectActivityTime;
+                CameraController.Instance.ApplyShieldEffect();
+            }
+            else
+            {
+                _sUEffectEndTime += _sEffectActivityTime;
+            }
+        }
+        
         public void ApplyElectricalEffect()
         {
             if (!_eEffectIsActive)
