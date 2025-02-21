@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Audio;
 using _Scripts.Level;
 using _Scripts.Models;
 using _Scripts.Obstacles;
@@ -21,11 +22,13 @@ namespace _Scripts
         [SerializeField] private CapsuleCollider _playerCollider;
         [SerializeField] private ObstacleSpawner _obstacleSpawner;
         [SerializeField] private PlayerController _playerController;
+        [SerializeField] private GameObject _rock;
 
+        private RockMover _rockMover;
         protected override void Awake()
         {
             var savedBestScore = SaveManager.Load();
-            
+            _rockMover = _rock.GetComponent<RockMover>();
             // BestScore.Instance.SetScore(savedBestScore.Coin , savedBestScore.Distance, savedBestScore.Time); 
             _bestScoreDisplay.UpdateScore(savedBestScore.Coin , savedBestScore.Distance, savedBestScore.Time);
             
@@ -48,7 +51,10 @@ namespace _Scripts
 
         private void HandleGameOver()
         {
+            AudioEffectController.Instance.Play(AudioEffectNames.onGameOver, PlayerMover.Instance.transform.position);
+
             IsGameOver = true;
+            _rockMover.IsGameOver = true;
             //Метод ресетящий позицию игрока и сбрасывающий его текущее ускорение.
 
             StopAllCoroutines();
@@ -101,6 +107,42 @@ namespace _Scripts
 
             _rb.useGravity = true;
             _playerCollider.isTrigger = false;
+        }
+
+        public void ActivateRock()
+        {
+            _rock.SetActive(true);
+        }
+
+        public void DeactivateRock()
+        {
+            if (!IsGameOver) _rock.SetActive(false);
+            else Destroy(_rock.gameObject, 15f);
+        }
+
+        public void PauseGame()
+        {
+            StopAllCoroutines();
+            PlayerController.Instance.PlayerAnimator().enabled = false;
+            _obstacleSpawner.IsPaused = true;
+            
+            LevelGenerator.Instance.Pause();
+            LevelGenerator.Instance.StopChunks();
+            
+            TimerDisplay.Instance.IsPaused = true;
+        }
+
+        public void ResumeGame()
+        {
+            if (IsGameOver) return;
+            
+            PlayerController.Instance.PlayerAnimator().enabled = true;
+
+            _obstacleSpawner.IsPaused = false;
+            _obstacleSpawner.ResetSpawn();
+            LevelGenerator.Instance.UnPause();
+            LevelGenerator.Instance.ResetChunksSpeed();
+            TimerDisplay.Instance.IsPaused = false;
         }
     }
 }

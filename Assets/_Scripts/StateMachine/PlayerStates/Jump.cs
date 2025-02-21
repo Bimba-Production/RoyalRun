@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Audio;
 using _Scripts.StateMachine.Abstractions;
 using _Scripts.StateMachine.Interfaces;
 using UnityEngine;
@@ -20,6 +21,8 @@ namespace _Scripts.StateMachine.PlayerStates
 
         public void Enter(IState previous)
         {
+            AudioEffectController.Instance.Play(AudioEffectNames.jump, PlayerMover.Instance.transform.position);
+            
             _controller.ResetAllTriggers();
             
             _mover.IsGrounded = false;

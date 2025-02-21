@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace _Scripts.StateMachine
 {
-    public class PlayerMover : Singleton<PlayerMover>
+    public sealed class PlayerMover : Singleton<PlayerMover>
     {
         [Header("References")]
         [SerializeField] private Rigidbody _rb;
